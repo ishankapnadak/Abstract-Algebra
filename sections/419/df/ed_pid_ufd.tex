@@ -1,0 +1,332 @@
+\section{Domains}
+
+For the remainder, we assume all rings to be commutative.
+
+\subsection{Euclidean Domains}
+
+\begin{defn}
+    Let $R$ be an integral domain. Any function $N \colon R \to \N$ with $N(0) = 0$ is called a \deff{norm} on $R$. If $N(a) > 0$ for $a \neq 0$, we call $N$ a \deff{positive norm}.
+\end{defn}
+
+Observe that this definition of a norm is fairly weak, and hence any integral domain $R$ possesses several different norms. 
+
+\begin{defn}
+    An integral domain $R$ is said to be a \deff{Euclidean domain} (or possess a \deff{division algorithm}) if there is a norm $N$ on $R$ such that for any two elements $a,b \in R$ with $b \neq 0$, there exist elements $q,r \in R$ such that
+    \[
+        a = qb + r \text{ with $r=0$ or N(r) < N(b).}
+    \]
+    $q$ is called the \deff{quotient} and $r$ is called the \deff{remainder} of the division. Such a norm $N$ is called a \deff{Euclidean function}.
+\end{defn}
+
+In a Euclidean domain, we have the Euclidean algorithm, which allows us to write the following by successive ``divisions''.
+\begin{align*}
+    a &= q_0 b + r_0 \\
+    b &= q_1 r_0 + r_1 \\
+    r_0 &= q_2 r_1 + r_2 \\
+    &\vdots \\
+    r_{n-2} &= q_n r_{n-1} + r_n \\
+    r_{n-1} &= q_{n+1} r_n
+\end{align*}
+
+where $r_n$ is the last nonzero remainder. Such an $r_n$ exists since $N(b) > N(r_0) > N(r_1) \ldots > N(r_n)$ is a decreasing sequence of non-negative integers if the remainders are nonzero, and such a sequence cannot continue indefinitely. Note that there is no guarantee that these elements are unique.
+
+\begin{ex}
+    \phantom{hi}
+    \begin{enumerate}
+        \item Fields are trivial examples of Euclidean domains, that satisfy the defining conditions with any norm. This is because for all elements $a,b$ with $b \neq 0$, we have
+        \[
+            a = qb + 0
+        \]
+        where $q = ab^{-1}$.
+        \item The integers, $\Z$, form a Euclidean domain with norm given by $N(a) = a$, the usual absolute value, for all $a \in \Z$. Of course, a division algorithm does exist for the integers, as we have seen before (\Cref{prop:div_algo}). Note however that if $a$ is not a multiple of $b$, we have two possible pairs of quotient and remainder. For example, we have
+        \[
+            5 = 2 \cdot 2 + 1 \text{ and } 5 = 3 \cdot 2 - 1.
+        \]
+        If however we restrict the remainder to be non-negative, this factorisation is unique.
+    \end{enumerate}
+\end{ex}
+
+\begin{defn}
+    Let $\F$ be a field. A \deff{discrete valuation} on $\F$ is a function $\nu \colon \F^{\times} \to \Z$ satisfying the following.
+    \begin{enumerate}
+        \item $\nu(ab) = \nu(a) + \nu(b)$, i.e, $\nu$ is a homomorphism from the multiplicative group of units of $\F$ to the additive group $\Z$.
+        \item $\nu$ is surjective.
+        \item $\nu(x+y) \geq \min\left\{ \nu(x), \nu(y) \right\}$ for all $x,y \in \F^{\times}$ with $x+y \neq 0$.
+    \end{enumerate}
+\end{defn}
+\begin{defn}
+    Let $\nu$ be a discrete valuation on a field $\F$. The set $\left\{ x \in \F^{\times} \mid \nu(x) \geq 0 \right\} \cup \{0\}$ forms a subring of $\F$ called the \deff{valuation ring} of $\nu$.
+\end{defn}
+\begin{prop}
+    Let $\nu$ be a discrete valuation on a field $\F$. Then, 
+    \begin{enumerate}
+        \item $\nu(1) = 0$, and
+        \item $\nu(b^{-1}) = -\nu(b)$ for all $b \in \F^{\times}$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    We leave the proof as an exercise to the reader. These properties follow directly from the definition.
+\end{proof}
+\begin{defn}
+    An integral domain $R$ is called a \deff{discrete valuation ring} if there exists a discrete valuation $\nu$ on $\fr(R)$ such that $R$ is the valuation ring of $\nu$.
+\end{defn}
+\begin{prop}
+    A discrete valuation ring is a Euclidean domain.
+\end{prop}
+\begin{proof}
+    Let $R$ be a discrete valuation ring. We define the norm on $R$ to be $N(0) = 0$ and $N = \nu$ on non-zero elements of $R$. Now, for $a,b \in R$ with $b \neq 0$, we have that
+    \begin{enumerate}
+        \item if $N(a) < N(b)$, then $a = 0b + a$, and
+        \item if $N(a) \geq N(b)$, then we have $q = ab^{-1} \in R$, since 
+        \[
+            \nu(q) = \nu(ab^{-1}) = \nu(a) - \nu(b)
+        \]
+        \[
+            \therefore \, \nu(q) \geq 0 \implies q \in R.
+        \]
+        We then have $a = qb + 0. \hfill\qedhere$
+    \end{enumerate}
+\end{proof}
+
+\begin{prop}
+    Every ideal in a Euclidean domain is principal. More precisely, if $I$ is a nonzero ideal in a Euclidean domain $R$, then $I = \langle d \rangle$, where $d$ is any nonzero element of $I$ of minimum norm.
+\end{prop}
+\begin{proof}
+    If $I$ is the zero ideal, we are done. Else, let $d$ be an element of $I$ of minimum norm. Such an element exists since the set $\left\{ N(a) \mid a \in I \right\}$ has a minimum element by the well-ordering property (\Cref{rem:wop}). Clearly, $\langle d \rangle \subseteq I$ since $d$ is an element of $I$. Suppose $a \in I$. Since $R$ is a Euclidean domain applying the division algorithm allows us to write $a = qd + r$ with $r = 0$ or $N(r) < N(d)$. Then, $r = a - qd$. Since $d \in I$, we have $qd \in I$. Now, since $a \in I$ and $qd \in I$, we have that $r \in I$. By the minimality of norm of $d$, we must have $r = 0$, giving us $a = qd \implies a \in \langle d \rangle$. Hence, $I = \langle d \rangle$.
+\end{proof}
+
+\begin{ex} \label{ex:Z[x]-not-principal ideal domain}
+    Let $R = \Z[x]$. Since $\langle 2,x \rangle$ is not a principal ideal of $\Z[x]$ (why?), it follows that $\Z[x]$ is not a Euclidean domain.
+\end{ex}
+
+\begin{prop}
+    Let $R$ be a commutative ring and let $a,b \in R$. If $I = \langle a,b \rangle$, then $d$ is a $\gcd$ of $a$ and $b$ if
+    \begin{enumerate}
+        \item $I$ is contained in the principal ideal $\langle d \rangle$, and
+        \item if $\langle d^{\prime} \rangle$ is any principal ideal containing $I$, then $\langle d\rangle \subseteq \langle d^{\prime}  \rangle$. 
+    \end{enumerate}
+\end{prop}
+\begin{prop}
+    If $a$ and $b$ are nonzero elements of a commutative ring $R$ such that the ideal generated by $a$ and $b$ is a principal ideal $\langle d \rangle$, then $d$ is a $\gcd$ of $a$ and $b$.
+\end{prop}
+
+\begin{defn}
+    An integral domain in which every ideal generated by two elements is principal is called a \deff{Bézout domain}.
+\end{defn}
+
+\begin{exe}
+    In a Bézout domain, every finitely generated ideal is principal.
+\end{exe}
+
+\begin{prop}
+    Let $R$ be an integral domain. If for two elements $d, d^{\prime} \in R$, we have $\langle d \rangle = \langle d^{\prime} \rangle$, then $d^{\prime} = ud$ for some unit $u$. In particular, if $d$ and $d^{\prime}$ are both greatest common divisors of two elements, then $d^{\prime} = ud$ for some unit $u$.
+\end{prop}
+\begin{proof}
+    The proof is trivial if either of $d$ or $d^{\prime}$ is zero, so we may assume that both $d$ and $d^{\prime}$ are non-zero. Since $d \in \langle d^{\prime} \rangle$, we have $d = xd^{\prime}$ for some $x \in R$. Similarly, since $d^{\prime} \in \langle d \rangle$, we have $d^{\prime} = yd$ for some $y \in R$. Thus, $d = xyd$ and $d(1-xy) = 0$. Since $d \neq 0$ and $R$ is an integral domain, it follows that $xy = 1$. That is, both $x$ and $y$ are units in $R$. This proves the first part. The second part follows trivially since any two greatest common divisors of two elements generate the same principal ideal.
+\end{proof}
+
+\begin{theorem}
+    Let $R$ be an integral domain and let $a$ and $b$ be two non-zero elements of $R$. Let $d = r_n$ be the last non-zero remainder in the Euclidean algorithm for $a$ and $b$. Then,
+    \begin{enumerate}
+        \item $d$ is a greatest common divisor of $a$ and $b$, and
+        \item the principal ideal $\langle d \rangle$ is the ideal generated by $a$ and $b$. In particular, $d$ can be written as an $R$-linear combination of $a$ and $b$, that is, there exist elements $x,y \in R$ such that 
+        \[
+            d = ax + by.
+        \]
+    \end{enumerate}
+\end{theorem}
+One we may regard the last statement of the above theorem as an extension of \nameref{prop:bezout}.
+
+\begin{proof}
+    Since the ideal generated by $a$ and $b$ is principal, $a$ and $b$ do have a $\gcd$, namely, any element which generates the principal ideal $\langle a,b \rangle$. Both parts of the theorem follow once we show that $d = r_n$ generates the said ideal. To do so, we will show that \begin{enumerate}
+        \item $d \divides a$ and $d \divides b$, so that $\langle a,b \rangle \subseteq \langle d \rangle$, and
+        \item $d$ is an $R$-linear combination of $a$ and $b$, so that $\langle d \rangle \subseteq \langle a,b \rangle$.
+    \end{enumerate}
+    It is easy to show via induction that $d$ indeed divides $a$ and $b$ (keep track of the divisibilities in the Euclidean algorithm). To prove the second part, we may again proceed inductively to show that $r_n \in \langle a,b \rangle$. More specifically, we have that $r_0 \in \langle a,b \rangle$. Assuming $r_{k-1}, r_k \in \langle a,b \rangle$, we have
+    \[
+        r_{k+1} = r_{k-1} - q_{k+1} r_k \in \langle r_{k-1}, r_k \rangle \subseteq \langle a,b \rangle.
+    \]
+    Hence, by induction, $r_n \in \langle a,b \rangle$, which completes the proof.
+\end{proof}
+
+\begin{aside}
+    The above discussion gives an interesting perspective on the existence of a solution in the integers to the first-order Diophantine equation, given by
+    \[
+        ax + by = N
+    \]
+    where $a,b,N \in \Z$. Observe that the existence of a solution $(x,y)$ to the above equation is just another way of saying that $N \in \langle a,b \rangle$. By the above theorem, this is the same as saying that $N \in \langle d \rangle$ where $d = \gcd(a,b)$. Hence, the equation $ax + by = N$ is solvable in integers $x$ and $y$ if and only if $N$ is divisible by $\gcd(a,b)$. Moreover, let $(x_0, y_0)$ be a solution of the above equation. Then, the complete set of solutions to the equation is given by 
+    \begin{align*}
+        x &= x_0 + m \cdot \frac{a}{\gcd(a,b)} \\
+        y &= y_0 - m \cdot \frac{b}{\gcd(a,b)}
+    \end{align*}
+    where $m$ varies over $\Z$.
+\end{aside}
+
+We end this discussion with another useful notion that is sometimes used to prove that a given integral domain is not a Euclidean domain. For any integral domain $R$, we define $\Tilde{R} \vcentcolon= R^{\times} \cup \{0\}$. 
+
+\begin{defn}
+    Let $R$ be an integral domain. An element $u \in R \setminus \Tilde{R}$ is called a \deff{universal side divisor} if for every $x \in R$, there is some $z \in \Tilde{R}$ such that $u$ divides $x - z$. That is, every $x \in R$ can be written as $x = qu + z$ where $z$ is either zero or a unit.
+\end{defn}
+
+\begin{prop}
+    Let $R$ be an integral domain that is not a field. If $R$ is a Euclidean domain, then there are universal side divisors in $R$. 
+\end{prop}
+\begin{proof}
+    Suppose $R$ is a Euclidean domain with some norm $N$, and let $u$ be an element of $R \setminus \Tilde{R}$ (this is nonempty since $R$ is not a field) of minimal norm. For any $x \in R$, write $x = qu + r$, where either $r = 0$, or $N(r) < N(u)$. In either case, the minimality of $N(u)$ implies that $r \in \Tilde{R}$. Hence, $u$ is a universal side divisor of $R$.
+\end{proof}
+
+\subsection{Principal Ideal Domains}
+
+\begin{defn}
+    A \deff{principal ideal domain} (PID) is an integral domain in which every ideal is principal.
+\end{defn}
+An immediate consequence of the above definition is the following. 
+\begin{cor} \label{cor:ED-is-PID}
+    Every Euclidean domain is a principal ideal domain.
+\end{cor}
+
+\begin{ex}
+\phantom{hi}
+\begin{enumerate}
+    \item We have seen in \Cref{ex:ideal-examples}, that $\Z$ is a principal ideal domain.
+    \item \Cref{ex:Z[x]-not-principal ideal domain} tells us that $\Z[x]$ is not a principal ideal domain.
+\end{enumerate}
+\end{ex}
+
+\begin{prop} \label{prop:prime-is-maximal-PID}
+    Every nonzero prime ideal in a principal ideal domain is a maximal ideal.
+\end{prop}
+\begin{proof}
+    Let $\langle p \rangle$ be a prime ideal in a principal ideal domain $R$, and let $I = \langle m \rangle$ be an ideal containing $\langle p \rangle$. We must show that $I = \langle p \rangle$ or $I = R$. Since $p \in \langle m \rangle$, we must have $p = rm$ for some $r \in R$. Since $\langle p \rangle$ is a prime ideal and $rm \in \langle p \rangle$, we must have $r \in \langle p \rangle$ or $m \in \langle p \rangle$. If $m \in \langle p \rangle$, then $\langle p \rangle = \langle m \rangle = I$, and we are done. Suppose otherwise that $r \in \langle p \rangle$. Then, $r = ps$ for some $s \in R$. Now, we have $rm = psm = p$ and hence $sm = 1$, since $R$ is an integral domain. Thus, $m$ is a unit and hence $I = R$. 
+\end{proof}
+
+\begin{cor}
+If the polynomial ring $R[x]$ is a principal ideal domain, then $R$ is a field.
+\end{cor}
+\begin{proof}
+    Assume that $R[x]$ is a principal ideal domain. Since $R$ is a subring of $R[x]$, $R$ is an integral domain. Define $\psi \colon R[x] \to R$ by
+    \[
+        \psi\left( f(x) \right) = f(0) \text{ for all } f(x) \in R[x].
+    \]
+    We leave it as an exercise to verify that $\psi$ is a homomorphism. By the \nameref{thm:ring-iso-1}, $R[x] / \ker\psi$ is isomorphic to $R$. We may show that $\ker\psi = \langle x \rangle$ and hence, $R[x] / \langle x \rangle \cong R$. Thus, $R[x] / \langle x \rangle$ is an integral domain. By \Cref{prop:ideal-characterisation-using-quotient-ring}, $\langle x \rangle$ is a non-zero prime ideal. By \Cref{prop:prime-is-maximal-PID}, $\langle x \rangle$ is also maximal. Again, \Cref{prop:ideal-characterisation-using-quotient-ring} tells us that $R[x] / \langle x \rangle$ is a field, and hence $R$ is a field.
+\end{proof}
+
+\begin{defn}
+    A norm $N$ on an integral domain $R$ is called a \deff{Dedekind-Hasse norm} if $N$ is a positive norm, and for every non-zero $a,b \in R$, either $a \in \langle b \rangle$, or there is a nonzero element in $\langle a,b \rangle$ with norm strictly lesser than $N(b)$. That is, either $b$ divides $a$ in $R$, or there exist $s,t \in R$ with $0 < N(sa - tb) < N(b)$.
+\end{defn}
+
+Notice that the $R$ is a Euclidean domain with respect to a positive norm $N$ if it is always possible to satisfy the Dedekind-Hasse condition with $s=1$. Thus, the Dedekind-Hasse condition is a weakening of the Euclidean condition, and we may think of a Dedekind-Hasse norm as a generalisation of a Euclidean function.
+
+\begin{prop}
+    An integral domain $R$ is a principal ideal domain if and only if $R$ has a Dedekind-Hasse norm.
+\end{prop}
+\begin{proof}
+    Let $I$ be a nonzero ideal in $R$ and let $b$ be a nonzero element of $I$, chosen such that $N(b)$ is minimal (again, such a $b$ exists by the \nameref{rem:wop}). Suppose $a$ is a nonzero element in $I$, so that $\langle a,b \rangle \subseteq I$. Let $N$ be a Dedekind-Hasse norm on $R$. We must have that either $b$ divides $a$, or that there exist $s,t \in R$ such that $0 < N(sa - tb) < N(b)$. Since $N(b)$ is minimal, we conclude that $a \in \langle b \rangle$. Thus, $I$ is principal and $R$ is a principal ideal domain. We shall prove the converse in a later section.
+\end{proof}
+
+\subsection{Unique Factorisation Domains}
+
+So far, we have computed the $\gcd$ of two elements algorithmically. However, \Cref{prop:gcd-lcm-prime-factorisation} shows us that for elements in $\Z$, we may calculate the $\gcd$ of two numbers using their prime factorisations. This idea generalises to a large class of rings, as we now show. We first recall the definition of an irreducible element. We restrict ourselves to integral domains for the following discussion.
+
+\begin{defn}
+    Let $R$ be an integral domain. An element $f \in R$ is said to be \deff{irreducible} if $f$ is non-zero, non-unit in $R$, and whenever $f = gh$ for some $g,h \in R$, at least one of $g$ and $h$ is a unit.
+\end{defn}
+
+\begin{defn}
+    Let $R$ be an integral domain. An element $p \in R$ is said to be \deff{prime} if $p$ is non-zero, and the ideal $\langle p \rangle$ is a prime ideal. In other words, a non-zero element $p$ is a prime if it is not a unit, and whenever $p \divides ab$ for $a,b \in R$, then either $p \divides a$ or $p \divides b$.
+\end{defn}
+
+\begin{defn}
+    Let $R$ be an integral domain. Two elements $a,b \in R$ are said to be \deff{associate} if $a = ub$ for some unit $u \in R^{\times}$.
+\end{defn}
+
+\begin{prop} \label{prop:prime-implies-irreducible}
+    In an integral domain, every prime element is irreducible.
+\end{prop}
+\begin{proof}
+    Let $p$ be a prime, so that $\langle p \rangle$ is a nonzero prime ideal. Suppose $p = ab$ for some $a,b \in R$, so that $ab = p \in \langle p \rangle$. Since $\langle p \rangle$ is a prime ideal, one of $a$ or $b$ must be in $\langle p \rangle$. Assume without loss of generality that $a \in \langle p \rangle$, so that $a = pr$ for some $r \in R$. Now, $p = ab = prb \implies rb = 1$. Thus, $b$ is a unit and $p$ is irreducible.
+\end{proof}
+
+\begin{prop} \label{prop:PID-prime-iff-irreducible}
+    In a principal ideal domain, an element is prime iff it is irreducible.
+\end{prop}
+\begin{proof}
+    \Cref{prop:prime-implies-irreducible} already shows us that prime implies irreducible. Hence it suffices to show that in a principal ideal domain, an irreducible element is prime. Let $M$ be any ideal containing $\langle p \rangle$. Since $R$ is a principal ideal domain, $M = \langle m \rangle$ for some $m \in R$. Since $p \in \langle m \rangle$, $p = rm$ for some $r \in R$. Now, since $p$ is irreducible, one of $r$ or $m$ must be a unit. Thus, either $\langle p \rangle = \langle m \rangle$ or $\langle m \rangle = R$. Thus, the only ideals containing $\langle p \rangle$ are $\langle p \rangle$ itself, and $R$. Hence, $\langle p \rangle$ is maximal ideal. By \Cref{cor:maximal-is-prime}, $\langle p \rangle$ is a prime ideal, and hence $p$ is prime.
+\end{proof}
+
+\begin{defn}
+    A \deff{unique factorisation domain} (UFD) is an integral domain $R$ in which every non-zero, non-unit element $r \in R$ has the following properties. 
+    \begin{enumerate}
+        \item $r$ can be written as a finite product of irreducibles (not necessarily distinct): $r = p_1 \cdots p_n$.
+        \item The decomposition is above is unique up to associates. That is, if $r = q_1 \cdots q_m$ is another factorisation of $r$ into irreducibles, then $n = m$, and there is some permutation $\sigma$ such that $p_i$ is associate to $\sigma(q_i)$ for $i = 1, \ldots, n$.
+    \end{enumerate}
+\end{defn}
+
+As a trivial example, observe that any field is vacuously a unique factorisation domain since there are no non-zero non-unit elements.
+
+\begin{prop} \label{prop:UFD-prime-iff-irreducible}
+In a unique factorisation domain, an element is prime iff it is irreducible.
+\end{prop}
+\begin{proof}
+    As before, \Cref{prop:prime-implies-irreducible} already shows us that prime implies irreducible. We now show that in a unique factorisation domain, an irreducible element is prime. Let $p$ be an irreducible element and suppose $p \divides ab$ for some $a,b \in R$. Thus, $ab = pc$ for some $c \in R$. Writing $a,b,c$ as their irreducible decompositions, and from the uniqueness of this decomposition, we see that $p$ must be associate to one of the irreducibles on the LHS. Without loss of generality, assume that $p$ is associate to one of the irreducibles in the decomposition of $a$, so that $a = (up) p_2 \cdots p_n$ for some unit $u \in R^{\times}$ and some (possibly empty) set of irreducibles $p_2, \ldots, p_n$. Thus, $p \divides a$ since $a = pd$ with $d = u p_2 \cdots p_n$. This completes the proof.
+\end{proof}
+
+We may now use the terms prime and irreducible interchangeably. This allows us to talk about `prime factorisations', which is just the decomposition of nonzero elements into irreducibles or primes. 
+
+\begin{prop}
+    Let $a$ and $b$ be two nonzero elements of a unique factorisation domain $R$ and suppose 
+    \begin{align*}
+        a &= u p_1^{e_1} \cdots p_n^{e_n} \\
+        b &= v p_1^{f_1} \cdots p_n^{f_n}
+    \end{align*}
+    where $u$ and $v$ are units, the primes $p_1, \ldots, p_n$ are distinct, and the exponents $e_i$ and $f_i$ are non-negative. Then, the element
+    \[
+        d = p_1^{\min(e_1, f_1)} \cdots p_n^{\min(e_n, f_n)}
+    \]
+    is a $\gcd$ of $a$ and $b$.
+\end{prop}
+\begin{proof}
+    Since the exponents of each of the primes occurring in $d$ are no larger than the exponents occurring in the prime factorisations of $a$ and $b$, it follows that $d$ is a common divisor of $a$ and $b$. We leave it as an exercise to show that if $c$ is a common divisor of $a$ and $b$, then $c \divides d$.
+\end{proof}
+
+\begin{theorem} \label{thm:PID-is-UFD}
+    Every principal ideal domain is a unique factorisation domain.
+\end{theorem}
+\begin{proof}
+    Let $R$ be a principal ideal domain and let $r \in R$ be non-zero and non-unit. We must show that $r$ can be written as a finite product of irreducibles in $R$, and that this decomposition is unique up to units. We first prove that such a decomposition indeed exists.
+    
+    If $r$ is itself reducible, then we are done. If not, then $r = r_1 r_2$ where $r_1, r_2$ are both non-unit. If both these elements are irreducible then again we are done. If not, at least one element, say $r_1$, can be written as a product of two non-unit elements, $r_1 = r_{11} r_{12}$, and so forth. We must verify that this process terminates, that is, we must necessarily reach a point where all factors of $r$ are irreducible. If this is not the case, we obtain an \emph{infinite ascending chain} of ideals, as follows.
+    \[
+        \langle r \rangle \subset \langle r_1 \rangle \subset \langle r_{11} \rangle \subset \ldots \subset R
+    \]
+    where all inclusions are proper. Moreover, such an infinite chain exists thanks to the Axiom of Choice. We now show that such an ascending chain of ideals $I_1 \subseteq I_2 \subseteq \ldots \subseteq R$ eventually becomes stationary. That is, there is some positive integer $n$ such that $I_k = I_n$ for all $k \geq n$. This means that it is not possible to have an infinite ascending chain of ideals where all containments are proper. Let $I \vcentcolon= \cup_{i=1}^{\infty} I_i$. It is easy to show that $I$ is an ideal of $R$. Since $R$ is a principal ideal domain, $I = \langle a \rangle$ for some $a \in R$. Since $a \in I$, we must have $a \in I_n$ for some $n$. We then have $I_n \subseteq I = \langle a \rangle \subseteq I_n$, so that $I = I_n$ and the chain becomes stationary at $I_n$. This proves that every non-zero, non-unit element in $R$ has a finite decomposition into irreducibles.
+    
+    We now show that this decomposition is unique up to units. We induct on the number, $n$, of irreducible factors in some factorisation of the element $r \in R$. If $n = 0$, then $r$ is a unit and the factorisation is trivially unique since if $r = qc$ for some irreducible $q$, then $q$ divides a unit, which is a contradiction. Suppose now that $n \geq 1$ and we have that
+    \[
+        r = p_1 \cdots p_n = q_1 \cdots q_m \quad m \geq n
+    \]
+    where $p_i$ and $q_j$ are (not necessarily distinct) irreducibles. Since $p_1$ divides the product on the right, it must divide one of the factors. Without loss of generality, suppose $p_1$ divides $q_1$ so that $q_1 = p_1 u$ for some $u \in R$. Since $q_1$ is irreducible, $u$ is a unit and thus $p_1$ and $q_1$ are associates. Since we are operating in an integral domain, we may `cancel' $p_1$ to get
+    \[
+        p_2 \cdots p_n = u q_2 \cdots q_m = q_2^{\prime} \cdots q_m \quad m \geq n
+    \]
+    where $q_2^{\prime} = uq_2$ is also irreducible. By induction on $n$, we may conclude that up to associates, each factor on the left matches bijectively with factor on the right. Since we have already shown that $p_1$ and $q_1$ are associates, we are done.
+\end{proof}
+\begin{cor} \label{cor:ED-is-UFD}
+    Every Euclidean domain is a unique factorisation domain.
+\end{cor}
+\begin{proof}
+    This follows straight from \Cref{thm:PID-is-UFD} and \Cref{cor:ED-is-PID}.
+\end{proof}
+\begin{cor}[Fundamental Theorem of Arithmetic] \label{cor:FTAr-UFD}
+    The integers $\Z$ form a unique factorisation domain.
+\end{cor}
+\begin{proof}
+    This is trivial since $\Z$ is a Euclidean domain.
+\end{proof}
+
+\begin{prop}
+    Let $R$ be a principal ideal domain. Then, there exists a multiplicative Dedekind-Hasse norm on $R$.
+\end{prop}
+\begin{proof}
+    If $R$ is a principal ideal domain, then $R$ is a unique factorisation domain. Define the norm $N$ by setting $N(0) = 0$, $N(u) = 1$ if $u$ is a unit, and $N(a) = 2^n$ if $a = p_1 \cdots p_n$ where $p_i$'s are irreducibles in $R$. This is well-defined since the number of irreducible factors of $a$ is unique. Clearly, $N(ab) = N(a)N(b)$, so that $N$ is positive and multiplicative. Suppose $a,b$ are nonzero elements in $R$. Since $R$ is a principal ideal domain, we have $\langle a,b \rangle = \langle r \rangle$ for some $r \in R$. If $b$ divides $a$ in $R$ then we are done. If $b$ does not divide $a$, that is, $a \notin \langle b \rangle$, and hence $r \notin \langle b \rangle$. However, $b = xr$ for some $x \in R$, and thus $x$ is not a unit in $R$. We then have that $N(b) = N(x)N(r) > N(r)$, proving that there is an element in $\langle a,b \rangle$ with norm strictly smaller than $N(b)$. Hence, $N$ is a multiplicative Dedekind-Hasse norm on $R$.
+\end{proof}

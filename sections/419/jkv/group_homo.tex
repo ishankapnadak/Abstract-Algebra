@@ -1,0 +1,393 @@
+\section{Group Homomorphisms}
+
+\begin{defn}
+    Let $(G, \star)$ and $(H, \diamond)$ be two groups. A map $\varphi \colon G \to H$ is a \deff{(group) homomorphism} if $\varphi$ satisfies 
+    \[
+        \varphi(a \star b) = \varphi(a) \diamond \varphi(b) \text{ for all } a,b \in G.
+    \]
+    This is more compactly written as
+    \[
+        \varphi(ab) = \varphi(a)\varphi(b)
+    \]
+    where the product is the ``appropriate'' group operation.
+\end{defn}
+
+\begin{defn}
+    Let $G,H$ be two groups. A map $\varphi \colon G \to H$ is called an \deff{isomorphism} if $\varphi$ is a homomorphism and $\varphi$ is a bijection. In this case, we say that $G$ and $H$ are \deff{isomorphic} and write $G \cong H$.
+\end{defn}
+
+\begin{defn}
+    Let $G$ be a group. An \deff{automorphism} is an isomorphism $\varphi$ from $G$ to itself. 
+\end{defn}
+
+\begin{ex}
+Following are some examples of homomorphisms
+\begin{enumerate}
+    \item Let $\F$ be any field\footnotemark\ and $\det \colon GL_n(\F) \to \F^{\times}$ be the determinant function. This is an example of a homomorphism since $\det(AB) = \det(A)\det(B)$. $\F^{\times}$ is the multiplicative group associated with the field $\F$.
+    \item Consider the symmetric group $S_n$ and define $f \colon S_n \to \{1, -1\}$ by taking $f(\sigma) = \sign(\sigma)$ where $\sign(\sigma)$ is $-1$ if $\sigma$ is an odd permutation and $1$ if it is an even permutation. $f$ is a homomorphism since $\sign(\sigma \tau) = \sign(\sigma) \sign(\tau)$.
+    \item Suppose $H \leq G$ where $G$ is any group. The identity map $i \colon H \to G$ is a homomorphism, trivially.
+    \item Consider $\varphi\colon \C^{\times} \to \R^{\times}$ defined as $\varphi(z) = \abs{z}$ for all $z \in \C^{\times}$. $\varphi$ is a homomorphism.
+    \item Consider $\phi \colon \R \to \R^{\times}$ defined by $\phi(x) = e^x$ for all $x \in \R$. This is also a homomorphism, since $\phi(x+y) = e^{x+y} = e^xe^y = \phi(x)\phi(y)$.
+    \item Consider the group
+    \[
+        G = \left\{ \begin{bmatrix}
+            1 & x \\
+            0 & 1
+        \end{bmatrix} \mid x \in \R \right\} \leq GL_2(\R).
+    \]
+    One can verify that the map $\varphi \colon G \to \R$ defined as
+    \[
+        \varphi\left( \begin{bmatrix}
+            1 & x \\
+            0 & 1
+        \end{bmatrix}\right) = x
+    \]
+    is an isomorphism. Hence $G \cong \R$.
+\end{enumerate}
+\end{ex}
+\footnotetext{We will define a field later while discussing rings. For now, the reader may assume the field to be $\R$ or $\C$.}
+
+\begin{defn}
+    Let $G$ be a group and $a \in G$. The map $T_a \colon G \to G$ defined as $T_a(g) = ag$ for all $g \in G$, is called \deff{translation by $a$}.
+\end{defn}
+$T_a$ is a bijection from $G$ to $G$ but it is \emph{not} a homomorphism, in general. Notice however that every element $a \in G$ gives rise to a permutation of $G$ (assuming $G$ is finite). Let $S_G$ denote the group of permutations of $G$ and define $\varphi \colon G \to S_G$ defined as $\varphi(a) = T_a$. We claim that $\varphi$ is an injective homomorphism. To show that $\varphi$ is a homomorphism, we need to show that $\varphi(ab) = \varphi(a)\varphi(b)$ for all $a,b \in G$. It is trivial to verify that $T_{ab} = T_aT_b$. We will prove the injectivity of $\varphi$ soon while proving \nameref{thm:cayley}.
+
+\begin{prop} \label{prop:homo-basics}
+    Let $G,H$ be groups and let $\varphi \colon G \to H$ be a homomorphism. Then, 
+    \begin{enumerate}
+        \item $\varphi(1) = 1$,
+        \item $(\varphi(a))^{-1} = \varphi(a^{-1})$ for all $a \in G$, and
+        \item the image of $G$ under $\varphi$ is a subgroup of $H$, that is,
+        \[
+            \im\varphi = \left\{ \varphi(a) \mid a \in G \right\} \leq H
+        \]
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    We have
+    \[
+        \varphi(1 \cdot 1) = \varphi(1)\cdot \varphi(1)
+    \]
+    Also, since $1 \cdot 1 = 1$, we have
+    \[
+        \varphi(1)\cdot\varphi(1) = \varphi(1) \implies \varphi(1) = 1
+    \]
+    For any $a \in G$, we have
+    \[
+        \varphi(aa^{-1}) = 1 = \varphi(a)\cdot \varphi(a^{-1})
+    \]
+    This gives us
+    \[
+        (\varphi(a))^{-1} = \varphi(a^{-1})
+    \]
+    The proof of the third part is left as an exercise and follows directly from the first two parts.
+\end{proof}
+
+\begin{prop} \label{prop:inverse-iso}
+    Suppose $\varphi \colon G \to H$ is an isomorphism. Then, $\varphi^{-1} \colon H \to G$ is also an isomorphism.
+\end{prop}
+\begin{proof}
+    Suppose $x,y \in H$. We show that $\varphi^{-1}(xy) = \varphi^{-1}(x)\varphi^{-1}(y)$. Let $\varphi(g) = x$ and $\varphi(h) = y$ where $g,h \in G$. Since $\varphi$ is a homomorphism, we have
+    \[
+        \varphi(gh) = \varphi(g)\varphi(h) = xy \implies \varphi^{-1}(xy) = gh = \varphi^{-1}(x)\varphi^{-1}(y) \qedhere
+    \]  
+\end{proof}
+
+\begin{defn}
+    Let $G,H$ be groups and let $\varphi \colon G \to H$ be a homomorphism. The \deff{kernel} of $\varphi$ is defined as
+    \[
+        \ker\varphi \vcentcolon= \left\{ g \in G \mid \varphi(g) = 1 \right\}
+    \]
+\end{defn}
+\begin{prop} \label{prop:kernel-subgroup}
+    Let $G,H$ be groups and let $\varphi \colon G \to H$ be a homomorphism. Then, $\ker\varphi \leq G$.
+\end{prop}
+\begin{proof}
+    Left as an exercise.
+\end{proof}
+\begin{prop} \label{prop:injective-trivial-kernel}
+    Let $G,H$ be groups and let $\varphi \colon G \to H$ be a homomorphism. $\varphi$ is injective if and only if $\ker\varphi = \{1\}$, the trivial subgroup.
+\end{prop}
+\begin{proof}
+    Observe that for all $a,b \in G$
+    \[
+        \varphi(a) = \varphi(b) \iff \varphi(a)\cdot (\varphi(b))^{-1} = 1 \iff \varphi(ab^{-1}) = 1.
+    \]
+    If $\varphi$ is injective, then $\varphi(a) = \varphi(b) \iff a = b$. Hence, $\varphi(ab^{-1}) = 1 \iff a = b$ and $\ker\varphi = \{1\}$. Conversely, suppose $\ker\varphi = \{1\}$. Then, $\varphi(ab^{-1}) = 1 \iff ab^{-1} = 1 \iff a = b$. Thus, $\varphi(a) = \varphi(b) \iff a = b$ and $\varphi$ is injective.
+\end{proof}
+
+\begin{prop} \label{prop:im-isomorphic-to-G}
+    Let $G,H$ be groups and let $\varphi \colon G \to H$ be a homomorphism. If $\varphi$ is injective then $G \cong \im\varphi$.
+\end{prop}
+\begin{proof}
+    Note that $\varphi \colon G \to \im\varphi$ is surjective by definition. If $\varphi$ is also injective, then $\varphi$ is a bijection. Moreover, $\varphi$ is also a homomorphism. Thus, $\varphi$ is an isomorphism and $G \cong \im\varphi$.
+\end{proof}
+
+\begin{theorem}[Cayley's Theorem] \label{thm:cayley}
+    Every group is isomorphic to a subgroup of a permutation group.
+\end{theorem}
+\begin{proof}
+    We showed that $\varphi \colon G \to S_G$ defined as $\varphi(a) = T_a$ is a homomorphism. From \Cref{prop:homo-basics}, we have that $\im\varphi \leq S_G$, a permutation group. Now, we have
+    \[
+        a \in \ker\varphi \implies \varphi(a) = 1 \implies T_a(1) = 1 \implies a = 1
+    \]
+    Hence, $\ker\varphi = \{1\}$. By \Cref{prop:injective-trivial-kernel}, $\varphi$ is injective and hence $G \cong \im\varphi$. Hence, $G$ is isomorphic to a subgroup of a permutation group.
+\end{proof}
+
+\begin{ex}
+    Suppose $G = \Z_3$ and define $\varphi \colon G \to S_3$ as above. One can show that $\im\varphi$ contains the identity permutations and both the $3$-cycles and hence forms a subgroup of $S_3$. In fact, $\im\varphi \cong A_3$.
+\end{ex}
+
+\medskip
+
+Suppose $\varphi \colon G \to H$ is a homomorphism. We saw that elements of $G$ that map to the identity in $H$ form a subgroup of $G$, its kernel. We now generalise this idea by looking at what elements in $G$ map to a particular element $h \in H$.
+\begin{defn}
+    Let $G,H$ be groups and let $\varphi \colon G \to H$ be a homomorphism. The \deff{fiber} of an element $h \in H$ is defined as
+    \[
+        \varphi^{-1}(h) \vcentcolon= \left\{ g \in G \mid \varphi(g) = h \right\}.
+    \]
+\end{defn}
+\begin{rem}
+$\ker\varphi = \varphi^{-1}(1)$.
+\end{rem}
+
+\begin{defn}
+    Let $H \leq G$. For $g \in G$, we define the \deff{left coset of $H$ by $g$} as
+    \[
+        gH \vcentcolon= \{ gh \mid h \in H \} .
+    \]
+    Similarly, we define the \deff{right coset of $H$ by $g$} as 
+    \[
+        Hg \vcentcolon= \{ hg \mid h \in H \}.
+    \]
+\end{defn}
+\begin{prop} \label{prop:index}
+    Let $H \leq G$. Then, the number of left and right cosets of $H$ in $G$ are equal. This common value is called the \emph{index of $H$ in $G$} and is denoted as $[G:H]$.
+\end{prop}
+\begin{prop} \label{prop:fiber-left-coset-of-kernel}
+    Let $G,H$ be groups and let $\varphi \colon G \to H$ be a homomorphism. Suppose $g \in G$ and $\varphi(g) = h$. Then, the fiber of $h$ is the left coset of $\ker\varphi$ by $g$.
+\end{prop}
+\begin{proof}
+    Suppose $x \in G$ is such that $\varphi(x) = h = \varphi(g)$. We have
+    \[
+        \varphi(x) = \varphi(g) \iff \varphi(g^{-1}x) = 1 \iff g^{-1}x \in \ker\varphi \iff x \in g\ker\varphi. \qedhere
+    \]
+\end{proof}
+\begin{prop} \label{prop:coset-same-cardinality}
+    Let $G$ be a group and let $H \leq G$. Then, any left or right coset of $H$ in $G$ has the same cardinality as $H$ itself.
+\end{prop}
+\begin{cor} \label{cor:fiber-same-cardinality}
+    Let $G,H$ be groups and let $\varphi \colon G \to H$ be a homomorphism. Given any two $h,h^{\prime} \in H$, the cardinality of $\varphi^{-1}(h)$ and $\varphi^{-1}(h^{\prime})$ is the same, and is equal to the cardinality of $\ker\varphi$. 
+\end{cor}   
+\begin{prop} \label{prop:coset-basics}
+    Let $H \leq G$ and $a,b \in G$. Then,
+    \begin{enumerate}
+        \item $aH = bH \iff b^{-1}a \in H$,
+        \item either $aH = bH$ or $aH \cap bH = \emptyset$, and
+        \item in particular, if $b \in aH$, then $aH = bH$.
+    \end{enumerate}
+\end{prop}
+\begin{prop} \label{prop:cosets-partition}
+    Suppose $H \leq G$. Then the following two equivalent statements are true.
+    \begin{enumerate}
+        \item For $a,b \in G$, the relation $a \sim b \iff a \in bH$ is an equivalence relation on $G$.
+        \item The left cosets of $H$, namely $gH$ for $g \in G$, form a partition of $G$. In other words, $G$ is a disjoint union of left cosets of $H$.
+    \end{enumerate}
+\end{prop}
+\begin{prop} \label{prop:disjoint-union-of-fibers}
+    Let $G,H$ be groups and let $\varphi \colon G \to H$ be a homomorphism. Then, $G$ is a disjoint union of fibers of elements in $\im\varphi$. That is,
+    \[
+        G = \bigsqcup_{h \, \in \, \im\varphi} \varphi^{-1}(h)
+    \]
+\end{prop}
+
+\begin{theorem}[Counting Principle] \label{thm:counting-principle}
+    Let $G$ be a group and let $H \leq G$. Then, $\abs{G} = \abs{H} \cdot [G:H]$.
+\end{theorem}
+\begin{proof}
+    The proof is straightforward since $G$ can be written as a disjoint union of distinct left cosets of $H$.
+\end{proof}
+\begin{cor} \label{cor:rank-nullity}
+    Let $\varphi \colon G \to H$ be a group homomorphism. Then, $\abs{G} = \abs{\ker\varphi} \cdot \abs{\im\varphi}$.
+\end{cor}
+Another corollary of the counting principle is the following.
+\begin{theorem}[Lagrange's Theorem] \label{thm:lagrange}
+    Let $G$ be a group and let $H \leq G$. Then, $\abs{H}$ divides $\abs{G}$.
+\end{theorem}
+
+\begin{cor} \label{cor:prime-subgroups}
+    Let $G$ be a finite group of order $p$ where $p$ is a prime number. Then, the only subgroups of $G$ are the trivial subgroup and $G$ itself.
+\end{cor}
+
+%For example, let $\F$ be a finite field with $q$ elements and define $\varphi \colon GL_n(\F) \to \F^{\times}$. We see that $\ker\varphi = SL_n(\F)$. 
+
+%\medskip
+
+%Consider the additive group $\Z$ and the group of congruence classes of $n$, $\Z_n$. Define $\varphi \colon \Z \to \Z_n$ as $\varphi(a) = \overline{a}$ for $a \in \Z$. This is a group homomorphism. Thus, we see that $\varphi(a) = \varphi(b) \iff ab^{-1} \in \ker\varphi$. The kernel of $\varphi$ is the subgroup $n\Z$. Thus, $\varphi(a) = \varphi(b) \iff ab^{-1} \in n\Z$. Since, $\Z$ is an additive group, the associated operation is addition and $b^{-1}$ is $-b$. Thus, $\varphi(a) = \varphi(b) \iff a-b \in n\Z \iff a-b = nm$ for some $m \in \Z$. Thus, $\varphi(a) = \varphi(b) \iff n \divides a-b$, as expected.
+
+We now provide a second proof of \nameref{thm:euler} using \nameref{thm:lagrange}.
+
+\begin{theorem}[Euler's Theorem] \label{thm:euler-group}
+    Let $a,n \in \N^+$ and $(a,n) = 1$. Then, $a^{\varphi(n)} \equiv 1 \Mod{n}$.
+\end{theorem}
+\begin{proof}
+    Consider the multiplicative group $\Z_n^{\times}$ of order $\varphi(n)$. Since $\gcd(a,n) = 1$, $\overline{a} \in \Z_n^{\times}$. Consider the cyclic group $H$ generated by $\overline{a}$. $H$ is a subgroup of $\Z_n^{\times}$. By Lagrange's Theorem, $\abs{H}$ divides $\varphi(n)$. But $\abs{H} = \abs{\overline{a}}$. We know that 
+    \[
+        (\overline{a})^{\abs{\overline{a}}} = \overline{1}
+    \]
+    Now, since $\varphi(n) = \abs{\overline{a}} \cdot m$ for some $m \in \Z$, we have
+    \[
+        (\overline{a})^{\varphi(n)} = \overline{1} \implies a^{\varphi(n)} \equiv 1 \Mod{n} \qedhere
+    \]
+\end{proof}
+
+Note that the converse of Lagrange's Theorem is not true. That is, if $G$ is a group of order $n$ and $d$ is a divisor of $n$, then there need not exist a subgroup $H \leq G$ of order $d$. Consider the group $A_4$, of order $12$.
+
+\underline{Claim:} There exists no subgroup of $A_4$ of order $6$.
+\begin{proof}
+    Suppose there is a subgroup $H \leq A_4$ of order $6$. By the counting principle, $H$ will have $2$ left cosets. Then, $A_4 = H \cup \sigma H$ where $\sigma \in A_4$ and $\sigma \notin H$. $A_4$ consists of the identity permutation, $8$ $3$-cycles and $3$ elements which are products of $2$ disjoint $2$-cycles. If $\tau$ is a $3$-cycle in $A_4$ then $\tau^3 = 1$ and hence $\tau = \tau^4 = (\tau^2)^2$. Thus, if $\tau \in A_4$, then $\tau^2 \in H$, since the square of every permutation in $A_4$ is a $3$-cycle. If $\tau \in H$ then clearly $\tau^2 \in H$. Pick an element $\tau \in \sigma H$. Then, $\tau = \sigma h$ for some $h \in H$. We then have $\tau^2 = \sigma h \sigma h $. Notice that $G$ can also be written as a disjoint union of right cosets. We then get
+    \[
+        G = H \cup \sigma H = H \cup H \sigma \implies \sigma H = H \sigma.
+    \]
+    Now, $h\sigma = \sigma h^{\prime}$ for some $h^{\prime} \in H$. We thus get $\tau^2 = \sigma^2 h^{\prime} h \in \sigma H$. Thus, $\sigma^2 h^{\prime} h \sigma \Tilde{h}$ for some $\Tilde{h} \in H$. However, this gives us $\sigma h^{\prime} h = \Tilde{h} \implies \sigma \in H$ which is a contradiction. 
+\end{proof} 
+
+\begin{theorem} \label{thm:product-of-indices}
+    Suppose $K \leq H \leq G$ and $G$ is finite. Then, $[G:K] = [G:H] \cdot [H:K]$.
+\end{theorem}
+\begin{proof}
+    Suppose $[G:H] = r$. Then, 
+    \[
+        G = \bigsqcup_{i=1}^r \, g_iH \text{  for some } g_1, \ldots, g_r \in G.
+    \]
+    Suppose $[H:K] = s$. Then,
+    \[
+        H = \bigsqcup_{j=1}^s \, h_jK \text{  for some } h_1, \ldots, h_s \in H.
+    \]
+    It is left as an exercise to show that cosets of the form $g_ih_jK$ are disjoint and to show that these cosets exhaust $G$. Thus, 
+    \[
+        G = \bigsqcup_{i=1}^r \bigsqcup_{j=1}^s \, g_ih_jK \implies [G:K] = r\cdot s \qedhere
+    \]
+\end{proof}
+
+\begin{defn}
+    Let $G$ be a group $a \in G$. The map $\gamma_a \colon G \to G$ with $\gamma_a(g) = aga^{-1}$ for all $g \in G$ is an isomorphism and is called \deff{conjugation by $a$} or an \deff{inner automorphism of $G$}.
+\end{defn}
+\begin{defn}
+    Let $G$ be a group. Then, the set
+    \[
+        \Aut G \vcentcolon= \left\{ \varphi \colon G \to G \mid \varphi \text{ is an automorphism} \right\}
+    \]
+    forms a group under composition of maps and is called the \deff{automorphism group of $G$}.
+\end{defn}
+\begin{prop}
+    Suppose $G$ is \emph{the}\footnotemark\ cyclic group of order $n$, that is, $G = \Z_n$. Suppose $\varphi \colon G \to G$ is an automorphism. Then, the following are true.
+    \begin{enumerate}
+        \item $\varphi(\overline{1}) = \overline{m}$ where $\gcd(m,n) = 1$ and $1 \leq m \leq n-1$.
+        \item The map $\psi \colon \Aut G \to \Z_n^{\times}$ defined by $\psi(\varphi) = \varphi(\overline{1})$ is an isomorphism.
+    \end{enumerate}
+\end{prop}
+\footnotetext{It turns out that up to isomorphism, there is only one cyclic group of order $n$ and only one infinite cyclic group. This is listed as an exercise.}
+
+\begin{defn}
+    Suppose $G$ is a group and $N \leq G$. For $g \in G$, we define $gNg^{-1} \vcentcolon= \{gng^{-1} \mid n \in N\}$. $N$ is said to be a \deff{normal subgroup} of $G$ if $gNg^{-1} = N$ for all $g \in G$. We denote this as $N \trianglelefteq G$.
+\end{defn}
+\begin{prop} \label{prop:kernel-is-normal}
+    Let $G,H$ be groups and let $\varphi \colon G \to H$ be a homomorphism. Then, $\ker\varphi \trianglelefteq G$.
+\end{prop}
+
+\begin{prop} \label{prop:two-cosets-normal}
+    Suppose $H \leq G$ and $[G:H] = 2$. Then, $H \trianglelefteq G$.
+\end{prop}
+\begin{proof}
+    Since $[G:H] = 2$, $G$ is the disjoint union of two distinct left (or right) cosets of $H$. That is, for some $g \in G\setminus H$, we have $G = H \cup gH$ and $G = H \cup Hg$. Let $gh \in gH$. Since $gh \in G$, we must have either $gh \in H$ or $gh \in Hg$. Note that $gh \in H \implies g \in H$. Since we assumed $g \notin H$, we get that $gh \in Hg \implies gH \subseteq Hg$. A similar argument also shows that $Hg \subseteq gH$, giving us $gH = Hg$. We leave it as an exercise to show that $gH = Hg \implies H \trianglelefteq G$.
+\end{proof}
+\begin{cor} \label{cor:alternating-normal-symmetric}
+    For all $n \in \N^+$, $n \geq 3$, $A_n \trianglelefteq S_n$.
+\end{cor}
+
+\begin{defn}[Center]
+    Let $G$ be a group. The \deff{center} of $G$ is defined as
+    \[
+        Z(G) \vcentcolon= \{ z \in G  \mid zg = gz \; \forall g \in G \}
+    \]
+\end{defn}
+\begin{prop} \label{prop:center-is-normal}
+    Let $G$ be a group and let $Z(G)$ denote its center. Then, $Z(G) \trianglelefteq G$.
+\end{prop}
+\begin{proof}
+    Let $x \in G$. Then, $xZ(G)x^{-1} = \{ xyx^{-1} \mid y \in Z(G) \}$. Since $y \in Z(G)$, $xyx^{-1} = yxx^{-1} = y$. Thus, $xZ(G)x^{-1} = Z(G)$ for any $x \in G$.
+\end{proof}
+\begin{prop} \label{prop:normal-basics}
+    Let $H \leq G$. Then, the following statements are equivalent.
+    \begin{enumerate}
+        \item $H \trianglelefteq G$.
+        \item $gH = Hg$.
+        \item Each left coset of $H$ is some right coset of $H$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    We only prove that $(2) \impliedby (3)$ as the rest of the implications are easy to verify. Suppose $gH$ is some left coset of $H$ and $gH = Ha$ for some $a \in G$. Now, $g \in gH \implies g \in Ha$. However, we know that $g \in Hg$. Since any two right cosets of $H$ are either equal or disjoint, we conclude that $Ha = Hg$ and hence, $gH = Hg$.
+\end{proof}
+\begin{cor} \label{cor:only-subgroup-order-normal}
+    If $H$ is the only subgroup of order $d$ in a group $G$, then $H \trianglelefteq G$.
+\end{cor}
+\begin{proof}
+    Fix a $g \in G$. We know that $\gamma_g \colon G \to G$ is an isomorphism. Hence, $\abs{gHg^{-1}} = \abs{H} = d$. But since $H$ is the only subgroup of order $d$, we conclude that $gHg^{-1} = H$ for all $g \in G$.
+\end{proof}
+
+\begin{theorem}[Correspondence Theorem] \label{thm:correspondence}
+    Let $\varphi \colon G \to G^{\prime}$ be a homomorphism. Then, the following are true.
+    \begin{enumerate}
+        \item $\varphi^{-1}(H^{\prime}) \leq G$ for all subgroups $H^{\prime} \leq G^{\prime}$. Here, $\varphi^{-1}(H^{\prime}) \vcentcolon= \{ g \in G \mid \varphi(g) \in H^{\prime} \}$.
+        \item If $H^{\prime} \trianglelefteq G^{\prime}$ then $\varphi^{-1}(H^{\prime}) \trianglelefteq G$.
+        \item If $\varphi$ is surjective and $\varphi^{-1}(H^{\prime}) \trianglelefteq G$, then $H^{\prime} \trianglelefteq G^{\prime}$.
+        \item If $\varphi$ is surjective, then there is a one-to-one correspondence between the following sets.
+        \[
+            \{ H \leq G \mid \ker\varphi \leq H \} \longleftrightarrow \{ H^{\prime} \leq G^{\prime} \}
+        \]
+        Under this correspondence, $H^{\prime} \trianglelefteq G^{\prime} \iff \varphi^{-1}(H^{\prime}) \trianglelefteq G^{\prime}$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let $H$ be a subgroup of $G$ containing the kernel and let $H^{\prime}$ be a subgroup of $G^{\prime}$. To show a bijection, we need to show that $\varphi^{-1}(\varphi(H)) = H$ and $\varphi(\varphi^{-1}(H^{\prime})) = H^{\prime}$. The second statement is trivial, hence we only look at the first statement. It is easy to show that $H \subseteq \varphi^{-1}(\varphi(H))$. Let $x \in \varphi^{-1}(\varphi(H)) \implies \varphi(x) \in \varphi(H)$. Thus, $\varphi(x) = \varphi(h)$ for some $h \in H$. Thus, $\varphi(xh^{-1}) = 1 \implies xh^{-1} \in \ker\varphi \subseteq H$. Thus, $x \in H \implies \varphi^{-1}(\varphi(H)) \subseteq H$, completing the proof.
+    
+    \medskip
+    
+    Let $g \in G$. We need to show that $g \varphi^{-1}(H^{\prime})g^{-1} \subseteq H^{\prime}$. Let $x \in \varphi^{-1}(H^{\prime})$. Then, $\varphi(x) \in H^{\prime}$. Now, 
+    \[
+        \varphi(gxg^{-1}) = \varphi(g) \varphi(x) \varphi(g^{-1}) \in H^{\prime}
+    \]
+    Thus, $gxg^{-1} \in \varphi^{-1}(H^{\prime})$ for all $x \in \varphi^{-1}(H^{\prime})$. Thus, $\varphi^{-1}(H^{\prime}) \trianglelefteq G$.
+    
+    \medskip
+    
+    We now show that if $\varphi$ is surjective and $H \trianglelefteq G$ containing $\ker\varphi$ then $\varphi(H) \trianglelefteq G^{\prime}$. We look at the conjugate $g^{\prime}\varphi(x)(g^{\prime})^{-1}$ where $x \in H$ and $g^{\prime} \in G^{\prime}$. Since $\varphi$ is surjective, $g^{\prime} = \varphi(g)$ for some $g \in G$. Now, 
+    \[
+        g^{\prime}\varphi(x)(g^{\prime})^{-1} = \varphi(g)\varphi(x)(\varphi(g))^{-1} = \varphi(gxg^{-1}) \in \varphi(H) \qedhere
+    \]
+\end{proof}
+\begin{prop} \label{prop:restriction-homo}
+Let $\varphi \colon G \to G^{\prime}$ be a surjective homomorphism and let $H^{\prime} \leq G^{\prime}$ and $\varphi^{-1}(H^{\prime})$ be its inverse image. Let $\delta \colon \varphi^{-1}(H^{\prime}) \to H^{\prime}$ be the map $\varphi$ restricted to $\varphi^{-1}(H^{\prime})$. Then,
+\begin{enumerate}
+    \item $\delta$ is a surjective homomorphism.
+    \item $\ker\varphi = \ker\delta$.
+    \item $\abs{\varphi^{-1}(H^{\prime})} = \abs{\ker\varphi} \cdot \abs{H^{\prime}}$.
+\end{enumerate}
+\end{prop}
+
+We know the subgroups of $S_3$ - the trivial subgroup, $3$ subgroups of order $3$, the alternating group $A_3$, and $S_3$ itself. We now use this knowledge to understand a certain class of subgroups of $S_4$. Let $\mathcal{A} = \{T_1, T_2, T_3\}$ where
+\begin{align*}
+    T_1 &= \{ (1 \, 2), (3 \, 4) \} \\
+    T_2 &= \{ (1 \, 3), (2 \, 4) \} \\
+    T_3 &= \{ (1 \, 4), (2 \, 3) \}
+\end{align*}
+Let $\sigma = (1\,2 \, 3\, 4)$. Then, $\sigma$ gives rise to a permutation $\varphi_{\sigma}$ of $\mathcal{A}$. We have
+\[
+    \varphi(\sigma)(T_1) = T_3 \quad \varphi(\sigma)(T_2) = T_2 \quad \varphi(\sigma)(T_3) = T_1
+\]
+Similarly, any permutation in $S_4$ is mapped to a permutation in $S_3$. We leave it as an exercise to show that $\varphi \colon S_4 \to S_3$ as defined above forms a surjective homomorphism. One may also verify that 
+\[
+    V \vcentcolon= \{ 1, (1\, 2)(3\, 4), (1\, 3)(2\, 4), (1\, 4)(2\, 3) \} \subseteq \ker\varphi
+\]
+$V$ forms a subgroup of $S_4$, called the \emph{Klein-four group} which corresponds to reflections of a square. Note also that $\abs{S_4} = \abs{\ker\varphi} \cdot \abs{S_3} \implies \abs{\ker\varphi} = 4$. Thus, the Klein-four group is in fact the kernel of this homomorphism. Using the correspondence theorem, we can deduce a lot about the subgroups of $S_4$ containing the Klein-four group. There are exactly $6$ such subgroups, each having order equal to a multiple of $4$ that divides $24$. This gives us $4,8,12$ and $24$ as the possible orders. The subgroup of order $4$ is the Klein-four itself while the subgroup of order $24$ is $S_4$ itself. One can further show that all subgroups of order $8$ that contain the Klein-four group arise from subgroups of order $2$ in $S_3$, which are exactly three in number. We hence conclude that there are exactly $3$ subgroups of order $8$ in $S_4$ which contain the Klein-four group. Moreover, the three subgroups of order $2$ in $S_3$ are not normal, hence the subgroups of order $8$ in $S_4$ containing the Klein-four group are also not normal. Finally, there exists a unique subgroup of order $12$ in $S_4$ containing the Klein-four group, which turns out to be the alternating group $A_4$. Note that characterising these subgroups of $S_4$ was a herculean task to carry out by only looking at $S_4$. However, the correspondence theorem allows us to map these subgroups to simpler subgroups of a group which we understand.

@@ -1,0 +1,602 @@
+\newpage
+\section{Rings and Fields}
+
+\subsection{Definitions}
+
+\begin{defn}[Ring]
+    A \deff{ring} is a set $R$ together with two binary operations $+$ and $\cdot$ (called addition and multiplication) satisfying the following properties.
+    \begin{enumerate}
+        \item $(R,+)$ is an abelian group with the identity element with respect to $+$ denoted by $0$.
+        \item Multiplication is associative, that is, $a\cdot (b \cdot c) = (a \cdot b) \cdot c$ for all $a,b,c \in R$.
+        \item There is a multiplicative identity in $R$, denoted by $1$, that is, $\exists \, 1 \in R$ such that $1\cdot a = a\cdot 1 = a$ for all $a \in R$.
+        \item The distributive laws hold. That is,
+        \[
+            a\cdot (b + c) = a\cdot b + a\cdot c
+        \]
+        \[
+            (b+c)\cdot a = b\cdot a + c\cdot a
+        \]
+        for all $a,b,c \in R$.
+    \end{enumerate}
+\end{defn}
+
+We henceforth forgo the use of $\cdot$ and denote multiplication simply by juxtaposition. Moreover, we denote the additive inverse of $a$ as $-a$.
+\begin{defn}[Pseudo-Ring]
+    Let $R$ be a set together with two binary operations $+$ and $\cdot$ (called addition and multiplication). If $R$ satisfies only the ring axioms $1,2$ and $4$, we call $R$ a \deff{pseudo-ring} or a \deff{non-unital ring} or a \deff{rng} (``ring'' without ``i'', the multiplicative identity).
+\end{defn}
+\begin{prop} \label{prop:ring-basic}
+    Let $R$ be a ring. Then, the following is true.
+    \begin{enumerate}
+        \item $0a = a0 = 0$ for all $a \in R$.
+        \item $(-a)b = a(-b) = -(ab)$ for all $a,b \in R$.
+        \item $(-a)(-b) = ab$ for all $a,b \in R$.
+        \item The multiplicative identity, $1$, is unique and $-a = (-1)a$.
+    \end{enumerate}
+\end{prop}
+
+\begin{ex}
+Some examples of rings:
+\begin{enumerate}
+    \item $\Z, \Q, \R$ and $\C$ are all rings with respect to the usual addition and multiplication.
+    \item For any $n \in \N^+$, $\Z_n$ is a ring with respect to addition and multiplication modulo $n$.
+    \item Consider $n \in \N^+$ and let $M_n(\R)$ be the set of all $n \times n$ matrices with entries in $\R$. $M_n(\R)$ is a ring with respect to the usual addition and matrices.
+\end{enumerate}
+\end{ex}
+
+\begin{defn}[Commutative Ring]
+    A ring $R$ is said to be \deff{commutative} if $ab = ba$ for all $a,b \in R$.
+\end{defn}
+\begin{defn}[Zero Divisor]
+    Let $R$ be a ring. An element $a \in R$ is called a \deff{zero divisor} if there is a non-zero $b \in R$ such that $ab = 0$ or $ba = 0$.
+\end{defn}
+\begin{defn}[Unit]
+    Let $R$ be a ring. An element $a \in R$ is called a \deff{unit} if there is some $b \in R$ such that $ab = ba = 1$. The set of units in $R$ is denoted as $R^{\times}$. We call $b$ the\footnotemark\ \deff{multiplicative inverse} of $a$ and denote it as $a^{-1}$ or $1/a$. 
+\end{defn}
+\footnotetext{prove that it is unique.}
+
+\begin{defn}[Irreducible Element]
+    Let $R$ be a commutative ring. An element $f \in R$ is said to be \deff{irreducible} if $f$ is non-zero, non-unit in $R$ and whenever $f = gh$ for some $g,h \in R$, either $g$ is a unit or $h$ is a unit.
+\end{defn}
+\begin{defn}[Division Ring]
+    Let $R$ be a ring. $R$ is called a \deff{division ring} or a \deff{skew field} if $R^{\times} = R\setminus\{0\}$.
+\end{defn}
+\begin{rem}
+A division ring necessarily requires $1 \neq 0$ since $1 = 0 \implies R = \{0\}$. In this case, $0$ is indeed a unit and $R^{\times} = \{0\} \neq \emptyset = R\setminus\{0\}$.
+\end{rem}
+\begin{defn}[Field]
+    A commutative division ring is called a \deff{field}.
+\end{defn}
+\begin{prop} \label{prop:field-has-zero-as-only-zero-divisor}
+    A field has zero as the only zero divisor.
+\end{prop}
+
+\begin{defn}[Domain]
+    A ring $R$ with $1 \neq 0$ is called a \deff{domain} if it has no non-zero zero divisors.
+\end{defn}
+\begin{defn}[Integral Domain]
+    A commutative domain is called an \deff{integral domain}.
+\end{defn}
+\begin{prop} \label{prop:ab-equals-ac}
+    If $R$ is an integral domain, then $ab = ac \implies a = 0$ or $b=c$ for all $a,b,c \in R$.
+\end{prop}
+\begin{proof}
+    If $ab = ac$, then $a(b-c) = 0$. If $a=0$, the result follows trivially.  If $a \neq 0$, then $a$ is also not a zero divisor, since $R$ is an integral domain. Hence, $b-c = 0$, giving us $b=c$.
+\end{proof}
+\begin{prop} \label{prop:field-and-integral-domain}
+    \phantom{hi}
+    \begin{enumerate}
+        \item Every field is an integral domain.
+        \item Every finite integral domain is a field.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \phantom{hi}
+    \begin{enumerate}
+        \item This follows trivially from \Cref{prop:field-has-zero-as-only-zero-divisor}.
+        \item We give an outline of the proof. Suppose that the elements of the finite integral domain are $0, a_1, \ldots, a_n$. Fix some non-zero $a_i$. Now, consider the set
+        \[
+            \left\{ 0a_i, a_1a_i, \ldots, a_na_i \right\}
+        \]
+        From \Cref{prop:ab-equals-ac}, it follows that each element of the above set is distinct. Hence, one of them must be equal to $1$, the multiplicative identity. Hence, for every non-zero $a_i$, we have a multiplicative inverse.
+    \end{enumerate}
+\end{proof}
+\subsection{Polynomial Rings} \label{sec:poly}
+
+\begin{defn}[Polynomial]
+    Let $R$ be a commutative ring and let $x$ be an indeterminate. The formal sum
+    \[
+        a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0
+    \]  
+    with $n \geq 0$ and each $a_i \in R$ is called a \deff{polynomial} in $x$ with coefficients in $R$.
+\end{defn}
+\begin{defn}[Degree]
+    Let $f(x)$ be a polynomial in $x$ with coefficients in $R$. The \deff{degree} of $f(x)$ is defined as
+    \[
+        \deg f(x) \vcentcolon= \max\left\{ i \in \N \mid a_i \neq 0 \right\}
+    \]
+\end{defn}
+By convention, we define the degree of the \emph{zero} polynomial (one which has all coefficients equal to $0$) as $-\infty$.
+
+We denote the set of all polynomials in $x$ with coefficients in $R$ as $R[x]$. We define the addition or sum of two polynomials ``componentwise''. That is,
+\begin{align*}
+    (a_nx^n &+ a_{n-1}x^{n-1} + \ldots + a_1x + a_0) + (b_nx^n + b_{n-1}x^{n-1} + \ldots + b_1x + b_0) \\
+    &= (a_n+b_n)x^n + (a_{n-1}+b_{n-1})x^{n-1} + \ldots + (a_1+b_1)x + (a_0 + b_0)
+\end{align*}  
+For multiplication, we first define $(ax^i)(bx^j) = abx^{i+j}$ for polynomials with only one non-zero term. We then extend this to all polynomials using the distributive laws. That is,
+\begin{align*}
+    &(a_0 + a_1x + a_2x^2 + \ldots) \cdot (b_0 + b_1x + b_2x^2 + \ldots) \\
+    &= (a_0b_0) + (a_1b_0 + a_0b_1)x + (a_2b_0 + a_1b_1 + a_0b_2)x^2 + \ldots
+\end{align*}
+In general, the coefficient of $x^k$ in the product will be $\sum_{i=0}^k a_ib_{k-i}$.
+\begin{prop} \label{prop:ring-of-polynomials}
+    Let $R$ be a commutative ring and let $R[x]$ denote the set of all polynomials in $x$ with coefficients in $R$. Then, under the above defined addition and multiplication, $R[x]$ forms a commutative ring, called the \emph{ring of polynomials in $x$ with coefficients in $R$}.
+\end{prop}
+The ring $R$ itself appears in $R[x]$ as the \emph{constant polynomials}. The multiplicative identity in $R[x]$ is the constant polynomial $1$ where $1$ is the multiplicative identity in $R$. For example, $\Z[x]$ and $\Q[x]$ are examples of such rings. The ring $\Z_3[x]$ consists of polynomials in $x$ where coefficients are either $0,1$ or $2$ and addition, multiplication is carried out modulo $p$. For example, if
+\[
+    p(x) = x^2 + 2x + 1 \text{ and } q(x) = x^3 + x + 2
+\]
+then
+\begin{align*}
+    p(x) + q(x) &= x^3 + x^2 \\
+    p(x) \cdot q(x) &= x^5 + 2x^4 + 2x^3 + x^2 + 2x + 2
+\end{align*}
+
+\begin{defn}[Power Series]
+    Let $R$ be a commutative ring and let $x$ be an indeterminate. The formal sum
+    \[
+        a_0 + a_1x + a_2x^2 + \ldots
+    \]  
+    with each $a_i \in R$ is called a \deff{(formal)\footnotemark\ power series} in $x$ with coefficients in $R$.
+\end{defn}
+\footnotetext{the term `formal' signifies that we are only dealing with the `expression' $a_0 + a_1x + \ldots$ but not actually evaluating it, so we need not worry about convergence.}
+Note that unlike a polynomial, a power series may have infinitely many terms. We can think of both polynomials and power series as a sequence of coefficients. The sequence of coefficients in a polynomial would have to be an eventually zero sequence (or a sequence with finite support), whereas there is no such restriction on the sequence of coefficients for a power series. Moreover, addition and multiplication of two formal power series follow the same pattern as the polynomials.
+
+\begin{prop} \label{prop:ring-of-power-series}
+    Let $R$ be a commutative ring and let $R\powser{x}$ denote the set of all formal power series in $x$ with coefficients in $R$. Then, with addition and multiplication as in $R[x]$, $R \powser{x}$ forms a commutative ring, called the \emph{ring of formal power series in $x$ with coefficients in $R$}.
+\end{prop}
+
+Unlike the polynomials, there are non-trivial (non-constant) units in the ring of power series. For example, consider the ring $\Z\powser{x}$ and consider $f(x) = 1 - x$. One may verify that the power series $g(x) = 1 + x + x^2 + \ldots$ is a multiplicative inverse of $f(x)$, i.e, $f(x)g(x) = 1$. In fact, the following is true.
+\begin{prop} \label{prop:unit-in-power-series}
+    Let $R$ be a commutative ring and let $f(x) = \sum_{i=0}^{\infty} a_ix^i$ be a formal power series in $R\powser{x}$. Then $f(x)$ is a unit in $R\powser{x}$ if and only if $a_0$ is a unit in $R$.
+\end{prop}
+\begin{proof}
+    Let $f(x)$ be the formal power series $\sum_{i=0}^{\infty}a_ix^i$ and suppose $g(x) = \sum_{j=0}^{\infty} b_jx^j$ be a formal power series that is a multiplicative inverse of $f(x)$. We then have
+    \[
+        f(x)g(x) = \sum_{k=0}^{\infty} \left( \sum_{i=0}^k a_ib_{k-i} \right) x^k = 1
+    \]
+    On comparing coefficients, we get $a_0b_0 = 1$. If $a_0$ is not a unit in $R$ then there does not exist any $b_0$ in $R$ satisfying the above equation, and hence, such a $g(x)$ does not exist and $f(x)$ is not a unit in $R\powser{x}$. If $a_0$ is invertible in $R$, then we define $b_0 \vcentcolon= a_0^{-1}$. For $k \geq 1$, we have
+    \[
+        \sum_{i=0}^k a_ib_{k-i} = 0 \implies a_0b_k = - \sum_{i=1}^k a_ib_{k-i}
+    \]
+    Multiplying throughout by $b_0$, we get
+    \[
+        b_k = -b_0\, \sum_{i=1}^k a_ib_{k-i}
+    \]
+    This allows us to solve for each coefficient $b_i$ by substituting $k=1,2,\ldots$ sequentially. Thus, a multiplicative inverse of $f(x)$ exists in $R\powser{x}$ and hence $f(x)$ is a unit in this ring.
+\end{proof}
+
+We now restrict ourselves to polynomials over fields. 
+
+\begin{prop}[Division Algorithm] \label{prop:div_algo_fields}
+    Let $\F$ be a field and let $f(x), g(x) \in \F[x]$ with $g(x) \neq 0$. Then, there are unique polynomials $q(x), r(x) \in \F[x]$ such that 
+    \[
+        f(x) = g(x)q(x) + r(x)
+    \]
+    and $\deg r(x) < \deg g(x)$.
+\end{prop}
+\begin{proof}
+    We first prove existence. If $\deg f(x) < \deg g(x)$, then taking $q(x) = 0$ and $r(x) = f(x)$ works. Assume that $\deg f(x) \geq \deg g(x)$. We can induct on $n = \deg f(x)$. If $n=0$, then $\deg g(x) = 0$, since $g(x)$ is non-zero. In this case, $f(x),g(x)$ are constant polynomials. We take $r(x) = 0$ and $q(x) = f(x)/g(x)$. Here $1/g(x)$ represents the multiplicative inverse of $g(x)$, which must exist since $g(x)$ is a non-zero constant polynomial and $\F$ is a field. 
+    
+    \medskip
+    
+    Now, suppose $n > 0$ and the result holds for polynomials of degree less than $n$. Suppose $f(x) = a_nx^n + a_{n-1}x^{n-1} + \ldots + a_1x + a_0$ and $g(x) = b_mx^m + b_{m-1}x^{m-1} + \ldots + b_1x + b_0$ where $a_i,b_j \in \F$ with $a_n \neq 0$ and $b_m \neq 0$. Since $b_m \neq 0$, it has a multiplicative inverse. Moreover, $n \geq m$ by assumption. Now, consider
+    \[
+        f_1(x) = f(x) - \frac{a_n}{b_m} x^{n-m} \cdot g(x)
+    \]
+    Then, $f_1(x) \in \F[x]$ and $\deg f_1(x) < n$. By the induction hypothesis, there exist $q_1(x), r_1(x) \in \F[x]$ such that $f_1(x) = g(x)q_1(x) + r_1(x)$ and $\deg r_1(x) < m$. Now, define
+    \[
+        q(x) \vcentcolon= \frac{a_n}{b_m} x^{n-m} + q_1(x) \text{  and  } r(x) \vcentcolon= r_1(x)
+    \]
+    Verify that these two polynomials satisfy the conditions of the proposition, proving existence.
+    
+    \medskip
+    
+    To prove uniqueness, suppose there are $\Tilde{q}(x), \Tilde{r}(x) \in \F[x]$ also satisfying the above conditions. We have
+    \[
+        q(x)g(x) + r(x) = \Tilde{q}(x)g(x) + \Tilde{r}(x) \implies r(x) - \Tilde{r}(x) = g(x) \left( q(x) - \Tilde{q}(x) \right)
+    \]
+    Observe that if $q-\Tilde{q}$ is non-zero, then the degree of the RHS is at least $\deg g(x)$ and, if $r-\Tilde{r}$ is non-zero, then the degree of the LHS is strictly less than $\deg g(x)$. Hence, equality holds only if $\Tilde{r}(x) = r(x)$ and $\Tilde{q}(x) = q(x)$, proving uniqueness.
+\end{proof}
+
+\begin{rem}
+The above result is also valid for an integral domain, provided the leading coefficient of $g(x)$ is a unit.
+\end{rem}
+
+\begin{defn}[Root]
+    Let $R$ be a commutative ring and let $f(x) \in R[X]$. An element $\alpha \in R$ is said to be a \deff{root} of $f(x)$ if $f(\alpha) = 0$.
+\end{defn}
+
+\begin{theorem}[Remainder Theorem] \label{thm:remainder-theorem}
+    Let $K$ be an integral domain and let $\alpha \in K$, $f(x) \in K[x]$. Then, the remainder upon dividing $f(x)$ by $(x-\alpha)$ is $f(\alpha)$.
+\end{theorem}
+\begin{proof}
+    Since the polynomial $g(x) = (x-\alpha)$ is monic, the \nameref{prop:div_algo_fields} applies. Thus, there exist unique $q(x),r(x) \in K[x]$ such that
+    \[
+        f(x) = q(x)(x-\alpha) + r(x)
+    \]
+    and $\deg r(x) < 1$. Hence, $r(x)$ is a constant polynomial, say $r$. Substituting $x = \alpha$, we get
+    \[
+        f(\alpha) = q(\alpha) (\alpha - \alpha) + r \implies f(\alpha) = r \qedhere
+    \]
+\end{proof}
+
+\begin{theorem}[Factor Theorem] \label{thm:factor-theorem}
+    Let $K$ be an integral domain. Let $\alpha \in K$ and let $f(x) \in K[x]$. Then, $\alpha$ is a root of $f(x)$ if and only if $(x-\alpha)$ is a factor of $f(x)$, that is, $f(x) = (x-\alpha)h(x)$ for some $h(x) \in K[x]$.
+\end{theorem}
+\begin{proof}
+    If $\alpha$ is a root of $f(x)$, then $f(\alpha) = 0$. Hence, by the \nameref{thm:remainder-theorem}, the remainder upon dividing $f(x)$ by $(x-\alpha)$ is $0$. Hence, $f(x) = h(x)(x-\alpha)$ for some $h(x) \in K[x]$.
+    
+    Conversely, suppose that $f(x) = (x-\alpha)h(x)$. Then, the remainder upon diving $f(x)$ by $(x-\alpha)$ is $0$. Hence, by the \nameref{thm:remainder-theorem}, $f(\alpha) = 0$ and $\alpha$ is a root of $f(x)$.
+\end{proof}
+
+\begin{cor}
+    Let $K$ be an integral domain and let $f(x) \in K[x]$ be a non-zero polynomial of degree $n$. Then, $f(x)$ has at most $n$ roots in $K$.
+\end{cor}
+\begin{proof}
+    We leave the proof as an exercise to the reader. (Hint: induction).
+\end{proof}
+
+\begin{theorem}[Fundamental Theorem of Algebra - Version 1] \label{thm:FTA1}
+    Every non-zero polynomial $f(x) \in \C[x]$ has a root in $\C$.
+\end{theorem}
+\begin{theorem}[Fundamental Theorem of Algebra - Version 2] \label{thm:FTA2}
+    For $f(x) \in \C[x]$ of degree $n \neq 0$, we can write
+    \[
+        f(x) = a \prod_{i=1}^h (x-\alpha_i)^{e_i}
+    \]
+    for some $a \in \C$, $a \neq 0$, $h \geq 0$, distinct $\alpha_1, \ldots, \alpha_h \in \C$ and $e_1, \ldots, e_h \in \N^+$. In particular, $e_i$ is the multiplicity of $\alpha_i$ as a root of $f(x)$ and
+    \[
+        \sum_{i=1}^h e_i = n
+    \]
+\end{theorem}
+
+\begin{defn}
+    Let $R$ be a commutative ring. Given $f(x),g(x) \in R[x]$, we say that $g(x)$ \deff{divides} $f(x)$ and write $g(x) \divides f(x)$ if $f(x) = g(x)h(x)$ for some $h(x) \in R[x]$.
+\end{defn}
+
+\begin{defn}[Irreducible Polynomial]
+    Let $R$ be a commutative ring. A polynomial $f(x) \in R[x]$ is said to be \deff{irreducible} if $f(x)$ is an irreducible element in $R[x]$.
+\end{defn}
+
+\begin{prop} \label{prop:linear-irreducible}
+    Let $R$ be an integral domain. $(x-\alpha)$ is irreducible in $R[x]$ for any $\alpha \in R$.
+\end{prop}
+
+\begin{defn}[Nilpotent Element]
+    Let $R$ be a commutative ring. An element $a \in R$ is said to be \deff{nilpotent} if there exists $n \in \N^+$ such that $a^n = 0$.
+\end{defn}
+
+\begin{prop} \label{prop:nilpotent-properties}
+    Let $R$ be a commutative ring and let $a,b$ be nilpotent elements in $R$. Then, 
+    \begin{enumerate}
+        \item $a+b$ is nilpotent.
+        \item $ar = ra$ is nilpotent for all $r \in R$. In particular, $-a$ is nilpotent.
+        \item If $u \in R$ is a unit, then $u-a$ is also a unit.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    We leave the first part as an exercise to the reader (Hint: Binomial theorem). The second part is also trivial. We now prove the third part. 
+    
+    \medskip
+    
+    Let $n \in \N^+$ be such that $a^n = 0$. Suppose that $u = 1$. In this case, we have
+    \[
+        1 = 1 - a^n = (1-a)(a^{n-1} + a^{n-2} + \ldots + a + 1)
+    \]
+    Thus $1-a = u-a$ is a unit with multiplicative inverse $(a^{n-1} + a^{n-2} + \ldots + a + 1)$. Now, in general, suppose $u$ is a unit with $uw = 1$ and suppose $a$ is nilpotent. We then have
+    \[  
+        (u-a) = u(1 - wa)
+    \]
+    Since $a$ is nilpotent, $wa$ is also nilpotent, by the second part. Thus, by the above argument, $(1-wa)$ is a unit. Thus, $(u-a)$ is a product of two units and is a unit itself.
+\end{proof}
+
+\begin{theorem} \label{thm:condition-for-unit-in-polynomial-ring}
+    Let $R$ be a commutative ring and let $f(x) = a_nx^n + \ldots + a_0 \in R[x]$. $f(x)$ is a unit in $R[x]$ if and only if $a_0$ is a unit in $R$ and $a_i$ is nilpotent for each $i > 0$.
+\end{theorem}
+\begin{proof}
+    One direction is easy to show. We leave it as an exercise to show that if $a_0 \in R$ is a unit then the constant polynomial $a_0$ is a unit in $R[x]$. It is also trivial to show that $a_i x^i$ is nilpotent in $R[x]$ if and only if $a_i$ is nilpotent. Thus, if $a_0$ is a unit and $a_i$ is nilpotent for each $i>0$, the polynomial $f(x) = a_0 + \ldots + a_nx^n$ is a unit in $R[x]$ since it is the sum of a unit and nilpotent elements.
+\end{proof}
+
+\begin{prop} \label{prop:no-nilpotent-in-integral}
+    An integral domain has no nonzero nilpotent elements.
+\end{prop}
+
+\begin{cor} \label{cor:units-in-integral-domain-polynomials}
+    Let $R$ be an integral domain. Then, the group of units of $R[x]$ is precisely the group of constant polynomials in $R[x]$ which are units in $R$.
+\end{cor}
+\begin{proof}
+    The proof follows trivially from \Cref{thm:condition-for-unit-in-polynomial-ring} and \Cref{prop:no-nilpotent-in-integral}.
+\end{proof}
+
+\begin{prop} \label{prop:irreducible-cubic-in-field}
+    Let $\F$ be a field and $f(x) \in \F[x]$ have degree $d$ such that $1 \leq d \leq 3$. If $f(x)$ has no root in $\F[x]$, then $f(x)$ is irreducible in $\F[x]$.
+\end{prop}
+\begin{proof}
+    Since $\deg f(x) \geq 1$, we see that $f(x)$ is non-zero and non-unit in $\F[x]$ (\Cref{cor:units-in-integral-domain-polynomials}). Further, if $f(x) = g(x)h(x)$ for some $g(x),h(x) \in \F[x]$ and if both $g(x),h(x)$ are non-units, then $\deg g(x) \geq 1$ and $\deg h(x) \geq 1$. Since $\deg f(x) \leq 3$ and $\deg g(x) + \deg h(x) = \deg f(x)$, we conclude that at least one of $g(x)$ and $h(x)$ must have degree $1$. Hence, at least one of them has a root in $\F$. However, this implies that $f(x)$ has a root in $\F$, which is a contradiction. Hence, $f(x)$ is irreducible.
+\end{proof}
+This allows us to easily conclude that $x^2 + 1$ is irreducible in $\R[x]$. Note that \Cref{prop:irreducible-cubic-in-field} breaks down for degree-$4$ polynomials. For example, consider the polynomial $f(x) = x^4 + 3x^2 + 2 \in \R[x]$. $f(x)$ clearly does not have a root in $\R$ since $a^4 + 3a^2 + 2 \geq 2 > 0$ for all $a \in \R$. However, we may factorise $f(x)$ as $(x^2+1)(x^2+2)$, both of which are non-units. 
+
+\begin{prop}
+    An odd-degree polynomial of degree greater than $1$ in $\R[x]$ is reducible.
+\end{prop}
+\begin{proof}
+    This follows from an elementary result in calculus which states that an odd-degree polynomial has a root in $\R$. Once we know that the polynomial has a root in $\R$, we may appeal to the \nameref{thm:factor-theorem}, to conclude. We leave it to the reader to work out the details.
+\end{proof}
+Does the same work for $\Q[x]$? That is, is an odd-degree polynomial in $\Q[x]$ of degree greater than $1$ always reducible in $\Q[x]$? (Hint: No).
+
+\begin{theorem}[Fundamental Theorem of Algebra - Version 3] \label{thm:FTA3}
+    Every non-zero polynomial in $\R[x]$ can be factored as 
+    \[
+        f(x) = a \cdot (x-\alpha_1) \cdots (x-\alpha_r) \cdot q_1(x) \cdots q_s(x)
+    \]
+    where $a \in \R^{\times}$, $\alpha_1, \ldots, \alpha_r \in \R$, not necessarily distinct, and $q_1(x), \ldots, q_s(x)$ are monic, quadratic polynomials in $\R[x]$ with negative discriminants. That is, $q_i(x)$ is of the form $x^2 + bx + c$ where $b,c \in \R$ with $b^2 - 4c < 0$, for all $i \in \{1, \ldots, s\}$.
+\end{theorem}
+
+\begin{theorem}[Fundamental Theorem of Algebra - Version 4] \label{thm:FTA4}
+    The only monic, irreducible polynomials in $\C[x]$ are $(x-\alpha)$ where $\alpha \in \C$.
+\end{theorem}
+
+\begin{theorem}[Fundamental Theorem of Algebra - Version 5] \label{thm:FTA5}
+    The only monic, irreducible polynomials in $\R[x]$ are of the form $(x-\alpha)$ where $\alpha \in \R$, or of the form $x^2 + bx + c$ where $b,c \in \R$ with $b^2 - 4c < 0$.
+\end{theorem}
+
+\begin{theorem}
+    Let $\F$ be a field and $f(x)$ be a nonzero polynomial in $\F[x]$. Then, $f(x)$ can be factored as
+    \[
+        f(x) = a \cdot p_1(x) \cdots p_h(x)
+    \]
+    where $a \in \F^{\times}$, $h \in \N$ and $p_1(x), \ldots, p_h(x)$ are monic irreducible polynomials in $\F[x]$.
+\end{theorem}
+\begin{proof}
+    We leave the proof as an exercise to the reader. The proof follows along similar lines as the proof for \Cref{thm:FTAr}.
+\end{proof}
+
+\begin{defn}[Greatest Common Divisor]
+    Let $R$ be an integral domain and let $f(x), g(x) \in R[x]$ be such that $f(x)$ and $g(x)$ are not both zero. A polynomial $h(x) \in R[x]$ is said to be a \deff{greatest common divisor} or \deff{$\gcd$} of $f(x)$ and $g(x)$ if the following hold.
+    \begin{enumerate}
+        \item $h(x) \divides f(x)$ and $h(x) \divides g(x)$.
+        \item If $\Tilde{h}(x) \in R[x]$ is such that $\Tilde{h}(x) \divides f(x)$ and $\Tilde{h}(x) \divides g(x)$, then $\Tilde{h}(x) \divides h(x)$.
+    \end{enumerate}
+    If $f(x), g(x)$ are both zero, we define the zero polynomial as the $\gcd$ of $f(x)$ and $g(x)$. We denote the $\gcd$ of $f(x)$ and $g(x)$ as $\left( f(x), g(x) \right)$.
+\end{defn}
+
+\begin{rem}
+    Suppose $R$ is an integral domain. If the $\gcd$ of $f(x)$ and $g(x)$ exists, then it is unique up to multiplication by a unit in $R[x]$.
+\end{rem}
+\begin{lem}
+    If $\F$ is a field, then for any $f(x), g(x) \in \F[x]$, $\left( f(x), g(x) \right)$ exists and moreover, it can be expressed as $u(x)f(x) + v(x)g(x)$ for some $u(x),v(x) \in \F[x]$.
+\end{lem}
+\begin{proof}
+    We leave this as an exercise too. The proof follows along similar lines as \Cref{prop:bezout}.
+\end{proof}
+\begin{cor}
+    Let $\F$ be a field and $p(x) \in \F[x]$ be irreducible. If $p(x) \divides f(x)g(x)$ for some $f(x), g(x) \in \F[x]$, then $p(x) \divides f(x)$ or $p(x) \divides g(x)$.
+\end{cor}
+\begin{proof}
+    Again, the proof follows along similar lines as \Cref{prop:a|c} and \Cref{cor:euclid_lemma}.
+\end{proof}
+
+\begin{comment}
+
+\subsection{Polynomial in Several Variables}
+
+\begin{defn}
+   A polynomial in $n$ variables $x_1, \ldots, x_n$ with coefficients in a commutative ring $R$ is an expression of the form
+   \[
+        \sum \, a_{i_1, \ldots, i_n} \, x_1^{i_1} \cdots x_n^{i_n}
+   \]   
+   where the summation is over a finite set of $n$-tuples $(i_1, \ldots, i_n)$ in $\N^n$ where $a_{i_1, \ldots, i_n} \in R$ for every such $n$-tuple.
+\end{defn}
+
+\begin{defn}
+   Let $R$ be a commutative ring and let $\Lambda$ be a finite subset of $\N^n$. Let $f(x_1, \ldots, x_n)$ be a polynomial in $x_1, \ldots, x_n$ of the form
+   \[
+        f(x_1, \ldots, x_n) = \sum_{(i_1,\ldots,i_n)\,\in\, \Lambda} \, a_{i_1, \ldots, i_n} \, x_1^{i_1} \cdots x_n^{i_n}.
+   \]
+   Then, 
+   \[
+        a_{i_1,\ldots,i_n} \, x_1^{i_1} \cdots x_n^{i_n}
+   \]
+   is called a \deff{term} of the polynomial $f(x_1, \ldots,x_n)$ provided $a_{i_1,\ldots,i_n} \neq 0$. Moreover, $i_1+\ldots+i_n$ is called the \deff{degree} of this term.
+\end{defn}
+
+Two polynomials are equal if and only if they have the same terms. The zero polynomial is defined as the polynomial having no terms. Since any non-zero polynomial must have at least one term, we can define the degree of such polynomials as follows.
+\begin{defn}
+   Let $f(x_1, \ldots, x_n)$ be a non-zero polynomial in $x_1,\ldots,x_n$. The \deff{degree} or \deff{total degree} of $f(x_1, \ldots, x_n)$ is defined as
+   \[
+        \deg f(x_1, \ldots, x_n) \vcentcolon= \max\left\{ i_1 + \ldots + i_n \mid (i_1, \ldots, i_n) \in \Lambda \text{ and } a_{i_1, \ldots, i_n} \neq 0 \right\}.
+   \]
+   As in the case of single variable polynomials, we define the degree of the zero polynomial as $-\infty$.
+\end{defn}
+
+\begin{defn}
+   Let $f(x_1, \ldots, x_n)$ be a non-zero polynomial in $x_1, \ldots, x_n$. If every term of the polynomial has the same degree $d$, then $f(x_1, \ldots, x_n)$ is said to be a \deff{homogeneous} polynomial of degree $d$. 
+\end{defn}
+
+\begin{defn}
+   A polynomial that has a single term with coefficient $1$, of the form $x_1^{i_1} \cdots x_n^{i_n}$ is called a \deff{monomial}.
+\end{defn}
+
+With this, we may think of a polynomial as a finite $R$-linear combination of monomials. That is, a finite linear combination of monomials with coefficients in the commutative ring $R$. Moreover, addition and multiplication of any two such polynomials is defined in the natural way, as was defined in the single variable case. With this, we have the following.
+
+\begin{prop}
+    Let $R$ be a commutative ring and let $R[x_1, \ldots, x_n]$ denote the set of all polynomials in $n$ variables, $x_1, \ldots, x_n$, with coefficients in $R$. Then, $R[x_1, \ldots, x_n]$ forms a commutative ring.
+\end{prop}
+
+For convenience, we define and use the following notation henceforth. 
+
+\underline{Multi-index notation}: For any $\alpha = (\alpha_1, \ldots, \alpha_n) \in \N^n$, we define
+\[
+    \mathbf{x}^{\alpha} \vcentcolon= x_1^{\alpha_1} \cdots x_n^{\alpha_n}
+\]
+and we define $\alpha \vcentcolon= \deg \mathbf{x}^{\alpha} = \alpha_1 + \ldots + \alpha_n$.
+
+With this notation, any polynomial in $R[x_1, \ldots, x_n]$ may be succinctly written as
+\[
+    \sum_{\alpha \, \in \, \Lambda} a_{\alpha} \mathbf{x}^{\alpha}
+\]
+where $\Lambda$ is a finite subset of $\N^n$. Of course, we may define $a_{\alpha}$ to be $0$ when $\alpha \notin \Lambda$ and then allow $\alpha$ to vary freely over $\N^n$ in the sum above.
+
+\end{comment}
+
+\subsection{Subrings and Ideals}
+
+\begin{defn}[Subring]
+    Let $S$ be a ring. A subset $R$ of $S$ is said to be a \deff{subring} of $S$ if $R$ is a ring with respect to addition and multiplication induced from $S$ and $R$ contains $1$, the multiplicative identity of $S$. In this case, we say that $S$ is an \deff{overring} or a \deff{ring extension} of $R$.
+\end{defn}
+\begin{prop}
+    Let $S$ be a ring and let $R \subseteq R$. $R$ is a subring of $S$ iff the following properties hold.
+    \begin{enumerate}
+        \item $1 \in R$.
+        \item $R$ is closed under addition and subtraction. That is, $a,b \in R \implies a+b \in R$ and $a-b \in R$.
+        \item $R$ is closed under multiplication. That is, $a,b \in R \implies ab \in R$.
+    \end{enumerate}
+\end{prop} 
+
+\begin{defn}[Subfield]
+    If $\K$ is a field and $\F$ is a subring of $\K$ such that $\F$ is also a field, then $\F$ is called a \deff{subfield} of $\K$. In this case, we say that $\K$ is an \deff{overfield} or a \deff{field extension} of $\F$.
+\end{defn}
+
+\begin{ex}
+\phantom{hi}
+\begin{enumerate}
+    \item $\Z$ is a subring of $\Q$. $\Q$ is a subring of $\R$. This also tells us that $\Z$ is a subring of $\R$. In general, if $S$ is a subring of $R$ and $T$ is a subring of $S$, then $T$ is also a subring of $R$. In other words, the relation ``is a subring of'', is transitive (we leave the proof as an exercise). In fact, the above examples are also fields themselves. Hence, $\Z$ is a subfield of $\Q$, $\Q$ is a subfield of $\R$ and so on. Equivalently, $\Q$ is a field extension of $\Z$, $\R$ is a field extension of $\Q$ and so on. Naturally, the relation ``is a subfield of'', is also transitive.
+    
+    \item $2\Z$ is closed under addition and multiplication, however it has no multiplicative identity. Hence, it is not a subring of $\Z$.
+    \item $\Z[\iota]$ is a subring of $\C$ where $\Z[\iota]$ is defined as
+    \[
+        \Z[\iota] \vcentcolon= \left\{ m + n\iota \mid m,n \in \Z \right\}.
+    \]
+    $\Z[\iota]$ is called the \emph{ring of Gaussian integers}.
+    \item $\Q[\sqrt{2}]$ is a subring of $\R$ where $\Q[\sqrt{2}]$ is defined as
+    \[
+        \Q[\sqrt{2}] \vcentcolon= \left\{ r + s\sqrt{2} \mid r,s \in \Q \right\}.
+    \]
+    It is, in fact, a field. Note that for $r,s \in \Q$, $r+s\sqrt{2} \neq 0 \iff (r,s) \neq (0,0)$ . For $(r,s) \neq (0,0)$, we leave it as an exercise to verify that
+    \[
+        \frac{r-s\sqrt{2}}{r^2 - 2s^2} \in \Q[\sqrt{2}]
+    \]
+    is a multiplicative inverse of $r+s\sqrt{2}$. Thus, $\Q[\sqrt{2}]$ is a subfield of $\R$. One may also verify that $\Q[\sqrt{2}]$ is a field extension of $\Q$.
+\end{enumerate}
+\end{ex}
+
+\begin{defn}
+   Given rings $R \subseteq S$, and $\alpha \in S$, we define $R[\alpha]$ to be the smallest subring of $S$ containing $\alpha$ and $R$.
+   
+   Given fields $\F \subseteq \K$, and $\alpha \in \K$, we define $\F(\alpha)$ to be the smallest subfield of $\K$ containing $\alpha$ and $\F$.
+   
+   Similarly, given a set $A \subseteq R$ (or $A \subseteq \F$), we can talk about $R[A]$ (or $\F(A)$) to be the smallest ring (or field) \deff{generated by $A$ over $R$ (or $\F$)}.
+\end{defn}
+
+\begin{prop} \label{prop:field-generation-construction}
+    Let $\F \subseteq \K$ be field and let $A \subseteq \K$ be a set. If $A = \emptyset$, then $\F(A) = \F$. Assume $A \neq \emptyset$.
+    
+    Let 
+    \[
+        M \vcentcolon= \left\{ a_1\cdots a_n \mid n \in \N, a_1, \ldots, a_n \in A \right\}
+    \]
+    be the set of all finite products of elements of $A$. Let
+    \[
+        S \vcentcolon= \left\{ b_0 + b_1m+1 + \cdots + b_nm_n \mid n \in \N, m_1, \ldots, m_n \in M, b_0,b_1,\ldots, b_n \in \F \right\}
+    \]
+    be the set of all finite sums of elements of $M$. (These are polynomials in $A$ with coefficients in $\F$). Then, 
+    \[
+        \F(A) = \left\{ \frac{s_1}{s_2} \mid s_1,s_2 \in S \text{ and } s_2 \neq 0 \right\}.
+    \]
+\end{prop}
+\begin{proof}
+    The case $A = \emptyset$ is trivial. Assume $A \neq \emptyset$. Let the set on the RHS of the last equation be $Q$. Note that $M$ is closed under products, and $S$ is closed under sums and products both. Moreover, $S$ contains $\F$ as the constant polynomials. It is hence clear that $Q$ is a subfield of $\K$. Taking denominator to be $1$, we also see that $S \subseteq Q$, and thus $Q$ contains $\F$ as well. Since $A \subseteq M \subseteq S$, $Q$ also contains $A$. Thus, $\F(A) \subseteq Q$.
+    
+    On the other hand, note that $M \subseteq \F(A)$ since $A \subseteq \F(A)$. Since $\F \subseteq \F(A)$, we get $S \subseteq \F(A)$, so that $Q \subseteq \F(A)$. (All these assertions follow from the relevant closure properties of $\F(A)$, a field). Thus, $Q = \F(A)$.
+\end{proof}
+
+\begin{cor} \label{cor:exists-a-finite-set-with-a-in-F(B)}
+    Let $\F \subseteq \K$ be fields and let $A \subseteq \K$ be a set. If $a \in \F(A)$, then there exists a finite set $B \subseteq A$, such that $a \in \F(B)$.
+\end{cor}
+\begin{proof}
+    Let $a \in \F(A)$ and let $M,S$ be as in \Cref{prop:field-generation-construction}. Then, $a = s_1/s_2$ for some $s_1, s_2 \in S$. Then, both $s_1$ and $s_2$ are polynomials in finitely many $a_i \in A$ with coefficients in $\F$. Let $B$ be the set of those finitely many $a_i$. Then, $a \in \F(B)$.
+\end{proof}
+
+\begin{defn}[Ideal]
+    A subset $I$ of a ring $R$ is called an \deff{ideal}\footnotemark\ of $R$ if 
+    \begin{enumerate}
+        \item $I$ is an additive subgroup of $R$, or equivalently, $0 \in I$ and $a,b \in I \implies a-b \in I$ (\Cref{thm:subgroup-criterion}). 
+        \item $a \in I$ and $r \in R \implies ra \in I$ and $ar \in I$.
+    \end{enumerate}
+\end{defn}
+\footnotetext{We sometimes call this a \emph{two-sided} ideal since we require the set to be closed under both right multiplication and left multiplication by elements in the ring. We may also define a \emph{right} and \emph{left} ideal, similarly.}
+\begin{prop} \label{prop:unit-ideal}
+    Let $R$ be a commutative ring and let $I$ be an ideal of $R$. Show that $I \neq R \iff 1 \notin I \iff I$ does not contain any unit.
+\end{prop}
+\begin{proof}
+    This follows trivially from the second condition and is left as an exercise.
+\end{proof}
+Motivated by \Cref{prop:unit-ideal}, we sometimes call $R$ the \emph{unit ideal} of $R$ and any ideal $I$ different from $R$ is called a \emph{non-unit ideal} of $R$.
+
+\begin{cor} \label{cor:ideals-of-a-field}
+    If $\F$ is a field, then the only ideals of $\F$ are the trivial or zero ideal $\{0\}$, and $\F$ itself.
+\end{cor}
+\begin{proof}
+    This follows directly from \Cref{prop:unit-ideal} since every non-zero element in a field is a unit.
+\end{proof}
+
+\begin{defn}
+    Let $R$ be a commutative ring. Given any $a_1, \ldots, a_n \in R$, the set
+    \[
+        \langle a_1, \ldots, a_n \rangle \vcentcolon= \left\{ r_1a_1 + \ldots + r_na_n \mid r_1, \ldots, r_n \in R \right\}
+    \]
+    is an ideal of $R$ called the \deff{ideal generated by $a_1, \ldots, a_n$}. More generally, if $A \subseteq R$, then the set of all finite $R$-linear combinations of elements in $A$, defined as
+    \[
+        \langle A \rangle \vcentcolon= \left\{ r_1a_1 + \ldots + r_na_n \mid r_1, \ldots, r_n \in R, a_1, \ldots, a_n \in A, n \in \N \right\}
+    \]
+    is an ideal of $R$ called the \deff{ideal generated by $A$}.\footnotemark
+\end{defn}
+\footnotetext{Instead of $(a_1, \ldots, a_n)$ or $(A)$, it is also common to denote these ideals as $\langle a_1, \ldots, a_n \rangle$ or $\langle A \rangle$.}
+
+\begin{defn}[Principal Ideal]
+   An ideal $I$ of a commutative ring $R$ is called a \deff{principal ideal} of $R$ if it can be generated by a single element in $R$, i.e, $I = \langle a \rangle$ for some $a \in R$.
+\end{defn}
+
+\begin{ex} \label{ex:ideal-examples}
+\phantom{hi}
+\begin{enumerate}
+    \item $n\Z$ is an ideal of $\Z$ for any $n \in \Z$. For $n=1$, we get the unit ideal and for $n=0$, we get the trivial or zero ideal. Moreover, $n\Z$ and $-n\Z$ are the same ideal for any $n \in \Z$. Additionally, one can prove that these are the only ideals of $\Z$ (Hint: \Cref{cor:additive_subgroup_nZ}). Note also that $n\Z$ is the ideal generated by $n$. We hence conclude that all ideals of $\Z$ are principal.
+    \item Let $\F$ be a field. For any $f(x) \in \F[x]$, the set
+    \[
+       \langle f(x) \rangle \vcentcolon= \left\{ f(x) g(x) \mid g(x) \in \F[x] \right\}
+    \]
+    is an ideal of $\F[x]$. Are these the only ideals of $\F[x]$? That is, if $I$ is an ideal of $\F[x]$ then is $I = \langle f(x) \rangle$ for some $f(x) \in \F[x]$? The answer is again \textbf{yes}. In fact, the proof is also eerily similar to the one for ideals of $\Z$. This is not surprising since they both are a consequence of the division algorithm, which holds true for both integers as well as polynomials. We again leave the exact details of the proof as an exercise to the reader. If $I$ was the zero ideal, then taking $f(x)$ to be the zero polynomial suffices. If $I$ is a nonzero ideal, then one may consider $f(x)$ to be a nonzero polynomial in $I$ such that $\deg f(x)$ is the least among the degrees of all nonzero polynomials in $I$. One may then appeal to the division algorithm (\Cref{prop:div_algo_fields}) to conclude that any polynomial $h(x)$ will be a multiple of $f(x)$. Thus, any ideal of $\F[x]$ is principal, just like $\Z$.
+    
+    \item Consider the ring $\Z[x]$ and the ideal $I = \langle 2,x \rangle$. We have
+    \[
+        I = \left\{ 2 f(x) + x g(x) \mid f(x), g(x) \in \Z[x] \right\}
+    \]
+    We would like to show that the ideal $I$ is \emph{not} principal. Suppose $I$ is principal and $I = \langle f(x) \rangle$ for some $f(x) \in \Z[x]$. Since $2 \in I$, we have $2 = f(x) g(x)$ for some $g(x) \in \Z[x]$. Comparing degrees, we get $\deg f(x) + \deg g(x) = 0$, which tells us that $f(x), g(x)$ are both non-zero constant polynomials whose product is $2$. We hence conclude that $f(x) = \pm 1$ or $f(x) = \pm 2$. If $f(x) = \pm 1$, then $I = \Z[x]$, which is a contradiction since $1 \notin I$ (since $2$ is not a unit in $\Z[x]$) but $1 \in \Z[x]$. Thus, $f(x) = \pm 2$ and $I$ is the ideal generated by $2$ (which is the same as the ideal generated by $-2$). Now, $x \in I$ and hence $x = 2 h(x)$ for some $h(x) \in \Z[x]$. On comparing degrees, we conclude that $h(x)$ must be a linear polynomial, of the form $ax + b$ for some $a,b \in \Z$. Comparing the leading coefficients, we get $2a = 1$ which is not possible since, again, $2$ is not a unit in $\Z$. Thus, $I$ is not principal.
+    
+    \item Consider the set
+    \[
+        R = \left\{ \begin{bmatrix}
+            a & 0 \\
+            0 & b
+        \end{bmatrix} \mid a,b \in \R \right\}
+    \]
+    $R$ forms a commutative ring under the usual addition and multiplication of matrices. The set
+    \[
+        S = \left\{ \begin{bmatrix}
+            a & 0 \\
+            0 & 0
+        \end{bmatrix} \mid a \in \R \right\}
+    \]
+    forms a ring and is a subset of $R$. However, it does \textbf{not} form a subring of $R$ since the multiplicative identity of $R$ ($I_{2 \times 2}$) is not present in the set $S$. The ring $S$ has its own multiplicative identity (put $a = 1$ in the definition above), which is different from the identity in $R$.
+\end{enumerate}
+\end{ex}

@@ -1,0 +1,62 @@
+\section{Solutions}
+
+\begin{enumerate}
+    \item[\ref{problem:multiplicativity_bijection}]
+    \begin{solution}
+        Chinese Remainder Theorem tells us that the map from $\mathbb{Z}_{mn} \to \mathbb{Z}_m \times \mathbb{Z}_n$ defined by
+        \[
+            c \longmapsto \left( c \Mod{m}, c \Mod{n} \right)
+        \]
+        is surjective. One can also verify that this map is injective (this follows since $m$ and $n$ are coprime). Hence, this map is bijective. The induced map from $\mathbb{Z}_{mn}^{\times} \to \mathbb{Z}_m^{\times} \times \mathbb{Z}_n^{\times}$ as 
+        \[
+            c \longmapsto \left( c \Mod{m}, c \Mod{n} \right)
+        \]
+        is also clearly injective. It is a good exercise to show that the induced map is also surjective, and thus, this is a bijection. Alternatively, it is an interesting exercise to define the following map from $\mathbb{Z}_m^{\times} \times \mathbb{Z}_n^{\times} \to \mathbb{Z}_{mn}^{\times}$ defined as
+        \[
+            (\overline{a}, \overline{b}) \longmapsto \overline{na + mb}
+        \]
+        is a bijection.
+    \end{solution}
+    
+    \item[\ref{problem:Aut}]
+    \begin{solution}
+        \underline{$\mathbb{Z}$:} Let $f \colon \mathbb{Z} \to \mathbb{Z}$ be an automorphism. Since $f$ is a bijection, we have $\im f = \mathbb{Z}$. Moreover, $f$ must preserve the identiy. Hence $f(0) = 0$. Suppose $f(1) = 1$. Then, we claim that $f$ is the identity map. For $n > 0$, we have
+        \[
+            f(n) = f(\underbrace{1 + \ldots + 1}_{n\text{ times}}) = \underbrace{f(1) + \ldots + f(1)}_{n\text{ times}} = \underbrace{1 + \ldots + 1}_{n\text{ times}} = n
+        \]  
+        If $n<0$, then $(-n)>0$ and we have
+        \[
+            f(n) + f(-n) = f(n+(-n)) = f(0) = 0
+        \]
+        \[
+            \therefore \, f(n) + (-n) = 0 \implies f(n) = n
+        \] 
+        Hence, $f(n) = n$ for all $n \in \mathbb{Z}$. Similarly, we may show that if $f(1) = -1$, then $f(n) = -n$ for all $n \in \mathbb{Z}$. Suppose that $f(1) = n$ for some $n > 1$. Since $f$ is surjective, there exists a $k \in \mathbb{Z}$ such that $f(k) = 1$. We have
+        \[
+            f(1) = n = \underbrace{1 + \ldots + 1}_{n\text{ times}} = \underbrace{f(k) + \ldots + f(k)}_{n\text{ times}} = f(\underbrace{k + \ldots + k}_{n\text{ times}})
+        \]
+        Since $f$ is also injective, we must have
+        \[
+            1 = \underbrace{k + \ldots + k}_{n\text{ times}}
+        \]
+        which has the only solution $k = 1$ and $n = 1$. Hence $f(1)$ cannot be any integer greater than $1$. Similarly, we can show that $f(1)$ cannot be any integer less than $-1$. It is also trivial to verify that $f(1)$ cannot be $0$. Thus, we have only two automorphisms on $\mathbb{Z}$, namely the identity map and the negation map.
+        
+        \medskip
+        
+        \underline{$S_3$:} It is easy to show that $S_3 = \left\langle (1 \, 2), (1 \, 2 \, 3) \right\rangle$. Since automorphism will not change the cycle structure, if $f \colon S_3 \to S_3$ is an automorphism then $f\left((1 \, 2)\right)$ will be one of three $2$-cycles, giving us three possibilities. Similarly, $f\left( (1 \, 2 \, 3) \right)$ will be one of two $3$-cycles, giving us two possibilities. Hence, $\Aut S_3$ has no more than $6$ elements. 
+        
+       Consider a group $G$, and define $\varphi \colon G \to \Aut G$, defined by $\varphi(h) = \gamma_h$. $\varphi$ is a group homomorphism. Moreover, 
+       \[
+        \ker\varphi = \left\{ h \in G \mid \gamma_h \text{ is the identity map} \right\}
+       \]
+       Now,
+       \[
+            \gamma_h(g) = g \text{ for all } g \in G\iff hgh^{-1} = g \text{ for all }g \in G \iff h \in Z(G)
+       \]
+       For $G = S_3$, we have $\ker\varphi = \{ () \}$, the identity permutation. Hence, $\varphi \colon S_3 \to \Aut S_3$ is injective, telling us that $\Aut S_3$ has at least six elements. Combining the two results, we see that $\Aut S_3$ has exactly six elements. Moreover, $\Aut S_3 = I(S_3)$, the group of inner automorphisms of $S_3$.
+       
+       \medskip
+       
+       \underline{$\mathbb{Z}_n$:} For $\mathbb{Z}_n$, we see that any generator of $\mathbb{Z}_n$ must map to another generator of $\mathbb{Z}_n$, else the map will not be surjective. Suppose $f \colon \mathbb{Z}_n \to \mathbb{Z}_n$ is an automorphism, then $f(\overline{1})$ should generate $\mathbb{Z}_n$. Thus, $f(\overline{1}) = f(\overline{m})$ where $1 \leq m \leq n$ and $(m,n) = 1$. Thus, $\abs{\Aut\mathbb{Z}_n} \leq \varphi(n)$. Moreover, $f(\overline{k}) = \overline{km}$ is indeed an automorphism when $(m,n) = 1$. Thus, we can construct a map $\psi \colon \Aut\mathbb{Z}_n \to \mathbb{Z}_n^{\times}$ defined by $\psi(f) = f(\overline{1})$. Verify that this is an isomorphism. Hence, $\Aut\mathbb{Z}_n \cong \mathbb{Z}_n^{\times}$.
+    \end{solution}
+\end{enumerate}

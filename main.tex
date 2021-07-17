@@ -1,0 +1,70 @@
+\documentclass[11pt]{article}	% Always compile at least twice.
+% Cover Information	
+\def\univname{}
+\def\coursenum{}
+\def\coursename{Abstract Algebra}
+\def\professor{Aryaman Maithani}
+\def\student{Ishan Kapnadak}
+\def\semesteryear{Summer of Science 2021}
+\def\imagename{iitb.png}		    % Replace with University Seal
+\def\scalesize{0.20}					% Scale Logo Size 
+
+% Style Package (Load After Cover Information)
+\usepackage{aryaman}	% Change to match style file
+%\setcounter{tocdepth}{1}
+%\definecolor{arsenic}{rgb}{0.23, 0.27, 0.29}
+\definecolor{arsenic}{rgb}{0.43, 0.5, 0.5}
+% -------------------
+% Content
+% -------------------
+\begin{document}
+
+
+% Cover Page
+\coverpage
+
+% Last Updated
+\thispagestyle{empty}
+\updated{\today}
+
+
+% Table of Contents
+\thispagestyle{empty}
+\tableofcontents
+% \newpage
+\pagestyle{fancy}
+\setcounter{section}{-1}
+\setcounter{page}{1}
+
+\addcontentsline{toc}{section}{\large{\textbf{\textcolor{arsenic}{Preliminaries}}}}
+\input{sections/419/srg/prelim}
+\addcontentsline{toc}{section}{\large{\textbf{\textcolor{arsenic}{Group Theory}}}}
+\input{sections/419/jkv/intro_groups}
+\input{sections/419/jkv/group_homo}
+\input{sections/419/jkv/product_quotients}
+\input{sections/419/df/semidirect}
+\input{sections/419/jkv/iso_thms}
+\input{sections/419/jkv/actions}
+\input{sections/419/jkv/sylow}
+\input{sections/419/jkv/classification}
+\addcontentsline{toc}{section}{\large{\textbf{\textcolor{arsenic}{Ring Theory}}}}
+\input{sections/419/srg/rings}
+\input{sections/419/srg/ring_homo}
+\input{sections/419/df/ed_pid_ufd}
+\input{sections/419/df/poly_rings}
+\addcontentsline{toc}{section}{\large{\textbf{\textcolor{arsenic}{Galois Theory}}}}
+\input{sections/414/algebra2}
+\input{sections/414/symmetric}
+\input{sections/414/closure}
+\input{sections/414/separable}
+\input{sections/414/finite_fields}
+\input{sections/414/normal}
+\input{sections/414/galois}
+%\input{sections/general/exercises}
+%\input{sections/general/extra}
+%\input{sections/general/solutions}
+%\input{sections/general/comments}
+\addcontentsline{toc}{section}{References}
+\input{sections/general/references}
+
+\end{document}

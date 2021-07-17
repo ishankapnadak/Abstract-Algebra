@@ -1,0 +1,261 @@
+\section{Direct Products and Quotient Groups}
+
+\begin{defn}[Direct Product]
+    Suppose $G_1, \ldots, G_n$ are groups. We define the \deff{direct product} of these groups as 
+    \[
+        G_1 \times \ldots \times G_n = \left\{ (g_1, \ldots, g_n) \mid g_i \in G_i \text{ for all } i \in \{1, \ldots, n\} \right\}
+    \]
+    with the associated binary operation as
+    \[
+        (g_1, \ldots, g_n) (h_1, \ldots, h_n) = (g_1h_1, \ldots, g_nh_n)
+    \]
+    where each $g_i, h_i \in G_i$ for all $i \in \{1, \ldots, n\}$. The direct product, along with this binary operation, forms a group.
+\end{defn}
+    
+\begin{ex} \label{ex:C6}
+    Let $C_2$ be the\footnotemark\ cyclic group of order $2$ and let $C_3$ be the cyclic group of order $3$. Suppose $C_2 = \langle x \rangle$ and $C_3 = \langle y \rangle$. Then,
+\[
+    C_2 \times C_3 = \left\{ (1,1), (1,y), (1,y^2), (x,1), (x,y), (x,y^2) \right\}
+\]
+Notice that $\abs{(x,y)} = 6$. Since $\abs{C_2 \times C_3} = 6$, we see that $(x,y)$ in fact generates $C_2 \times C_3$. That is, $C_2 \times C_3 = \langle (x,y) \rangle$, a cyclic group of order $6$. Since there is only one cyclic group of order $6$, we conclude that $C_2 \times C_3 \cong C_6$. We leave it as an exercise to explicitly define the isomorphism between these two groups. This is generalised by the following proposition.
+\end{ex}
+\footnotetext{Since, up to isomorphism, there is only a single cyclic group of order $n$, we denote this group as $C_n$.}
+
+\begin{prop} \label{prop:product-of-cyclic}
+    Suppose $C_m$ and $C_n$ are cyclic groups of order $m$ and $n$ respectively. Then,
+    \begin{enumerate}
+        \item $\abs{C_m \times C_n} = mn$.
+        \item $C_m \times C_n$ is cyclic if and only if $\gcd(m,n) = 1$.
+        \item if $\gcd(m,n) = 1$, then $C_m \times C_n \cong C_{mn}$.
+        \item if $x \in C_m$ and $y \in C_n$, then $\abs{\langle x,y \rangle} = \lcm(\abs{x}, \abs{y})$.
+    \end{enumerate}
+\end{prop}
+\begin{defn}[Inclusion Maps]
+    Let $A$ and $B$ be two groups and let $A \times B$ denote their direct product. Define $i_A \colon A \to A \times B$ and $i_B \colon B \to A \times B$ as
+    \[
+        i_A(a) = (a,1) \text{ for all } a \in A
+    \]
+    \[
+        i_B(b) = (1,b) \text{ for all } b \in B
+    \]
+    We call $i_A$ the \deff{inclusion map} of $A$ in $A \times B$ and $i_B$ the \deff{inclusion map} of $B$ in $A \times B$.
+\end{defn}
+\begin{prop} \label{prop:inclusion-map-basics}
+    Let $A,B$ be two groups and let $i_A, i_B$ be their respective inclusion maps in $A \times B$. Then,
+    \begin{enumerate}
+        \item $i_A$ and $i_B$ are group homomorphisms.
+        \item $\im i_A \leq A \times B$ and $\im i_B \leq A \times B$.
+        \item $i_A$ and $i_B$ are injective.
+        \item $\im i_A \cong A$ and $\im i_B \cong B$.
+    \end{enumerate}
+\end{prop}
+\begin{defn}
+    Let $A$ and $B$ be two groups and let $A \times B$ denote their direct product. Define $P_A \colon A \times B \to A$ and $P_B \colon A \times B \to B$ as
+    \[
+        P_A(a,b) = a
+    \]
+    \[
+        P_B(a,b) = b
+    \]
+    We call $P_A$ the \deff{projection map} of $A \times B$ onto $A$ and $P_B$ the \deff{projection map} of $A \times B$ onto $B$.
+\end{defn}
+\begin{prop} \label{prop:projection-map-basics}
+    Let $A,B$ be two groups and let $P_A, P_B$ be their respective projection maps. Then,
+    \begin{enumerate}
+        \item $P_A$ and $P_B$ are group homomorphisms.
+        \item $\ker P_A = \im i_B$ and $\ker P_B = \im i_A$.
+    \end{enumerate}
+\end{prop}
+\begin{cor} \label{cor:image-of-inclusion-is-normal}
+    Let $A,B$ be two groups and let $i_A, i_B$ be their respective inclusion maps in $A \times B$. Then, $\im i_A \trianglelefteq A \times B$ and $\im i_B \trianglelefteq A \times B$.
+\end{cor}
+\begin{proof}
+    We leave the proof as an exercise to the reader. We will later show that The proof follows quite trivially since $\im i_A$ and $\im i_B$ are both the kernels of some group homomorphisms (namely, the projection maps described above).
+\end{proof}
+\begin{prop} \label{prop:idp-of-inclusion}
+    Let $A,B$ be two groups and let $i_A, i_B$ be their respective inclusion maps in $A \times B$. Then, 
+    \begin{enumerate}
+        \item $\im i_A \cap \im i_B = \{ (1,1) \}$.
+        \item $\im i_A \im i_B = A \times B$ where
+        \[
+            \im i_A \im i_B \vcentcolon= \left\{ (a,1)(1,b) \mid (a,1) \in \im i_A, (1,b) \in \im i_B \right\}
+        \]
+        \item for any $(a,b) \in A \times B$, the decomposition of $(a,b)$ into a product of two elements in $\im i_A$ and $\im i_B$ is unique.
+    \end{enumerate}
+\end{prop}
+
+\begin{defn}[Internal Direct Product]
+    Let $G$ be a group and $N_1, \ldots, N_t$ be normal subgroups of $G$. We say that $G$ is an \deff{internal direct product} of $N_1, \ldots, N_t$ if
+    \begin{enumerate}
+        \item $G = N_1 \cdots N_t$.
+        \item Every $g \in G$ has a unique decomposition $g = n_1 \cdots n_t$ where $n_i \in N_i$ for all $i \in \{1, \ldots, t\}$.
+    \end{enumerate}
+\end{defn}
+
+Hence, we just showed that $A \times B$ is an internal direct product of $\im i_A$ and $\im i_B$. Note that the definition does not require that these normal subgroups intersect trivially. In fact, this follows from the definition itself.
+
+\begin{prop} \label{prop:idp-trivial-intersection}
+    Let $G$ be a group and $N_1, \ldots, N_t$ be normal subgroups of $G$. If $G$ is an internal direct product of $N_1, \ldots, N_t$, then $N_i \cap N_j = \{1\}$ for all $i,j \in \{1,\ldots,t\}$ with $i \neq j$.
+\end{prop}
+\begin{proof}
+    We will consider the case that $G$ is an internal direct product of $2$ normal subgroups, $N_1$ and $N_2$. The idea used next generalises very well to any internal direct product. Suppose that $N_1$ and $N_2$ both contain $g \neq 1$. Then, they also contain $g^{-1}$. Now consider the identity $1 \in G$. We can write
+    \[
+        1 = 1 \cdot 1 = g \cdot g^{-1}
+    \]
+    Thus, giving us two distinct ways of writing the same element in $G$ as a product of elements in $N_1, N_2$. Hence, $N_1$ and $N_2$ must intersect trivially.
+\end{proof}
+
+\begin{lem} \label{lem:distinct-idp-commute}
+    Let $G$ be an internal direct product of normal subgroups $N_1, \ldots, N_t$. Then, for all $a \in N_i, b \in N_j$ with $i,j \in \{1, \ldots, t\}$ and $i\neq j$, we have $ab = ba$. That is, elements in distinct $N_i$'s commute. 
+\end{lem}
+\begin{proof}
+    Let $a \in N_i$ and $b \in N_j$ and $i \neq j$. Define $h = aba^{-1}b^{-1}$. We can write $h$ as $(aba^{-1})b^{-1}$. The bracketed term is a conjugate of $b$. Since $b \in N_j$ and $N_j$ is normal, we have $aba^{-1} \in N_j$. Since $b^{-1} \in N_j$, we have $h \in N_j$. Similarly, we can write $h = a(ba^{-1}b)$ and conclude that $h \in N_i$. However, since $i \neq j$, we have $N_i \cap N_j = \{1\}$. Thus, $h = 1$. This gives us $aba^{-1}b^{-1} = 1 \implies ab = ba$.
+\end{proof}
+
+\begin{theorem} \label{thm:group-isomorphic-to-product}
+    Let $G$ be a group and $N_1, \ldots, N_t$ be normal subgroups of $G$. If $G$ is an internal direct product of $N_1, \ldots, N_t$, then the map $\varphi \colon N_1 \times \ldots \times N_t \to G$ defined by
+    \[
+        \varphi(n_1, \ldots, n_t) = n_1 \cdots n_t
+    \]
+    is an isomorphism, and hence $G \cong N_1 \times \ldots \times N_t$.
+\end{theorem}
+
+\begin{proof}
+    We first prove that $\varphi$ is a homomorphism. Let $(n_1, \ldots, n_t), (m_1, \ldots, m_t) \in N_1 \times \ldots \times N_t$ be two $n$-tuples. Then, 
+    \[
+        \varphi\left( (n_1, \ldots, n_t) (m_1, \ldots, m_t) \right) = \varphi\left( n_1m_1, \ldots, n_tm_t \right) = n_1m_1 \cdots n_tm_t
+    \]
+    We also have
+    \[
+        \varphi(n_1, \ldots, n_t) \varphi(m_1, \ldots, m_t) = n_1\cdots n_t m_1 \cdots m_t
+    \]
+    Now, since $n_i, m_i$ all belong to distinct $N_i$, the above lemma allows us to conclude commutativity of these elements. Thus, 
+    \[
+        \varphi\left( (n_1, \ldots, n_t) (m_1, \ldots, m_t) \right) = \varphi(n_1, \ldots, n_t) \varphi(m_1, \ldots, m_t)
+    \]
+    and hence $\varphi$ is a homomorphism. It is trivial to check that $\varphi$ is surjective. Also observe that $\ker\varphi = \{(1, \ldots, 1)\}$ since $1 \in G$ has the unique representation $1 \cdots 1$. Thus, $\varphi$ is also injective and hence a bijection. This proves isomorphism.
+\end{proof}
+
+\begin{prop} \label{prop:HK}
+    Let $G$ be a group and let $H,K$ be finite subgroups of $G$. Define
+    \[
+        HK \vcentcolon= \left\{ hk \mid h \in H, k \in K \right\} = \bigcup_{h \in H} hK
+    \]  
+    Then, the following hold true.
+    \begin{enumerate}
+        \item $\abs{HK} = \ddfrac{\abs{H}\abs{K}}{\abs{H\cap K}}$.
+        \item $HK \leq G \iff HK = KH$.
+        \item If $K \trianglelefteq G$ then $HK \leq G$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    We see that $HK$ is a union of left cosets of $K$ taken over elements in $H$. Hence, to count the number of elements in $HK$, we only need to count the number of distinct left cosets of $K$ by elements in $H$. To this end, observe that
+    \[
+        h_1K = h_2K \iff h_2^{-1}h_1 \in K 
+    \]
+    Since $h_2^{-1}h_1$ must also lie in $H$, we have
+    \[
+        h_1K = h_2K \iff h_2^{-1}h_1 \in K \cap H \iff h_1 (K \cap H) = h_2(K \cap H)
+    \]
+    Hence, the number of distinct left cosets of $K$ by elements in $H$ is equal to the number of distinct left cosets of $K\cap H$ in $H$. However, this is precisely equal to $[H:K\cap H]$. If $H,K$ are finite, this is equal to $\frac{\abs{H}}{\abs{K\cap H}}$. Each distinct left coset has precisely $\abs{K}$ elements. Thus, 
+    \[
+        \abs{HK} = \abs{K} \cdot [H:K\cap H] = \frac{\abs{H}\abs{K}}{\abs{H\cap K}}
+    \]
+    
+    \medskip
+    
+    Now, suppose that $HK$ is a subgroup and let $h \in H$ and $k \in K$. We then have $h = h1 \in HK$ and $k = 1k \in HK$. Since $HK$ is closed under products, we have $kh \in HK$ and thus $KH \subseteq HK$. We also have $(hk)^{-1} \in HK$, so $(hk)^{-1} = xy$ for some $x\in H$, $y \in K$. Thus, $hk = (xy)^{-1} = y^{-1}x^{-1} \in KH$ since $y^{-1} \in K$ and $x^{-1} \in H$. Thus, $HK \subseteq KH$. Hence, if $HK \leq G$ then $HK = KH$. 
+    
+    \medskip
+    
+    Conversely, suppose that $HK = KH$. We trivially see that $1 \in HK$. Suppose $a,b \in HK$. Thus, $a = h_1k_1$ and $b = h_2k_2$ for some $h_1,h_2 \in H$ and $k_1,k_2 \in K$. Now, $k_1h_2 \in KH = HK$ and thus $k_1h_2 = hk$ for some $h \in H$ and $k \in K$. We then have
+    \[
+        ab = h_1k_1h_2k_2 = h_1hkk_2
+    \]  
+    Since $H$ and $K$ are closed under products, $h_1h \in H$ and $kk_2 \in K$, giving us $ab \in HK$. Also,
+    \[
+        a^{-1} = (h_1k_1)^{-1} = k_1^{-1}h_1^{-1} \in KH = HK
+    \]
+    Thus, $HK$ is closed under products and inverses and also contains the identity. Thus, $HK \leq G$.
+    
+    \medskip
+    
+    Now, suppose $K \trianglelefteq G$. It suffices to show that $HK = KH$. Let $x \in HK$. Thus, $x = hk$ for some $h \in H$, $k \in K$. We have
+    \[
+        xh^{-1} = hkh^{-1} \in K \text{  (since $K$ is normal)}
+    \]
+    Thus, $x \in HK \implies x \in KH$ and hence $HK \subseteq KH$. One can similarly show that $KH \subseteq HK$. Thus $HK = KH$ and $HK \leq G$.
+\end{proof}
+
+
+\begin{prop} \label{prop:quotient-group-is-a-group}
+    Let $G$ be a group and let $N \trianglelefteq G$. Define $G/N \vcentcolon= \left\{ gN \mid g \in G \right\}$, the set of all left cosets of $N$. Then, $G/N$ forms a group with binary operation defined as
+    \[
+        (gN)(hN) = (gh)N \text{ for all } gN, hN \in G/N
+    \]
+\end{prop}
+\begin{proof}
+We first prove that this binary operation is well-defined. That is, if $gN = g_1N$ and $hN = h_1N$, then $(gh)N = (g_1h_1)N$. $gN = g_1N \implies g_1^{-1}g \in N$ and $hN = h_1N \implies h_1^{-1}h \in N$. Now,
+\[
+    (gh)N = (g_1h_1)N \iff (g_1h_1)^{-1}gh \in N \iff h_1^{-1}g_1^{-1}gh \in N
+\]  
+Now, $g^{-1}g = n_1$ and $h_1^{-1}h = n_2$ for some $n_1,n_2 \in N$, giving us $g = g_1n_1$ and $h=h_1n_2$. Thus,
+\[
+    (gh)N = (g_1h_1)N \iff h_1^{-1}g_1^{-1}g_1n_1h_1n_2 \in N \iff h_1^{-1}n_1h_1n_2 \in N
+\]
+Now $h_1^{-1}n_1h_1 \in N$ since $N$ is normal. Thus, $h_1^{-1}n_1h_1n_2 \in N \implies (gh)N = (g_1h_1)N$. 
+
+\medskip
+
+Now, we prove associativity. Let $g_1N, g_2N, g_3N \in G/N$. We have
+\[
+\left( g_1Ng_2N \right)g_3N = (g_1g_2 N)g_3N = \left( (g_1g_2)g_3 \right)N 
+\]
+Since $G$ is associative, $(g_1g_2)g_3 = g_1(g_2g_3)$. Thus, 
+\[
+    \left( g_1Ng_2N \right)g_3N = \left( g_1(g_2g_3) \right)N = g_1N(g_2g_3N) = g_1N\left( g_2N g_3N\right)
+\]
+Since $(gN)N = N(gN) = gN$, $N$ is the element. It is also trivial to check that $(gN)^{-1} = g^{-1}N$. Hence, $G/N$ forms a group.
+\end{proof}
+
+\begin{rem}
+    The group $G/N$, as defined above, is called the \emph{quotient group of $N$ in $G$.}
+\end{rem}
+
+\begin{prop} \label{prop:quotient-surjective-homo}
+    Let $G$ be a group and let $N \trianglelefteq G$. Define $\varphi \colon G \to G/N$ with $\varphi(g) = gN$ for all $g \in G$. Then, $\varphi$ is a surjective group homomorphism.
+\end{prop}
+\begin{proof}
+    Surjectivity is evident. We hence only show that $\varphi$ is a homomorphism. Given any $g_1,g_2 \in G$, we have
+    \[
+        \varphi(g_1g_2) = g_1g_2N = (g_1N)(g_2N) = \varphi(g_1)\varphi(g_2) \qedhere
+    \]
+\end{proof}
+\begin{prop} \label{prop:normal-subgroup-is-kernel}
+    Every normal subgroup of a group $G$ is the kernel of some group homomorphism.
+\end{prop}
+\begin{proof}
+    Let $G$ be a group and let $N \trianglelefteq G$ be a normal subgroup. We define $\varphi \colon G \to G/N$ with $\varphi(g) = gN$ for all $g \in G$. The identity element of $G/N$ is $N$. Hence,
+    \[
+        \ker\varphi = \left\{ g \in G \mid \varphi(g) = N \right\} = \left\{ g \in G \mid gN = N \right\} = N \qedhere 
+    \]
+\end{proof}
+\begin{prop} \label{prop:subgroup-of-quotient-is-left-coset}
+    Let $G$ be a group and let $N \trianglelefteq G$. Then, every subgroup of the quotient group $G/N$ is of the form $H/N = \left\{ hN \mid h \in H \right\}$ where $N \leq H \leq G$. Conversely, if $N \leq H \leq G$, then $H/N \leq G/N$. Moreover, if $N \leq N^{\prime} \trianglelefteq G$, then $N^{\prime}/N \trianglelefteq G/N$.
+\end{prop}
+\begin{proof}
+    This is a direct application of the \nameref{thm:correspondence}.
+\end{proof}
+
+There is a reason why we are interested in only quotient groups generated by normal subgroups. Such a nice structure will not exist if the subgroup isn't normal. In fact, the binary operation defined above is indeed a well-defined binary operation then the subgroup must be normal, as we now show.
+
+\begin{prop} \label{prop:binary-well-defined-normal-quotient}
+    Let $G$ be a group and let $N \leq G$. The operation $\cdot \colon G/N \times G/N \to G/N$ defined by
+    \[
+        (gN) \cdot (hN) = (gh)N \text{ for all } gN,hN \in G/N
+    \]
+    is well-defined if and only if $N \trianglelefteq G$.
+\end{prop}
+\begin{proof}
+    We have already shown that if $N \trianglelefteq G$ then the binary  operation on $G/N$ is well defined. Now suppose the operation is well-defined. That is, if $gN = g_1N$ and $hN = h_1N$ then $(gh)N = (g_1h_1)N$. Let $n \in N$ and let $g \in G$. We have $nN = 1N$. Thus, $(ng)N = (1g)N = gN$, which gives us $gN = ngN$. Thus, $N = g^{-1}ngN$ and hence $g^{-1}ng \in N$ for all $g \in G$, giving us $N \trianglelefteq G$. 
+\end{proof}

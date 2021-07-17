@@ -1,0 +1,265 @@
+\section{Classification of Groups}
+
+\subsection{Isomorphism Classes of Groups}
+
+We now classify all groups of order at most $13$ using the Sylow theorems, along with some other specific orders.
+
+\begin{prop}
+    Let $p$ be a prime. Up to isomorphism, there is exactly one group of order $p$, namely the cyclic group $C_p$.
+\end{prop}
+\begin{proof}
+    We leave the proof as an exercise to the reader. (Hint: \nameref{thm:lagrange}). 
+\end{proof}
+
+\begin{theorem} \label{thm:class-prime-square}
+    Let $p$ be a prime. Up to isomorphism, there are only two groups of order $p^2$, namely, the cyclic group $C_{p^2}$, and the group $C_p \times C_p$. 
+\end{theorem}
+\begin{proof}
+    Let $\abs{G} = p^2$ and let $Z(G)$ be the center of $G$. We first show that $G$ must be abelian. By \Cref{thm:p-group-has-non-trivial-center}, $Z(G)$ is non-trivial. By \nameref{thm:lagrange}, $Z(G)$ must have order $p$ or $p^2$. If $Z(G)$ has order $p^2$, then $Z(G) = G$, so that $G$ is abelian. If $Z(G)$ has order $p$, then $G/Z(G)$ has order $p$. Hence, $G/Z(G)$ is cyclic and hence abelian. However, this forces $G$ to be abelian, in which case $Z(G) = G$ and $\abs{Z(G)} = p^2$, which is a contradiction. Hence, $G$ is abelian. 
+    
+    Now, suppose there was an element of order $p^2$ in $G$. Then, $G \cong C_{p^2}$. If not, then all elements (except identity) have order $p$. Let $x$ be one such element. Now, choose $y \notin \langle x \rangle$. Both $\langle x \rangle$ and $\langle y \rangle$ are normal subgroups of $G$, intersecting trivially. By \Cref{prop:HK}, the cardinality of their product matches the cardinality of $G$. Hence, $G$ is the internal direct product of $\langle x \rangle$ and $\langle y \rangle$, both of which are isomorphic to $C_p$. \Cref{thm:group-isomorphic-to-product} now tells us that $G \cong C_p \times C_p$.
+\end{proof}
+\begin{cor} \label{cor:class-4}
+    Up to isomorphism, there are only two groups of order $4$, namely, the cyclic group $C_4$, and the Klein-four group $V$. 
+\end{cor}
+\begin{proof}
+    By \Cref{thm:class-prime-square}, $C_4$ and $C_2 \times C_2$ are the only two groups of order $4$. Since $V$ is a group of order $4$, and $V$ is not isomorphic to $C_4$ (why?), we conclude that $V \cong C_2 \times C_2$. 
+\end{proof}
+
+\begin{prop} \label{prop:unique-sylow-not-simple}
+    Let $G$ be a group of order $mp^n$ where $m >1$ and $p$ is prime. If $n_p = 1$, then $G$ is not simple.
+\end{prop}
+\begin{proof}
+    Let $H$ be the \emph{unique} Sylow $p$-subgroup of $G$. $H$ is clearly a proper non-trivial subgroup of $G$ since $\abs{H} = p^n$ and $1 < p^n < mp^n$. Moreover, for any $g \in G$, $gHg^{-1}$ is a Sylow $p$-subgroup of $G$ by the third Sylow theorem. By uniqueness, $gHg^{-1} = H$ for all $g \in G$, so that $H$ is normal. Hence, $G$ is not simple.
+\end{proof}
+
+\begin{theorem} \label{thm:class-6}
+    Up to isomorphism, there are only two groups of order $6$, namely the cyclic group of order $6$, $C_6$, and the group of permutations $S_3$.
+\end{theorem}
+\begin{proof}
+    Let $\abs{G} = 6 = 2 \cdot 3$. By the first Sylow theorem, $G$ has a Sylow $2$-subgroup, say $H$, and a Sylow $3$-subgroup, say $K$. We will let $n_2$ denote the number of Sylow $2$-subgroups of $G$, and $n_3$ denote the number of Sylow $3$-subgroups of $G$. By the fourth Sylow theorem,
+    \begin{align*}
+        n_2 &\equiv 1 \Mod{2} \text{ and } n_2 \divides 3 \implies n_2 = 1 \text{ or } 3. \\
+        n_3 &\equiv 1 \Mod{3} \text{ and } n_3 \divides 2 \implies n_3 = 1.
+    \end{align*}
+    Hence, there is a unique Sylow $3$-subgroup of $G$, which is $K$, that is a normal subgroup of $G$ by \Cref{prop:unique-sylow-not-simple}. If $n_2 = 1$, then $H$ is also normal in $G$. Moreover, $\abs{H} = 2$ and $H = C_2$, and $\abs{K} = 3$ and $K = C_3$. Note that $H$ and $K$ are two normal subgroups of $G$ that intersect only in identity. By \Cref{prop:HK}, we have
+    \[
+        \abs{HK} = \frac{\abs{H} \cdot \abs{K}}{\abs{H \cap K}} = \frac{2 \cdot 3}{1} = 6.
+    \]
+    Again, from \Cref{prop:HK}, we know that $HK \leq G$. However, $\abs{HK} = \abs{G}$ and hence $HK = G$. Thus, $G$ is an internal direct product of $H$ and $K$. But $H$ and $K$ are the unique cyclic groups $C_2$ and $C_3$. Hence, $G = C_2 C_3$. By \Cref{thm:group-isomorphic-to-product}, $G \cong C_2 \times C_3$. Now, since $2$ and $3$ are coprime, by \Cref{prop:product-of-cyclic} and \Cref{ex:C6} in particular, we get that $G \cong C_6$.
+    
+    Now, consider that $n_2 = 3$, that is, there are $3$ Sylow $2$-subgroups of $G$, say $H_1, H_2$ and $H_3$. Let $\Syl_2(G) = \left\{ H_1, H_2, H_3 \right\}$ and let $G$ act on $\Syl_2(G)$ by conjugation, with action defined from $G \times \Syl_2(G)$ to $\Syl_2(G)$ as
+    \[
+        (g,H) \longmapsto gHg^{-1} \text{ for all } g \in G, H \in \Syl_2(G).
+    \]
+    For a fixed $g \in G$, $\gamma_g \colon \Syl_2(G) \to \Syl_2(G)$ defined by $\gamma_g(H) = gHg^{-1}$ defines a permutation of $\Syl_2(G)$, a set with $3$ elements. Now, construct the natural homomorphism $\varphi \colon G \to S_3$ with $\varphi(g) = \gamma_g$. Now, 
+    \[
+        \ker\varphi = \left\{ g \in G \mid gH_ig^{-1} = H_i \text{ for all } H_i \in \Syl_2(G) \right\} = N(H_1) \cap N(H_2) \cap N(H_3).
+    \]
+    We leave it as an exercise to show that $\ker\varphi = \{1\}$. Hence, $\varphi$ is injective. Moreover, $\abs{G} = \abs{S_3} = 6$. Thus, $\varphi$ is a bijection, and $G \cong S_3$. 
+\end{proof}
+
+\begin{theorem} \label{thm:class-pq-pnmid-q-1}
+    Let $p,q$ be distinct primes with $p < q$ and let $p \notdivides q-1$. Up to isomorphism, there's only one group of order $pq$, namely the cyclic group $C_{pq}$.
+\end{theorem}
+\begin{proof}
+    Let $\abs{G} = pq$. By the first Sylow theorem, $G$ has a Sylow $p$-subgroup, say $H$, and a Sylow $q$-subgroup, say $K$. By the fourth Sylow theorem,
+    \begin{align*}
+        n_p \equiv 1 \Mod{p} \text{ and } n_p \divides q \implies n_p = 1 \text{ (since $p \notdivides q-1$)}. \\
+        n_q \equiv 1 \Mod{q} \text{ and } n_q \divides p \implies n_q = 1.
+    \end{align*}
+    Thus there is a unique Sylow $p$-subgroup, $H$, and a unique Sylow $q$-subgroup, $K$. By \Cref{prop:unique-sylow-not-simple}, $H \trianglelefteq G$ and $K \trianglelefteq G$. Since they also intersect only in identity, by \Cref{prop:HK}, we again have
+    \[
+        \abs{HK} = \frac{\abs{H} \cdot \abs{K}}{\abs{H \cap K}} = pq
+    \]
+    and $HK \leq G$. Since $\abs{HK} = \abs{G}$, we conclude that $HK = G$. Thus, $G$ is an internal direct product of $H$ and $K$. But $H$ and $K$ are the unique cyclic groups $C_p$ and $C_q$. Hence, $G = C_p C_q$. By \Cref{thm:group-isomorphic-to-product}, $G \cong C_p \times C_q$. Since $q$ and $p$ are coprime, by \Cref{prop:product-of-cyclic}, $G \cong C_{pq}$.
+\end{proof}
+
+\begin{theorem} \label{thm:class-21}
+    Up to isomorphism, there are only two groups of order $21$, namely, the cyclic group $C_{21}$ and the group presented as $\left\langle x,y \mid x^7 = y^3 = 1; \, yx = x^2y \right\rangle$. 
+\end{theorem}
+\begin{proof}
+    Let $\abs{G} = 21 = 3 \cdot 7$. By the first Sylow theorem, $G$ has a Sylow $3$-subgroup, say $H$, and a Sylow $7$-subgroup, say $K$. By the fourth Sylow theorem,
+    \begin{align*}
+        n_3 &\equiv 1 \Mod{3} \text{ and } n_3 \divides 7 \implies n_3 = 1 \text{ or } 7. \\
+        n_7 &\equiv 1 \Mod{7} \text{ and } n_7 \divides 3 \implies n_7 = 1.
+    \end{align*}
+    Thus, there is a unique Sylow $7$-subgroup, $K$, of $G$. By similar reasoning as before, $K \trianglelefteq G$. Again. if $n_3 = 1$, then there is only one Sylow $3$-subgroup of $G$. By similar reasoning as before, we get $G \cong C_{21}$ in this case. 
+    
+    Now let us assume $n_3 = 7$ and let $H$ be a Sylow $3$-subgroup of $G$. Since $K \trianglelefteq G$, it follows from \Cref{prop:HK} that $HK \leq G$. Since $H$ and $K$ intersect only in identity, we get $HK = G$ by similar reasoning. Now, since $\abs{H} = 3$ and $\abs{K} = 7$ are both prime, these are both isomorphic to cyclic groups of corresponding orders. Thus, $H = \langle y \rangle$ and $K = \langle x \rangle$ where $\abs{y} = 3$ and $\abs{x} = 7$. Now, since $K \trianglelefteq G$, we have
+    \[
+        yxy^{-1} \in K \implies yxy^{-1} = x^i \text{ for some }i.
+    \]
+    If $i = 1$, then $G$ becomes abelian. If $G$ were abelian then for any two Sylow $3$-subgroups $H$ and $H^{\prime}$, we have $gHg^{-1} = H^{\prime} \implies H = H^{\prime}$, by commutativity. Hence, if $G$ is abelian, there is a unique Sylow $3$-subgroup, but we have assumed $n_3 = 7$. Hence, $i \neq 1$. Now, 
+    \begin{align*}
+        yxy^{-1} = x^i \implies y^2xy^{-2} &= y(yxy^{-1})y^{-1} = yx^iy^{-1} \\
+        &= (yxy^{-1})^i = x^{i^2}.
+    \end{align*}
+    Similarly, we have
+    \begin{align*}
+        y^3xy^{-3} &= y(y^2xy^{-2})y^{-1} = yx^{i^2}y^{-1} \\
+        &= (yxy^{-1})^{i^2} = x^{i^3}.
+    \end{align*}
+    Since $y^3 = 1$, we get $x = x^{i^3}$. Since $\abs{x} = 7$, we get $i^3 \equiv 1\Mod{7}$, which has as its solutions $i = 1,2,4 \Mod{7}$. Since $i \neq 1$, we conclude that $i = 2$ or $4$. When $i=2$, we get the presentation we desired. We now show that the case $i=4$ boils down to the same case as $i=2$. In the case that $i=4$, we have
+    \[
+        yxy^{-1} = x^4 \implies y^2xy^{-2} = x^{16} = x^2.
+    \]
+    Note that $y^2$ is also a generator of $H$. Hence, replacing $y^2$ by $y$ reduces the case $i=4$ to the case $i=2$. 
+    
+    Note that we are not done with the proof since we have not yet proved that such a group exists! Consider the group $GL_2(\F_7)$, where $\F_7$ is the finite field of $7$ elements, namely $\Z_7$. Now consider the elements
+    \[
+        A = \begin{bmatrix}
+            1 & 1 \\
+            0 & 1
+        \end{bmatrix} \text{ and } B = \begin{bmatrix}
+            2 & 0 \\
+            0 & 1
+        \end{bmatrix}
+    \]
+    It is easy to show that $\abs{A} = 7$ and $\abs{B} = 3$ in $GL_2(\F_7)$. We leave it as a simple computational exercise to show that $BA = A^2B$.
+\end{proof}
+
+\begin{theorem} \label{thm:class-12}
+    Up to isomorphism, there are exactly five groups of order $12$, namely
+    \begin{enumerate}
+        \item $C_{12}$,
+        \item $C_2 \times C_6$,
+        \item $A_4$,
+        \item $D_{12}$, and
+        \item $\left\langle x,y \mid x^4=y^3=1; \, xy =y^2x \right\rangle$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let $\abs{G} = 12 = 2^2 \cdot 3$. By the first Sylow theorem, $G$ has a Sylow $2$-subgroup, say $H$, and a Sylow $3$-subgroup, say $K$. Now, $H$ has order $4$, and hence, by \Cref{cor:class-4}, $H$ is either the cyclic group $C_4$, or the Klein-four group $V$. Of course, $K \cong C_3$. Now, by the fourth Sylow theorem,
+    \begin{align*}
+        n_2 &\equiv 1 \Mod{2} \text{ and } n_2 \divides 3 \implies n_2 = 1 \text{ or } 3. \\
+        n_3 &\equiv 1 \Mod{3} \text{ and } n_3 \divides 4 \implies n_3 = 1 \text{ or } 4.
+    \end{align*}
+    
+    We claim that one of $H$ and $K$ has to be normal in $G$. Suppose $K$ is not normal in $G$. Then, there are $4$ Sylow-$3$ subgroups, say $K_1, K_2, K_3,$ and $K_4$. Moreover, each pair intersects only in identity. Hence, we have
+    \[
+        \abs{\bigcup_{i=1}^4 \, K_i} = 9.
+    \]
+    Since any of the Sylow $2$-subgroups intersect with Sylow $3$-subgroups only in identity, and since $\abs{G} = 12$, it follows that there must be exactly one Sylow $2$-subgroup of $G$, which is normal by reasoning as before. Hence, one of $H$ and $K$ will always be normal. 
+    
+    \underline{Case 1}: Both $H$ and $K$ are normal in $G$. Of course, $H$ and $K$ intersect only in identity. 
+    
+    In this case, \Cref{prop:HK} tells us that $G = HK$ since $\abs{HK} = \abs{G}$ and $HK \leq G$. Since both $H$ and $K$ are normal, $G$ is their internal direct product. By \Cref{thm:group-isomorphic-to-product}, $G \cong H \times K$. Thus, we have the following two possibilities.
+    \begin{enumerate}
+        \item $G \cong C_4 \times C_4 \cong C_{12}$.
+        \item $G \cong V \times C_3 \cong C_2 \times C_2 \times C_3 \cong C_2 \times C_6$.
+    \end{enumerate}
+    
+    \underline{Case 2}: $H$ is normal in $G$, but $K$ is not normal. 
+    
+    In this case, there are $4$ Sylow $3$-subgroups, all of which are conjugate to each other. Let $\Syl_3(G) = \left\{ K_1, K_2, K_3, K_4 \right\}$. Suppose $G$ acts on $\Syl_3(G)$ by conjugation, with action defined as
+    \[
+        (g, K_i) \longmapsto gK_ig^{-1} \text{ for all } g \in G, K_i \in \Syl_3(G).
+    \]
+    This gives rise to a permutation representation $\varphi \colon G \to S_4$, with $\varphi(g) = \gamma_g$, where $\gamma_g \colon \Syl_3(G) \to \Syl_3(G)$ is defined as
+    \[
+        \gamma_g(K_i) = gK_ig^{-1} \text{ for all } g\in G, K_i \in \Syl_3(G). 
+    \]
+    The kernel is given by
+    \[
+        \ker\varphi = \left\{ g \in G \mid gK_ig^{-1} = K_i \text{ for all } i \right\} = \bigcap_{i=1}^4 \, N(K_i).
+    \]
+    Note that since every $K_i$ is conjugate to every $K_j$, the orbit of each $K_i$ is the entire set $\Syl_3(G)$, which has cardinality $4$. The \nameref{thm:orbit-stabiliser} now gives us that $\abs{N(K_i)} = 3$ for all $i$. But, $K_i \subseteq N(K_i)$ and $\abs{K_i} = 3$ for all $i$. Hence, $N(K_i) = K_i$ for all $i$. Since $K_i$'s intersect in identity. so do $N(K_i)$'s. Thus, $\ker\varphi$ is identity and $\varphi$ is injective. Since $G$ has $8$ elements of order $3$ ($2$ from each Sylow $3$-subgroup), $\im\varphi$ has $8$ $3$-cycles. However, there are exactly $8$ $3$-cycles in the group $S_4$. Hence, $\im\varphi$ is a subgroup of $S_4$ that contains all $3$-cycles. Moreover, $\abs{\im\varphi} = \abs{A_4} = 12$. Since $A_4$ is generated by $3$-cycles, it follows that $\im\varphi = A_4$. Now, since $\varphi$ is injective, $G \cong \im\varphi$, by \Cref{prop:im-isomorphic-to-G}. Hence, $G \cong A_4$.
+    
+    \underline{Case 3}: $K$ is normal in $G$, $H$ is not normal in $G$, and $H \cong C_4$. 
+    
+    Let $H$ act on $K$ via conjugation, with action defined as $(h,k) \mapsto hkh^{-1}$ for all $h \in H, k \in K$. Now, define $\gamma_h \colon K \to K$ with $\gamma_h(k) = hkh^{-1}$ for all $h\in H, k \in K$. Notice that $\gamma_h$ cannot be the identity map since that would force $G$ to be abelian, which is a contradiction since $H$ is not a normal subgroup of $G$. Hence, there is only one other possibility for $\gamma_h$ (why?). Suppose $H = \langle x \rangle$ and $K = \langle y \rangle$. Now, $\gamma_x(y) = y^2$ since $\gamma_x$ is not the identity map. Hence, $y^2 = xyx^{-1} \implies xy = y^2x$. As before, we must show that there is indeed such a group. That is, we must find a group $G$ which is presented as
+    \[
+        G = \left\langle x,y \mid x^4 = y^3 = 1; \, xy = y^2x \right\rangle.
+    \]
+    Define 
+    \[
+        X = \begin{bmatrix}
+            0 & -1 \\
+            1 & 0
+        \end{bmatrix} \text{ and } Y = \begin{bmatrix}
+            \omega & 0 \\
+            0 & \omega^2
+        \end{bmatrix}
+    \]
+    where $\omega = \exp\left( \frac{2\pi\iota}{3} \right)$. We leave it as a simple computational exercise to show that these two elements satisfy the give requirements. 
+    
+    \underline{Case 4}: $K$ is normal in $G$, $H$ is not normal in $G$, and $H \cong V$. 
+    
+    Suppose $K = \langle y \rangle$. That is, $K = \{1,y,y^2\}$. Consider the set $S = \{y, y^2\}$ and let $H$ act on $S$ via conjugation. We can restrict the action of $H$ to the set $S$ since the conjugate of $y$ must be $y$ or $y^2$, and likewise, the conjugate of $y^2$ must be $y$ or $y^2$. This is because conjugation preserves order (\Cref{prop:same-conjugacy-same-order}). Now, the stabiliser of $y$, given by
+    \[
+        G_y = \left\{ h \in H \mid hyh^{-1} = y \right\}
+    \]
+    can be easily shown to have order $2$. Thus, there is a $z \in H$ such that $zyz^{-1} = y$ and $z \neq 1$, and there is an $x \in H$ such that $xyx^{-1} = y^2$. Since $H$ is abelian, we have $xz = zx$. Hence, we have the following presentation for the group.
+    \[
+        G = \left\langle x,y,z \mid x^2 = y^3 = z^2 = 1 ; \, xz = zx, yz = zy, xy = y^2x \right\rangle.
+    \]
+    We leave it as an exercise to show that the dihedral group $D_{12}$ satisfies the above presentations. 
+\end{proof}
+
+\subsection{Simplicity of Groups}
+
+We now state some important results that allow us to classify several groups on the basis of their simplicity.
+
+\begin{theorem} \label{thm:simple-order-p}
+    Any group with prime order is simple.
+\end{theorem}
+\begin{proof} 
+    Let $p$ be a prime number and let $G$ be a group of order $p$. Let $H$ be any subgroup of $G$. By \nameref{thm:lagrange}, we have either $\abs{H} = 1$ or $\abs{H} = p$. In either case, $H$ is a trivial subgroup of $G$. Thus, $G$ is simple and has no non-trivial normal subgroups.
+\end{proof}
+
+\begin{prop}
+    A group $G$ is simple abelian if and only if it is of prime order.
+\end{prop}
+
+\begin{theorem} \label{thm:simple-order-pn}
+    Let $p$ be a prime number and let $n \geq 2$ be an integer. Any group with order $p^n$ is not simple.
+\end{theorem}
+\begin{proof}
+    As $G$ is a $p$-group, it has a non-trivial center, $Z(G)$, by \Cref{thm:p-group-has-non-trivial-center}. If $Z(G) \neq G$, then $Z(G)$ is a proper non-trivial normal subgroup of $G$, and hence $G$ is not simple. Now, assume $Z(G) = G$, so that $G$ is abelian. Let $x \in G$ with $x \neq 1$. We have $\abs{x} = p^m$ for some $1 \leq m \leq n$. Define $y \vcentcolon= x^{p^{m-1}}$, so that $\abs{y} = p$. Now, $\langle y \rangle$ is a proper non-trivial subgroup of $G$ which is normal since $G$ is abelian. Hence, $G$ is not simple.
+\end{proof}
+
+\begin{theorem} \label{thm:simple-order-mpn}
+    Let $p$ be a prime number and let $m$ be an integer with $1 < m < p$. Any group with order $mp^n$ is not simple.
+\end{theorem}
+\begin{proof}
+    By the fourth Sylow theorem $n_p \equiv 1\Mod{p}$ so that $n_p = 1 + kp$ for some $k \in \N$. However, $n_p \divides m$ and since $m < p$, this forces $k = 0$. Thus, $n_p = 1$ and there is exactly one Sylow $p$-subgroup of $G$, say $H$. By similar reasoning as before, $H$ is a normal subgroup of $G$. It is also non-trivial since $\abs{H} = p^n$ and $1 < p^n < mp^n$. Hence, $G$ is not simple.
+\end{proof}
+
+\begin{theorem} \label{thm:simple-order-ppq}
+    Let $p$ and $q$ be distinct prime numbers. Any group with order $p^2q$ is not simple.
+\end{theorem}
+\begin{proof}
+    Let $G$ be a group of order $p^2q$. We show that $G$ is not simple.
+    
+    \underline{Case 1}: $p > q$.
+    
+    By the fourth Sylow theorem, $n_p \divides q$ and $n_p \equiv 1 \Mod{p}$. The first condition gives us $n_p = 1$ or $n_p = q$. Since $q < p$, $q \not\equiv 1\Mod{p}$. Thus, $n_p = 1$, and $G$ is not simple.
+    
+    \underline{Case 2}: $p < q$.
+    
+    Again, by the fourth Sylow theorem, we have $n_q \in \{1, p ,p^2\}$. If $n_q = 1$, we are done. As before, $n_q \neq p$ since $p < q$. Now, assume that $n_q = p^2$. Thus, there are exactly $p^2$ Sylow $q$-subgroups of $G$. Moreover, each pair of Sylow $q$-subgroups intersects only in identity since each has order $q$, a prime. Hence, these $p^2$ Sylow $q$-subgroups capture exactly $p^2(q-1)$ non-identity elements of $G$. Since the remaining $p^2$ elements (barring identity) cannot be part of any Sylow $q$-subgroup, and since $n_p \geq 1$, we conclude that these remaining  $p^2$ elements form a unique Sylow $p$-subgroup of $G$, giving us $n_p =1$. Thus, $G$ is not simple.
+\end{proof}
+
+\begin{theorem} \label{thm:simple-order-pqr}
+    Let $p,q,r$ be distinct prime numbers. Any group with order $pqr$ is not simple.
+\end{theorem}
+\begin{proof}
+    We may assume without loss of generality that $p < q < r$. Let $G$ be a group of order $pqr$. If any of $n_p,n_q$ or $n_r$ are $1$, we know that $G$ is not simple. Assume now that each of the above is strictly greater than $1$. Now, $n_r \divides pq$. Since we have assumed $n_r > 1$, and since $p,q < r$, we conclude that $n_r = pq$. Thus, we have $pq$ Sylow $r$-subgroups, that intersect pairwise in identity (since each has prime order). Thus, the number of elements having order $r$ is $o_r = pq(r-1)$. Now, $n_q > 1$ and $n_q \divides pr$ gives us $n_q \in \{p, r, pr\}$. Since $p<q$, we conclude that $n_q \neq p$ and hence $n_q \geq r$. Thus, $o_q \geq r(q-1)$. Similarly, $o_p \geq p(q-1)$.
+    
+    Since $o_r, o_q,$ and $o_p$ are counting distinct non-identity elements of $G$, we have
+    \begin{align*}
+        &\abs{G} \geq o_r + o_q + o_p + 1 \geq pq(r-1) + r(q-1) + q(p-1) \\
+        &\implies \abs{G} \geq pqr + \underbrace{(r-1)(q-1)}_{>0} > pqr.
+    \end{align*}
+    Thus, we arrive at a contradiction since $\abs{G} = pqr$, which concludes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $p$ be a prime and let $n$ be an integer with $n > 1$. Any group with order $(p+1)\cdot p^n$ is not simple.
+\end{theorem}
+\begin{proof}
+    Let $G$ be a group with the given order. By the fourth Sylow theorem, we have $n_p \divides (p+1)$ and $n_p \equiv 1 \Mod{p}$. This gives us $n_p =1$ or $n_p = p+1$. If $n_p = 1$, we are done. Now, assume $n_p = p+1$. Thus, $G$ has $p+1$ Sylow $p$-subgroups, so that $\Syl_p(G) = \{P_1, \ldots, P_{p+1}\}$. Let $\varphi \colon G \to S_{p+1}$ be the natural homomorphism induced by the group action. By the third Sylow theorem, $G$ acts on $\Syl_p(G)$ transitively, and hence $\ker\varphi \neq G$. Assume now that the kernel is trivial, in which case $\varphi$ is injective. Thus, $\abs{\im\varphi} = (p+1)\cdot p^n$. Now, since $\im\varphi \leq S_{p+1}$ and $\abs{S_{p+1}} = (p+1)!$, by \nameref{thm:lagrange}, we must have $(p+1)\cdot p^n \divides (p+1)! \iff p^n \divides p!$ which is a contradiction (why?), since $n > 1$. Hence, the kernel is a proper non-trivial subgroup of $G$. Since kernels of all homomorphisms are normal, it follows that $G$ is not simple.
+\end{proof}
+
+The above theorems are able to classify most groups of order at most $200$ on the basis of their simplicity. For an exhaustive list, I urge the reader to refer to \href{https://aryamanmaithani.github.io/alg/groups/simple/sieve/}{Aryaman's website}.

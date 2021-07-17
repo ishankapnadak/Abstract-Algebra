@@ -1,0 +1,109 @@
+\section{Semidirect Products}
+
+We now study the ``semidirect product'' of two groups $H$ and $K$, which is a generalisation of the direct product which relaxes the requirement that both $H$ and $K$ be normal. Suppose $G$ is a group and $H,K$ are subgroups of $G$ such that 
+\begin{enumerate}
+    \item $H \trianglelefteq G$ (but $K$ is not necessarily normal in $G$), and
+    \item $H \cap K = 1$. 
+\end{enumerate}
+
+By \Cref{prop:HK}, $HK \leq G$. Moreover, every element in $HK$ can be written uniquely as $hk$ for some $h \in H$ , $k \in K$. That is, there is a bijection between $HK$ and $H \times K$, given by $hk \mapsto (h,k)$. Here, the group $H$ appears as elements of the form $(h,1)$, while the group $K$ appears as elements of the form $(1,k)$. Given $h_1k_1, h_2k_2 \in HK$, we have
+\begin{align*}
+    (h_1k_1)(h_2k_2) &= h_1k_1h_2(k_1^{-1}k_1)k_2) \\
+    &= h_1(k_1h_2k_1^{-1})k_1k_2 \\
+    &= h_3k_3
+\end{align*}
+where $h_3 = h_1(k_1h_2k_1^{-1}) \in H$ since $H$ is normal, and $k_3 \in K$. Since $H$ is normal in $G$, $K$ acts on $H$ via conjugation, with action defined as $(k,h) \mapsto khk^{-1}$. With this, the product of two elements of $HK$ can be written as
+\[
+    (h_1k_1)(h_2k_2) = (h_1 \, k_1 \cdot h_2)(k_1k_2)
+\]
+The action of $K$ on $H$ gives rise to a homomorphism of $K$ into $\Aut(H)$. We now use this interpretation to define a group given two groups $H$ and $K$, and a homomorphism from $K$ to $\Aut(H)$.
+
+\begin{theorem} \label{thm:semidirect}
+    Let $H$ and $K$ be groups and let $\varphi \colon K \to \Aut(H)$ be a homomorphism. Let $\cdot$ be the (left) action of $K$ on $H$ determined by $\varphi$. Let $G$ be the set of ordered pairs $(h,k)$ with $h \in H$, $k \in K$, and define operation on $G$ as
+    \[
+        (h_1, k_1)(h_2, k_2) = (h_1 \, k_1\cdot h_2 , k_1k_2).
+    \]
+    \begin{enumerate}
+        \item $G$ is a group under this operation with $\abs{G} = \abs{H} \cdot \abs{K}$.
+        \item The sets $\{ (h,1) \mid h \in H \}$ and $\{ (1,k) \mid k \in K \}$ are subgroups of $G$ and the maps $h \mapsto (h,1)$ for $h \in H$, and $k \mapsto (1,k)$ for $k \in K$, are isomorphisms of these subgroups with the groups $H$ and $K$ respectively. That is,
+        \[
+            H \cong \left\{ (h,1) \mid h \in H \right\} \text{ and } K \cong \left\{ (1,k) \mid k \in K \right\}.
+        \]
+    \end{enumerate}
+    Identifying $H$ and $G$ with their isomorphic copies as above, the following are true.
+    \begin{enumerate}[resume]
+        \item $H \trianglelefteq G$.
+        \item $H \cap K = 1$.
+        \item For all $h\in H, k \in K$, $khk^{-1} = k \cdot h = \varphi(k)(h)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Since we have discussed the motivation for the above, the proof becomes easy.
+    \begin{enumerate}
+        \item We leave it as a simple exercise to prove that $G$ is a group, with identity $(1,1)$ and $(h,k)^{-1} = (k^{-1} \cdot h^{-1}, k^{-1})$. Moreover, we clearly have $\abs{G} = \abs{H} \cdot \abs{K}$.
+        \item Let $\Tilde{H} \vcentcolon= \{(h,1) \mid h \in H\}$ and $\Tilde{K} \vcentcolon= \{(1,k) \mid k\in K\}$. For all $a,b \in H$ and all $x,y \in K$, we clearly have
+        \[
+            (a,1)(b,1) = (ab,1) \text{ and } (1,x)(1,y) = (1,xy)
+        \]
+        which shows that $\Tilde{H}$ and $\Tilde{K}$ are subgroups of $G$, and that the maps as defined are isomorphisms. 
+        \item[4] It is clear by definition that $\Tilde{H} \cap \Tilde{K} = 1$.
+        \item[5] We have
+        \begin{align*}
+            (1,k)(h,1)(1,k)^{-1} &= (k\cdot h, k)(1,k^{-1}) \\
+            &= (k\cdot h \, k\cdot 1, kk^{-1}) \\
+            &= (k \cdot h, 1)
+        \end{align*}
+        Identifying $(h,1)$ with $h$ and $(1,k)$ with $k$, we get $khk^{-1} = k \cdot h$.
+        \item[3] We have shown above that $K \leq N_G(H)$. Since $H \leq N_G(H)$ and $G = HK$, it follows that $G = N_G(H)$. Hence, $H \trianglelefteq G$.
+    \end{enumerate}
+\end{proof}
+
+\begin{defn}
+    Let $H$ and $K$ be groups and let $\varphi \colon K \to \Aut(H)$ be a homomorphism. The group $G$ described in \Cref{thm:semidirect} is called the \deff{semidirect product} of $H$ and $K$ with respect to $\varphi$. We denote this group as $H \rtimes_{\varphi} K$. When there is no danger of confusion, we simply write $H \rtimes K$.
+\end{defn}
+
+\begin{prop}
+    Let $H$ and $K$ be groups and let $\varphi \colon K \to \Aut(H)$ be a homomorphism. Then, the following are equivalent. 
+    \begin{enumerate}
+        \item The identity map between $H \rtimes K$ and $H \times K$ is an isomorphism. 
+        \item $\varphi$ is the trivial homomorphism.
+        \item $K \trianglelefteq H \rtimes K$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    \phantom{hi}
+    \begin{enumerate}
+        \item[$1 \implies 2.$] By the definition of the group operation on $H \rtimes K$, we have
+        \[
+            (h_1, k_1)(h_2, k_2) = (h_1 \, k_1 \cdot h_2, k_1k_2)
+        \]
+        for all $h_1, h_2 \in H$ and $k_1, k_2 \in K$. If the identity map is an isomorphism, then $(h_1, k_1)(h_2, k_2) = (h_1h_2, k_1k_2)$. Thus, we get $k_1 \cdot h_2 = h_2$ for all $h_2 \in H, k_1 \in K$, so that $\varphi$ is the trivial homomorphism. 
+        
+        \item[$2 \implies 3.$] If $\varphi$ is trivial, then the action of $K$ on $H$ is trivial. Thus, the elements of $H$ commute with $K$ by \Cref{thm:semidirect}, and $H$ normalises $K$. Since $K$ normalises itself, we get that $G = HK$ normalises $K$, so that $K \trianglelefteq H \rtimes K$.
+        
+        \item[$3 \implies 1.$] If $K \trianglelefteq H \rtimes K$, then both $H$ and $K$ are normal subgroups of $H \rtimes K$. Now, for any $h \in H$, $k \in K$, we have
+        \begin{align*}
+            h^{-1}k^{-1}hk &= h^{-1}(k^{-1}hk) \in H \text{ since $H$ is normal, and} \\
+            h^{-1}k^{-1}hk &= (h^{-1}k^{-1}h)k \in K \text{ since $K$ is normal}.
+        \end{align*}
+        Since $H \cap K = 1$, it follows that $hk = kh$ for all $h \in H, k \in K$. Thus, the action of $K$ on $H$ is trivial and we get $(h_1,k_1)(h_2,k_2) = (h_1h_2, k_1k_2)$, which completes the proof. \qedhere
+    \end{enumerate}
+\end{proof}
+
+\begin{ex}
+    \phantom{hi}
+    \begin{enumerate}
+        \item The dihedral group $D_{2n}$ can be expressed as the semidirect product of two cyclic groups. In fact, we have $D_{2n} \cong \Z_n \rtimes \Z_2$. Recall that any element in $D_{2n}$ can be written as $r^is^j$ where $i$ is unique modulo $n$, and $j$ is unique modulo $2$. We leave it to the reader to verify that $(i,j) \mapsto r^is^j$ is an isomorphism. 
+        
+        \item With the above, we may generalise the dihedral group to infinite order, by considering the semidirect product $\Z \cong \Z_2$. We denote this infinite-order group as $D_{\infty}$. 
+    \end{enumerate}
+\end{ex}
+
+\begin{theorem}
+    Let $G$ be a group and let $H,K$ be subgroups such that 
+    \begin{enumerate}
+        \item $H \trianglelefteq G$, and
+        \item $H \cap K$.
+    \end{enumerate}
+    Let $\varphi \colon K \to \Aut(H)$ be the homomorphism defined by mapping $k \in K$ to the automorphism induced by conjugation by $k$ on $H$. Then, $HK \cong H \rtimes K$. In particular, if $G = HK$ with $H,K$ satisfying the above two, then $G$ is the semidirect product of $H$ and $K$.
+\end{theorem}

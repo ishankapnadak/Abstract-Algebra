@@ -1,0 +1,87 @@
+\section{Extra}
+
+\subsection{Constructing the Rationals from the Integers} \label{subs:Q-from-Z}
+
+We give an elementary construction of $\mathbb{Q}$ from $\mathbb{Z}$ and show that addition and multiplication is well-defined on $\mathbb{Q}$.
+
+\begin{defn}
+    Let $X = \{ (a,b) \mid a,b \in \mathbb{Z}, b \neq 0 \}$. We define a relation $\sim$ on $X$ as follows:
+    \[
+        (a,b) \sim (c,d) \iff ad = bc
+    \]
+\end{defn}
+\begin{lem}
+    The relation $\sim$ on $X$ is an equivalence relation. 
+\end{lem}
+\begin{proof}
+    Given any $(a,b) \in X$, we clearly have $ab = ab \implies (a,b) \sim (a,b)$. Hence $\sim$ is reflexive. 
+    
+    \medskip
+    
+    Suppose $(a,b) \sim (c,d)$. Then, $ad = bc \implies cb = ad \implies (c,d) \sim (a,b)$ and hence $\sim$ is symmetric.
+    
+    \medskip
+    
+    Suppose $(a,b) \sim (c,d)$ and $(c,d) \sim (e,f)$. Then, $ad = bc$ and $cf = de$. Now,
+    \begin{align*}
+        ad = bc &\implies adf = bcf  \\
+        &\implies adf = bde \\
+        &\implies af = be \text{ (since $d \neq 0$)}\\ 
+        &\implies (a,b) \sim (e,f)
+    \end{align*}
+    Hence, $\sim$ is transitive.
+\end{proof}
+
+\begin{defn}[Rationals]
+    Formally, we define the set of rationals, $\mathbb{Q}$, as the collection of equivalence classes of the relation $\sim$ on $X$. If $(a,b) \in X$, we denote the equivalence class of $(a,b)$ with respect to $\sim$ as $[(a,b)]$. Thus,
+    \[
+        \mathbb{Q} \vcentcolon= \left\{ [(a,b)] \mid (a,b) \in X \right\}
+    \]
+\end{defn}
+
+\begin{defn}
+    We define addition ($+_{\mathbb{Q}}$) and multiplication $(\cdot_{\mathbb{Q}})$ as follows. Given, $[(a,b)], [(c,d)] \in \mathbb{Q}$
+\begin{align*}
+    [(a,b)] +_{\mathbb{Q}} [(c,d)] &\vcentcolon= \left[ (ad + bc, bd) \right] \\
+    [(a,b)] \cdot_{\mathbb{Q}} [(c,d)] &\vcentcolon= \left[ (ac, bd) \right]
+\end{align*}
+\end{defn}
+
+\begin{theorem}
+    Addition in $\mathbb{Q}$ is well-defined. That is, if $(a,b) \sim (a^{\prime}, b^{\prime})$ and $(c,d) \sim (c^{\prime}, d^{\prime})$, then
+    \[
+        (ad + bc, bd) \sim (a^{\prime}d^{\prime} + b^{\prime}c^{\prime}, b^{\prime}d^{\prime})
+    \]
+\end{theorem}
+
+\begin{theorem}
+    Multiplication in $\mathbb{Q}$ is well-defined. That is, if $(a,b) \sim (a^{\prime}, b^{\prime})$ and $(c,d) \sim (c^{\prime}, d^{\prime})$, then
+    \[
+        (ac, bd) \sim (a^{\prime}c^{\prime}, b^{\prime}d^{\prime})
+    \]
+\end{theorem}
+
+\begin{theorem}
+    The rational numbers, $\mathbb{Q}$, form a field where 
+    \begin{enumerate}
+        \item The additive identity is $[(0,1)]$.
+        \item The additive inverse of $[(a,b)]$ is $[(-a,b)]$.
+        \item The multiplicative identity is $[(1,1)]$.
+        \item For $[(a,b)] \neq [(0,1)]$, the multiplicative inverse of $[(a,b)]$ is $[(b,a)]$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{defn}[Order]
+    Let $[(a,b)], [(c,d)] \in \mathbb{Q}$ with $b,d > 0$ in $\mathbb{Z}$.\footnotemark\ We define a relation $<_{\mathbb{Q}}$ as follows
+    \[
+        [(a,b)] <_\mathbb{Q} [(c,d)] \iff ad < bc
+    \]
+\end{defn}
+\footnotetext{we can always choose a representative of any equivalence class $[(a,b)]$ such that $b>0$.}
+\begin{theorem}
+    The above relation on $\mathbb{Q}$ is well-defined. That is, if $(a,b) \sim (a^{\prime}, b^{\prime})$ and $(c,d) \sim (c^{\prime}, d^{\prime})$, then
+    \[
+        ad < bc \iff a^{\prime} d^{\prime} < b^{\prime} c^{\prime}
+    \]
+    Moreover, $<_{\mathbb{Q}}$ is an ordering of the rationals, $\mathbb{Q}$.
+\end{theorem}

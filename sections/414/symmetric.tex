@@ -1,0 +1,312 @@
+\section{Symmetric Polynomials}
+
+\begin{defn}
+    Let $R$ be a ring and let $S = R[x_1, \ldots, x_n]$. Let $S_n$ denote the symmetric group. Then, any $\tau \in S_n$ induces an automorphism $g_{\tau} \colon S \to S$, defined by
+    \[
+        g_t\left( f(x_1, \ldots, x_n) \right) \vcentcolon= f\left( x_{\tau(1)}, \ldots, x_{\tau(n)} \right).
+    \]
+\end{defn}
+\begin{ex}
+    Suppose $n = 3$ and $\tau = (1 \, 2 \, 3)$. Then, the polynomial $x_1 + x_2^2 + x_3^3$ in $\Z[x]$ is mapped to $x_2 + x_3^2 + x_1^3$ via $g_{\tau}$.
+\end{ex}
+\begin{defn}
+    A polynomial $f \in R[x_1, \ldots, x_n]$ is said to be a \deff{symmetric polynomial (in $n$ variables)} if $g_{\tau}(f) = f$ for all $\tau \in S_n$.
+\end{defn}
+
+\begin{defn}
+    Let $S = R[x_1, \ldots, x_n]$ and consider $f(T) \in S[T]$ given by
+    \[
+        f(T) = (T-x_1) \cdots (T-x_n).
+    \]
+    We may write $f(T)$ as
+    \[
+        f(T) = T^n - \sigma_1 T^{n-1} + \cdots + (-1)^n \sigma_n,
+    \]
+    for $\sigma_1, \ldots, \sigma_n \in S$. Then, $\sigma_1, \ldots, \sigma_n$ are symmetric polynomials, called the \deff{elementary symmetric polynomials (in $n$ variables)}.
+\end{defn}
+\begin{rem}
+    Note that one can explicitly write down the elementary symmetric polynomials, as follows. 
+    \begin{align*}
+        \sigma_1 &= \sum_{i=1}^n \, x_i \\
+        \sigma_2 &= \sum_{1 \leq i_1 < i_2 \leq n} \, x_{i_1} x_{i_2} \\
+        &\vdots \\
+        \sigma_n &= x_1 \cdots x_n.
+    \end{align*}
+    It is now easy to verify that these are all indeed symmetric polynomials.
+\end{rem}
+
+\begin{defn}
+    Given an elementary symmetric polynomial $\sigma_i \in R[x_1, \ldots, x_n]$ (for $n \geq 2$), we define the elementary symmetric polynomial $\sigma_i^0$ in $(n-1)$ variables as
+    \[
+        \sigma_i^0 \vcentcolon= \sigma_i(x_1, \ldots, x_{n-1}, 0).
+    \]
+\end{defn}
+\begin{ex}
+    Consider $n = 3$ and $\sigma_2 = x_1x_2 + x_1x_3 + x_2x_3$. Then, $\sigma_2^0 = x_1x_2$ is the second symmetric polynomial in $2$ variables. In fact, any elementary symmetric polynomial in $(n-1)$ variables is of the form $\sigma_i^0$ for the corresponding elementary symmetric polynomial $\sigma_i$ in $n$ variables.
+\end{ex}
+
+\begin{theorem}[Fundamental Theorem of Symmetric Polynomials] \label{thm:ftsp}
+    Let $R$ be a commutative ring. Then, every symmetric polynomial in $S \vcentcolon= R[x_1, \ldots, x_n]$ is a polynomial in the elementary symmetric polynomials in a unique way. More precisely, if $f(x_1, \ldots, x_n) \in S$ is symmetric, then there exists a unique $g \in R[u_1, \ldots, u_n]$ such that 
+    \[
+        g(\sigma_1, \ldots, \sigma_n) = f(x_1, \ldots, x_n)
+    \]
+    where the above equality is in $S$.
+\end{theorem}
+\begin{proof}
+    \textbf{Existence.} We apply induction on $n$, the number of variables. The case $n=1$ is clear since every polynomial is symmetric and $\sigma_1 = x_1$. Thus, we may choose $g$ to have the same coefficients as $f$.
+    
+    Suppose the theorem is true for $n-1$ variables. We now apply induction on $\deg f$. If $f$ is constant, then again choosing $g$ to have the same coefficients as $f$ works. Suppose $\deg f \geq 1$. Now, we define
+    \[
+        f^0 \vcentcolon= f(x_1, \ldots, x_{n-1}, 0) \in R[x_1, \ldots, x_{n-1}].
+    \]
+    Then, $f^0$ is a symmetric polynomial in $n-1$ variables. By the induction hypothesis on the number of variables, there exists $g \in R[u_1, \ldots, u_{n-1}]$ such that
+    \[
+        f^0(x_1, \ldots, x_{n-1}) = g(\sigma^0_1, \ldots, \sigma^0_{n-1}).
+    \]
+    Now, define $f_1(x_1, \ldots, x_n) \in R[x_1, \ldots, x_n]$ as
+    \[
+        f_1(x_1, \ldots, x_n) \vcentcolon= f(x_1, \ldots, x_n) - g(\sigma_1, \ldots, \sigma_{n-1}).
+    \]
+    Then, we have $f_1(x_1, \ldots, x_{n-1}, 0) = 0$. Thus, $x_n \divides f_1$. Since $f_1$ is symmetric, each $x_i$ divides $f_1$, so that $\sigma_n \divides f_1$. Thus, we can write
+    \[
+        f_1(x_1, \ldots, x_n) = \sigma_n \cdot h(x_1, \ldots, x_n)
+    \]
+    for some $h \in R[x_1, \ldots, x_n]$. Since $\sigma_n$ is not a zero-divisor in $R[x_1, \ldots, x_n]$, we get that $h$ is also a symmetric polynomial and $\deg h < \deg f$. Thus, $h$ is a polynomial in $\sigma_1, \ldots, \sigma_n$ and hence, so is $f$.
+    
+    \textbf{Uniqueness.} For uniqueness, it suffices to show that the elementary symmetric polynomials are algebraically independent. That is, the map $\varphi \colon R[z_1, \ldots, z_n] \to R[x_1, \ldots, x_n]$ defined by
+    \[
+        z_i \mapsto \sigma_i \text{ and } \varphi\restr{R} = \id_R
+    \]
+    is an injection. We use induction on $n$ to prove this. The case $n=1$ is clear since $\sigma_1 = x_1$. Assume now that $n \geq 2$, and that the result holds for $n-1$. If $\varphi$ is not an injection, then pick a nonzero polynomial $f(z_1, \ldots, z_n) \in \ker\varphi$ of least degree. We may write $f$ as a polynomial in $z_n$ as follows. 
+    \[
+        f(z_1, \ldots, z_n) = f_0(z_1, \ldots, z_{n-1}) + \cdots + f_d(z_1, \ldots, z_{n-1})z^n
+    \]
+    with $f_d \neq 0$. Since $d$ is minimal, and $\sigma_n$ is not a zero-divisor, we also get $f_0 \neq 0$. Since $f \in \ker\varphi$, we have
+    \[
+        f_0(\sigma_1, \ldots, \sigma_{n-1}) + \cdots + f_d(\sigma_1, \ldots, \sigma_{n-1}) \sigma_n^d = 0.
+    \]
+    The above equality is in $R[x_1, \ldots, x_n]$. Putting $x_n = 0$, we get
+    \[
+        f_0(\sigma_1^0, \ldots, \sigma^0_{n-1}) = 0
+    \]
+    which shows that the corresponding $\varphi$ for $n-1$ variables is not an injection, a contradiction.
+\end{proof}
+
+\begin{defn}
+    Let $S = R[x_1, \ldots, x_n]$. For $k \geq 1$, we define
+    \[
+        w_k = x_1^k + \cdots + x_n^k.
+    \]
+\end{defn}
+
+\begin{theorem}[Newton's Identities] \label{thm:newton}
+    With $w_k$ as defined above, we have
+    \[
+        w_k = \begin{cases}
+            \sigma_1 w_{k-1} - \sigma_2 w_{k-2} + \cdots + (-1)^k \sigma_{k-1} w_1 + (-1)^{k+1} \sigma_k k\footnotemark& k \leq n, \\
+            \sigma_1 w_{k-1} - \sigma_2 w_{k-2} + \cdots + (-1)^{n+1} \sigma_{n} w_{k-n}& k > n.
+        \end{cases}
+    \]
+\end{theorem}
+\footnotetext{Note that the last term is $\sigma_k \textcolor{red}{k}$ and not $\sigma_k \textcolor{red}{n}$, as one might have expected.}
+\begin{proof}
+    Let $z$ be an indeterminate over $S \vcentcolon= R[x_1, \ldots, x_n]$. Observe that
+    \[
+        (1-x_1z) \cdots (1-x_nz) = 1 - \sigma_1z + \cdots + (-1)^n \sigma_nz^n =\vcentcolon \sigma(z).
+    \]
+    Now, define $w(z) \in S\powser{z}$ as
+    \begin{align*}
+        w(z) &= \sum_{k=1}^{\infty} \, w_k z^k \\
+        &= \sum_{k=1}^{\infty} \left( \sum_{i=1}^n \, x_i^k \right) z^k \\
+        &= \sum_{i=1}^n \left( \sum_{k=1}^{\infty} \, (x_i z)^k \right) \\
+        &= \sum_{i=1}^n \, \frac{x_iz}{1-x_iz}.
+    \end{align*}
+    Now, since $\sigma(z) = (1-x_1z)\cdots(1-x_nz)$, we have
+    \[
+        \sigma^{\prime}(z) = - \sum_{i=1}^n \, \frac{x_i \sigma(z)}{1-x_iz}
+    \]
+    where we have taken the formal derivative in $S\powser{z}$. (We shall define this derivative more formally later on in \Cref{defn:derivative}, but for now, one may think of it as the `usual' derivative). On rearranging, we get
+    \[
+        - \frac{z \sigma^{\prime}(z)}{\sigma(z)} = \sum_{i=1}^n \, \frac{x_iz}{1-x_iz} = w(z)
+    \]
+    which further gives us
+    \[
+        w(z)\sigma(z) = -z\sigma^{\prime}(z).
+    \]
+    Moreover, one may compute $\sigma^{\prime}(z)$ independently from the first equation. Using that expression, we get
+    \[
+        w(z) \sigma(z) = \sigma_1 z - 2 \sigma_2 z^2 + \cdots + (-1)^n n \sigma_n z^n.
+    \]
+    Comparing the coefficients of $z^k$ on both sides gives us the desired result.
+\end{proof}
+
+\begin{defn}
+    Let $\F$ be a field and let $f(x) \in \F[x]$ be a non-constant monic polynomial. Let $\K$ be a splitting field of $f(x)$ over $\F$, so that 
+    \[
+        f(x) = (x-r_1)\cdots(x-r_n)
+    \]
+    for $r_1,\ldots,r_n \in \K$. Then, the \deff{discriminant of $f(x)$} is defined as
+    \[
+        \disc_{\K}(f(x)) \vcentcolon= \prod_{1 \leq i < j \leq n} \, (r_i - r_j)^2.
+    \]
+\end{defn}
+
+\begin{rem} \label{rem:disc=0-iff-repeated}
+    Note that $\disc_{\K}(f(x)) = 0 \iff f(x)$ has repeated roots in $\K$. Moreover, by construction, $\disc_{\K}(f(x))$ has a square root in $\K$, given by
+    \[
+        \prod_{1 \leq i < j \leq n} \, (r_i - r_j) \in \K.
+    \]
+\end{rem}
+
+\begin{prop} \label{prop:disc-independent-of-SF}
+    Let $\F$ be a field and let $f(x) \in \F[x]$ be non-constant and monic. Suppose $\K$ and $\K^{\prime}$ are two splitting fields of $f(x)$ over $\F$. Then, 
+    \[
+        \disc_{\K}(f(x)) = \disc_{\K^{\prime}}(f(x)) \in \F.
+    \]
+    In other words, the discriminant takes value in $\F$ and is independent of the splitting field chosen.
+\end{prop}
+\begin{proof}
+    Let $r_1, \ldots, r_n \in \K$ be such that $f(x) = (x-r_1)\cdots(x-r_n)$. Consider the Vandermonde matrix, 
+    \[
+        M = \begin{bmatrix}
+            1 & 1 & \cdots & 1 \\
+            r_1 & r_2 & \cdots & r_n \\
+            r_1^2 & r_2^2 & \cdots & r_n^2 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            r_1^{n-1} & r_2^{n-1} & \cdots & r_n^{n-1}
+        \end{bmatrix}.
+    \]
+    Then, $\disc_{\K}(f(x)) = \left( \det(M) \right)^2 = \det(MM^{\top})$. Let $\sigma_1, \ldots, \sigma_n \in \F[x_1, \ldots, x_n]$ be the elementary symmetric polynomials and define
+    \[
+        s_i \vcentcolon= \sigma_i(r_1, \ldots, r_n).
+    \]
+    Now, note that
+    \[
+        f(x) = x^n - s_1x^{n-1} + \cdots + (-1)^n s_n
+    \]
+    and since $f(x) \in \F[x]$, $s_i \in \F$ for all $i$. Also, define
+    \[
+        v_k \vcentcolon= r_1^k + \cdots + r_n^k
+    \]
+    for all $k \geq 1$. By \nameref{thm:newton}, each $v_k$ can be written as a combination of $s_i$'s, so that each $v_k \in \F$. Moreover, we have
+    \[
+        MM^{\top} = \begin{bmatrix}
+            n & v_1 & \cdots & v_{n-1} \\
+            v_1 & v_2 & \cdots & v_n \\
+            v_2 & v_3 & \cdots & v_{n+1} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            v_{n-1} & v_n & \cdots & v_{2n-2}
+        \end{bmatrix}.
+    \]
+    Thus, $\disc_{\K}(f(x)) = \det(MM^{\top}) \in \F$.\footnotemark\ Note that since $v_k$ can be calculated directly in terms of $s_i$, the coefficients of $f(x)$ itself, the discriminant does not depend on the choice of the splitting field.
+\end{proof}
+\footnotetext{Note that the \textcolor{red}{$n$} in the matrix is defined as $1 + \cdots + 1 (n \text{ times})$, where $1$ is the identity in $\F$. We may also regard $n$ to represent the image of $n \in \Z$ under the homomorphism that sends $1_{\Z}$ to $1_{\F}$.}
+
+In view of the above proof, we have the following alternate definition of the discriminant, that is independent of the splitting field. 
+
+\begin{defn}
+    Let $\F$ be a field and let $f(x) = x^n - \sigma_1 x^{n-1} + \cdots + (-1)^n \sigma_n \in \F[x]$ be a monic polynomial. With $w_k$ for $k=1,\ldots,2n-2$ as defined in \nameref{thm:newton}, we have
+    \[
+        \disc(f(x)) \vcentcolon= \det \begin{bmatrix}
+            n & w_1 & \cdots & w_{n-1} \\
+            w_1 & w_2 & \cdots & w_n \\
+            w_2 & w_3 & \cdots & w_{n+1} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            w_{n-1} & w_n & \cdots & w_{2n-2}
+        \end{bmatrix}.
+    \]  
+\end{defn}
+\begin{rem}
+    In the above definition, $\sigma_i$ are \textbf{not} the elementary symmetric polynomials. They are arbitrary elements of $\F$. We are \emph{defining} $w_k$ recursively in terms of $\sigma_i$, using \nameref{thm:newton}, which is what motivates the use of the same notation.
+\end{rem}
+
+\begin{prop}[Discriminant in terms of derivative] \label{prop:d-in-terms-of-d}
+    Suppose $f(x) = \prod_{i=1}^n \, (x-r_i)$, then $f^{\prime}(x) = (-1)^{\binom{n}{2}} \prod_{i=1}^n \, f^{\prime}(r_i)$.
+\end{prop}
+\begin{proof}
+    Observe that
+    \[
+        f^{\prime}(x) = \sum_{i=1}^n \, \frac{f(x)}{x-r_i} = \sum_{i=1}^n \, \prod_{\substack{j=1 \\ j \neq i}}^n \, (x-r_j).
+    \]
+    Thus, we have
+    \[
+        f^{\prime}(r_i) = \prod_{\substack{j=1 \\ j \neq i}}^n \, (r_i - r_j)
+    \]
+    from which the result follows.
+\end{proof}
+
+\begin{ex}[Discriminant of a Quadratic]
+        \item Let $x^2 + bx + c \in \F[x]$ be a quadratic. We have $\sigma_1 = -b, \sigma_2 = c$. Thus, \nameref{thm:newton} give us
+        \begin{align*}
+            w_1 &= -b, \\
+            w_2 &= b^2 - 2c.
+        \end{align*}
+        Thus, we have
+        \[
+            \disc(f(x)) = \det \begin{bmatrix}
+                2 & -b \\
+                -b & b^2 - 2c
+            \end{bmatrix} = b^2 - 4c,
+        \]
+        which is the usual determinant of a quadratic.
+\end{ex}
+
+We now (finally) prove the Fundamental Theorem of Algebra. 
+
+\begin{lem} \label{lem:FTA-lem}
+    \phantom{hi}
+    \begin{enumerate}
+        \item Every real polynomial of odd degree has a real root. 
+        \item Every complex number has a square root. Thus, every complex quadratic polynomial has a root in $\C$.
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+    The first part follows trivially from the intermediate value property. For the second, for any $a + b\iota \in \C$, with $a,b \in \R$, we define $c,d \in \R$ as follows.
+    \[
+        c \vcentcolon= \sqrt{\frac{1}{2} [ a + \sqrt{a^2 + b^2} ]} \text{ and } d \vcentcolon= \sqrt{\frac{1}{2} [ -a + \sqrt{a^2 + b^2} ]}.
+    \]  
+    Then, we have $(c+d\iota)^2 = a + b\iota$.
+\end{proof}
+
+\begin{theorem}[Fundamental Theorem of Algebra] \label{thm:FTA-sym}
+    Every non-constant complex polynomial has a root in $\C$.
+\end{theorem}
+\begin{proof}
+    Let $g(x) \in \C[x]$ be a non-constant complex polynomial. Then, $f(x) \vcentcolon= g(x) \overline{g}(x)$ is a non-constant real polynomial, where $\overline{g}(x)$ denotes the polynomial whose coefficients are complex conjugates of the coefficients of $g(x)$. Note that if $f(z) = 0$ for some $z \in \C$, then $g(z) = 0$ or $\overline{g}(z) = 0$. If $\overline{g}(z) = 0$, then $g(\overline{z}) = 0$, so that $g(x)$ has a complex root in either case. Thus, it suffices to show that every non-constant real polynomial has a complex root. 
+    
+    Given any $f(x) \in \R[x]$, we can write $\deg f(x) = 2^nq$ for unique $n \geq 0$, and odd $q \in \N$. We prove the statement by induction on $n$. In the case that $n =0$, $f(x)$ has odd degree, and hence has a real (and consequently, a complex) root. Now, assume that $n \geq 1$ and that the statement is true for $n-1$. Let $d \vcentcolon= \deg f(x)$ and let $\K \vcentcolon= \C(\alpha_1, \ldots, \alpha_d)$ be a splitting field of $f(x)$ over $\C$, where $\alpha_i$ are the roots of $f(x)$. For $r \in \R$, define
+    \[
+        y_{ij}(r) = \alpha_i + \alpha_j + r\alpha_i\alpha_j
+    \]
+    for $1 \leq i \leq j \leq d$. There are $\binom{d+1}{2}$ such pairs $(i,j)$, so that the polynomial
+    \[
+        h_r(x) \vcentcolon= \prod_{1\leq i\leq j\leq d} \, (x- y_{ij}(r))
+    \]
+    has degree
+    \[
+        \deg h_r(x) = \binom{d+1}{2} = \frac{1}{2} d(d+1) = 2^{n-1} \underbrace{q(d+1)}_{\text{odd}}.
+    \]
+    Note that the coefficients of $h_r(x)$ are elementary symmetric polynomials in $y_{ij}$'s, and hence, are symmetric polynomials in $\alpha_i,\ldots,\alpha_d$. Thus, the coefficients of $h_r(x)$ are polynomials in coefficients of $f(x)$, so that $h_r(x) \in \R[x]$. By the inductive hypothesis on $n$, $h_r(x)$ has a root $z_r \in \C \subseteq \K$. Thus, $z_r = y_{i(r), j(r)}(r)$ for some $1 \leq i(r) \leq j(r) \leq d$. 
+    
+    Let $P \vcentcolon= \left\{ (i,j) \mid 1 \leq i \leq j \leq d \right\}$ and define $\varphi \colon \R \to P$ by $r \mapsto (i(r), j(r))$. Since $P$ is finite and $\R$ is not, $\varphi$ is not injective. Thus, there exist $c,d \in \R$, with $c \neq d$, such that
+    \[
+        (i(c), j(c)) = (i(d), j(d)) = \vcentcolon= (a,b) \in P.
+    \]
+    Thus, 
+    \[
+        z_c = \alpha_a + \alpha_b + c\alpha_a\alpha_b \text{ and } z_d = \alpha_a + \alpha_b + d\alpha_a\alpha_b.
+    \]  
+    Although apriori we only know that $\alpha_a, \alpha_b \in \K$, we now have
+    \[
+        \alpha_a\alpha_b = \frac{z_c - z_d}{d-c} \in \C
+    \]
+    and consequently,
+    \[
+        \alpha_a + \alpha_b = z_c - c\alpha_a\alpha_b \in \C.
+    \]
+    Thus, $\alpha_a\alpha_b$ and $\alpha_a + \alpha_b \in \C$. However, these are the coefficients of the quadratic
+    \[
+        x^2 - (\alpha_a + \alpha_b)x + \alpha_a\alpha_b \in \C[x],
+    \]
+    of which $\alpha_a$ and $\alpha_b$ are both roots. By \Cref{lem:FTA-lem}, one of $\alpha_a$ and $\alpha_b$ must be in $\C$. Since $\alpha_a$ and $\alpha_b$ are both roots of $f(x)$, we are done.
+\end{proof}

@@ -1,0 +1,377 @@
+\section{Ring Homomorphisms}
+
+\begin{defn}[Ring Homomorphism]
+    Let $R$ and $S$ be rings. A map $\varphi \colon R \to S$ is called a \deff{ring homomorphism} if 
+    \begin{enumerate}
+        \item $\varphi(a+b) = \varphi(a) + \varphi(b)$ for all $a,b \in R$.
+        \item $\varphi(ab) = \varphi(a)\varphi(b)$ for all $a,b \in R$.
+        \item $\varphi(1) = 1$.\footnotemark
+    \end{enumerate}
+    A \deff{field homomorphism} is a ring homomorphism between fields.
+\end{defn}
+\footnotetext{Note that a more suggestive way of writing this is $\varphi(1_{R}) = 1_{S}$. For brevity, we drop the subscript and $1$ will be assumed to be the multiplicative identity of the appropriate ring.}
+
+\begin{defn}
+    Since any field homomorphism is injective (why?), we also call them \deff{embeddings}.
+\end{defn}
+
+\begin{ex}
+\phantom{hi}
+\begin{enumerate}
+    \item Of course, for any ring $R$, the identity map of $R$ is a ring homomorphism.
+    \item Let $R$ be a commutative ring and let $R^{\prime}$ be any overring of $R$, that is, $R$ is a subring of $R^{\prime}$. For some $\alpha \in R^{\prime}$, we define the map $\pi_{\alpha} \colon R[x] \to R^{\prime}$ as follows
+    \[
+        \pi_{\alpha} \left( f(x) \right) = f(\alpha) \text{ for all } f(x) \in R[x].
+    \]
+    We leave it as an easy exercise to the reader to show that $\pi_{\alpha}$ is a homomorphism, called the \emph{substitution homomorphism} or the \emph{substitution map}.
+    \item If $R$ is a subring of $R^{\prime}$, then the \emph{inclusion map} $\varphi \colon R \to R^{\prime}$ defined as
+    \[
+        \varphi(a) = a \text{ for all } a \in R
+    \]  
+    is a homomorphism.
+    \item Let $R$ be a commutative ring and let $M_n(R)$ be the ring of $n\times n$ matrices with entries in $R$. For a fixed invertible matrix $P \in M_n(R)$, the map, $\varphi_P \colon M_n(R) \to M_n(R)$ defined by
+    \[
+        \varphi_P(A) = PAP^{-1}
+    \]
+    is a homomorphism.
+\end{enumerate}
+\end{ex}
+
+\begin{prop}
+    Let $\varphi \colon R \to S$ be a ring homomorphism. Then,
+    \begin{enumerate}
+        \item $\varphi(0) = 0$.
+        \item $\varphi(-r) = -\varphi(r)$ for all $r \in R$.
+        \item If $r \in R^{\times}$ then $s \in S^{\times}$ and $\varphi(r^{-1}) = (\varphi(r))^{-1}$.
+        \item The image of $R$ under $\varphi$ is a subring of $S$, where the image is defined as
+        \[
+            \im\varphi \vcentcolon= \left\{ \varphi(r) \mid r \in R \right\}
+        \]
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    We have
+    \[
+        \varphi(0 + 0) = \varphi(0) + \varphi(0)
+    \]
+    Since $0 + 0 = 0$, we have
+    \[
+        \varphi(0) + \varphi(0) = \varphi(0) \implies \varphi(0) = 0
+    \]
+    For any $a \in R$, we have
+    \[
+        \varphi(a - a) = 0 = \varphi(a) + \varphi(-a)
+    \]
+    This gives us
+    \[
+        \varphi(-a) = -\varphi(a)
+    \]
+    Let $r \in R^{\times}$. Then, $r^{-1}$ exists. We have
+    \[
+        \varphi(r) \varphi(r^{-1}) = \varphi(r r^{-1}) = \varphi(1) = 1
+    \]
+    from which, the third part clearly follows.
+    The proof of the fourth part is left as an exercise and follows directly from the first three parts.
+\end{proof}
+
+\begin{defn}[Kernel]
+    Let $\varphi \colon R \to S$ be a ring homomorphism. The \deff{kernel} of $\varphi$, denoted as $\ker\varphi$ is defined as 
+    \[
+        \ker\varphi \vcentcolon= \left\{ a \in R \mid \varphi(a) = 0 \right\}
+    \]
+\end{defn}
+
+Note that the definition straightaway implies that $0 \in \ker\varphi$. Moreover, we have the following.
+\begin{prop} \label{prop:kernel-is-ideal}
+    If $\varphi \colon R \to S$ is a ring homomorphism, then $\ker\varphi$ is an ideal of $R$.
+\end{prop}
+\begin{proof}
+    Left as an exercise.
+\end{proof}
+
+\begin{defn}[Quotient Ring]
+    Let $R$ be a ring and let $I$ be an ideal of $R$. Then, $I$ is an additive subgroup of $R$ and the quotient group
+    \[
+        R/I \vcentcolon= \left\{ r + I \mid r \in R \right\}
+    \]
+    is an abelian group with addition defined as
+    \[
+        (a+I) + (b+I) \vcentcolon= (a+b) + I \text{ for all } a,b \in R.
+    \]
+    Moreover, $R/I$ is a ring where multiplication is defined\footnotemark\ as
+    \[
+        (a + I) (b + I) \vcentcolon= ab + I \text{ for all } a,b \in R.
+    \]
+    In fact, $R/I$ is a ring with respect to addition and multiplication as defined above, with $1+I$ as the multiplicative identity in $R/I$.\footnotemark\ We call $R/I$ the \deff{quotient ring} of $I$ in $R$.
+\end{defn}
+\footnotetext{One should check that this is indeed well-defined. That is, if $a+I = a^{\prime} + I$ and $b+I = b^{\prime}+I$, then $ab + I = a^{\prime}b^{\prime} + I$.}
+\footnotetext{We leave it as an exercise to verify that $R/I$ is indeed a ring.}
+
+\begin{prop} \label{prop:ideal-is-kernel}
+    Let $R$ be a ring and let $I$ be an ideal of $R$. Let $\varphi \colon R \to R/I$ be a map defined by
+    \[
+        \varphi(r) = r + I \text{ for all } r \in R.
+    \]
+    Then, 
+    \begin{enumerate}
+        \item $\varphi$ is a homomorphism,
+        \item $\ker\varphi = I$.
+    \end{enumerate}
+\end{prop}
+
+From \Cref{prop:kernel-is-ideal} and \Cref{prop:ideal-is-kernel}, we see that any ideal is the kernel of some ring homomorphism and that the kernel of any homomorphism is an ideal.
+
+\begin{defn}[Isomorphism]
+    Let $R,S$ be rings. A ring homomorphism $\varphi \colon R \to S$ is called an isomorphism if $\varphi$ is a bijection. In this case, $R$ and $S$ are said to be isomorphic and we denote this as $R \cong S$.
+\end{defn}
+
+\begin{exe}
+    Let $R,S$ be rings and let $\varphi \colon R \to S$ be an isomorphism. Then,
+    \begin{enumerate}
+        \item $\varphi^{-1}$ is an isomorphism,
+        \item $r \in R$ is a unit if and only if $\varphi(r)$ is a unit in $S$,
+        \item $r \in R$ is a zero divisor if and only if $\varphi(r)$ is a zero divisor in $S$,
+        \item $R$ is commutative if and only if $S$ is commutative,
+        \item $R$ is an integral domain if and only if $S$ is an integral domain, and
+        \item $R$ is a field if and only if $S$ is a field.
+    \end{enumerate}
+\end{exe}
+
+\begin{theorem}[Isomorphism Theorem for Rings] \label{thm:ring-iso-1}
+    Let $R,S$ be rings. If $\varphi \colon R \to S$ is a homomorphism, then $\im\varphi \cong R/\ker \varphi$.
+\end{theorem}
+\begin{proof}
+Verify that the map $r + \ker\varphi \mapsto \varphi(r)$ defines an isomorphism.
+\end{proof}
+
+\begin{defn}[Prime Ideal]
+    Let $R$ be a ring and let $P$ be an ideal of $R$. $P$ is called a \deff{prime ideal} of $R$ if $P \neq R$ and for all $a,b \in R$,
+    \[
+        ab \in P \implies a \in P \text{ or } b \in P
+    \]
+\end{defn}
+
+\begin{defn}[Maximal Ideal]
+    Let $R$ be a ring and let $M$ be an ideal of $R$. $M$ is called a \deff{maximal ideal} of $R$ if $M \neq R$ and whenever $J$ is an ideal of $R$ such that $M \subseteq J$, we have either $J = M$ or $J = R$.
+\end{defn}
+
+\begin{ex}
+    \phantom{hi}
+    \begin{enumerate}
+        \item In the ring $\Z$, the ideals $\langle 0 \rangle = \{0\}$ and $p\Z$, where $p$ is a prime, are prime ideals of $\Z$, as is proved trivially by Euclid's Lemma (\Cref{cor:euclid_lemma}). In fact, these are the only prime ideals of $\Z$. Moreover, the ideals $p\Z$ are the only maximal ideals of $\Z$.
+        
+        \item Similarly, in the ring $\F[x]$ where $\F$ is a field, the only maximal ideals are ideals of the form $\langle f(x) \rangle$ where $f(x)$ is irreducible in $\F[x]$. Further, these ideals, together with the zero ideal, are the only prime ideals of $\F[x]$. In particular, $\F = \C$, we have two more versions of the Fundamental Theorem of Algebra, as stated ahead,
+    \end{enumerate}
+\end{ex}
+
+\begin{theorem}[Fundamental Theorem of Algebra - Version 6] \label{thm:FTA6}
+    The only maximal ideals in $\C[x]$ are $\langle x-\alpha \rangle$ where $\alpha \in \C$.
+\end{theorem}
+\begin{theorem}[Fundamental Theorem of Algebra - Version 7] \label{thm:FTA7}
+    The only maximal ideals in $\R[x]$ are of the form $\langle x-a \rangle$ or $\langle x^2 + bx + c \rangle$ where $a,b,c \in \R$ and $b,c$ are such that $b^2 - 4c < 0$.
+\end{theorem}
+
+\begin{prop} \label{prop:ideal-characterisation-using-quotient-ring}
+    Let $R$ be a commutative ring and let $I$ be an ideal of $R$. Then, 
+    \begin{enumerate}
+        \item $I$ is a prime ideal if and only if $R/I$ is an integral domain;
+        \item $I$ is a maximal ideal if and only if $R/I$ is a field.
+    \end{enumerate}
+\end{prop}
+\begin{proof} \phantom{hi}
+\begin{enumerate}
+    \item Suppose $I$ is a prime ideal. Since $I \neq R$, $R / I$ is not the trivial ring. Thus, $1 \neq 0$ in the ring $R/I$. We now show that if the product of two cosets of $I$ is equal to $I$ (the additive identity of the ring $R/I$), then at least one of them must be equal to $I$. For $a,b \in R$, if we have $(a+I)(b+I) = I$, then $ab + I = I \implies ab \in I$. Since $I$ is a prime ideal, this means that either $a \in I$ or $b \in I$. Thus, either $a + I = I$ or $b + I = I$, proving that $R/I$ is an integral domain. The converse is straightforward as well and is left as an exercise.
+    
+    \item Suppose $I$ is a maximal ideal of $R$. Then, $I \neq R$ and thus $1 \neq 0$ in $R/I$. Now suppose that $a+I$ is a non-zero element of $R/I$ for some $a \in R$. Then, $a \notin I$. Let $J$ be the ideal generated by $a$ and $I$. We have
+    \[
+        J = \left\{ ra + u \mid r \in R \text{ and } u \in I \right\}
+    \]
+    We leave it as an exercise to show that $J$ is indeed an ideal. Notice that $J$ contains $I$ (take $r$ to be $0$). Moreover, $J \neq I$ since $a \in J$ and $a \notin I$. Thus, by the maximality of $I$, we must have that $J = R$. In particular, we have that
+    \[
+        1 = ba + u \text{ for some } b \in R \text{ and } u \in I.
+    \]
+    This implies that
+    \[
+        (a + I)(b + I) = ab + I = ba + I = 1 - u + I
+    \]
+    Since $u \in I$, we get that
+    \[
+        (a + I)(b + I) = 1 + I
+    \]
+    and hence, $b + I$ is a multiplicative inverse of $a+I$ in $R/I$. Hence, $R/I$ is a field. We again leave the converse as an exercise to the reader. 
+\end{enumerate}
+    
+\end{proof}
+
+\begin{cor} \label{cor:maximal-is-prime}
+    Let $R$ be a commutative ring and let $I$ be an ideal of $R$. If $I$ is maximal, then $I$ is prime.
+\end{cor}
+\begin{proof}
+    This follows from \Cref{prop:ideal-characterisation-using-quotient-ring} since every field is an integral domain.
+\end{proof}
+\begin{prop} \label{prop:finite-prime-and-maximal}
+    In a finite commutative ring, every prime ideal is maximal. 
+\end{prop}
+\begin{proof}
+    We leave the proof as an exercise. (Hint: \Cref{prop:field-and-integral-domain} and \Cref{prop:ideal-characterisation-using-quotient-ring})
+\end{proof}
+
+\begin{exe}
+    Let $R$ be a commutative ring and let $I$ be an ideal of $R$. Show that there is an inclusion-preserving\footnotemark\ bijection between ideals of $R$ containing $I$ and the set of ideals of $R/I$, which is given by $J \mapsto J/I \vcentcolon= \left\{ a + I \mid a \in J \right\}$ where $J$ is an ideal of $R$ containing $I$. Moreover, this correspondence preserves primality and maximality. 
+\end{exe}
+\footnotetext{Let $\varphi$ be the bijection. By `inclusion-preserving', we mean that if $J_1$ and $J_2$ are ideals containing $I$ and if $J_1 \subset J_2$, then $\varphi(J_1) \subset \varphi(J_2)$.}
+
+\begin{prop}
+    Let $R$ be a ring and let $I$ be an ideal of $R$ such that $I \neq R$. Then, there exists a maximal ideal $M$ of $R$ such that $I \subseteq M$.
+\end{prop}
+\begin{proof}
+    Consider the set 
+    \[
+        \mathcal{F} = \left\{ J \mid \text{$J$ is an ideal of $R$ with $J \neq R$ and $I \subseteq J$} \right\}.
+    \]
+    $\mathcal{F}$ is clearly non-empty since $I \in \mathcal{F}$. Further, suppose that $\left\{ I_{\alpha} \right\}_{\alpha \, \in \Lambda}$ is a chain in $\mathcal{F}$, that is, a subset of $\mathcal{F}$ such that for any $\alpha, \beta \in \Lambda$, either $I_{\alpha} \subseteq I_{\beta}$ or $I_{\beta} \subseteq I_{\alpha}$. Now, we define 
+    \[
+        J \vcentcolon= \bigcup_{\alpha \, \in \, \Lambda} I_{\alpha}.
+    \]
+    We claim that $J$ is an ideal of $R$ (the proof is left as an exercise) and $I \subseteq J$. Moreover, $J \neq R$, since $1 \in J \implies 1 \in I_{\alpha} \implies I_{\alpha} = R$ for some $\alpha \in \Lambda$, which is a contradiction. Thus $J \in \mathcal{F}$ and clearly, $I_{\alpha} \subseteq J$ for all $\alpha \in \Lambda$. So, $J$ is an upper bound in $\mathcal{F}$ on the chain $\left\{ I_{\alpha} \right\}_{\alpha \, \in \Lambda}$. Hence, by Zorn's Lemma, $\mathcal{F}$ has a maximal element with respect to inclusion, say $M$. Clearly, $M$ has the desired properties.
+    
+\end{proof}
+
+
+\begin{prop} \label{prop:subring-of-field-is-ID}
+    Every subring of a field is an integral domain.
+\end{prop}
+\begin{proof}
+    Left as an exercise.
+\end{proof}
+
+Interestingly, the converse of \Cref{prop:subring-of-field-is-ID} is also true.
+
+\begin{prop} \label{prop:ID-has-fof}
+    Every integral domain is a subring of some field.
+\end{prop}
+
+The simplest way to prove \Cref{prop:ID-has-fof} is to construct the so-called field of fractions of the integral domain. This is similar to the construction of $\Q$ from $\Z$.
+
+\subsection{Construction of Field of Fractions of an Integral Domain}
+
+For the remainder, we let $R$ denote an integral domain and let $S \vcentcolon= R \times R^{\times} = \{ (a,b) \mid a,b \in R, b \neq 0 \}$
+
+\begin{defn}
+    We define a relation $\sim$ on $S$ as follows:
+    \[
+        (a,b) \sim (c,d) \iff ad = bc.
+    \]
+\end{defn}
+\begin{lem}
+    The relation $\sim$ on $S$ is an equivalence relation. 
+\end{lem}
+\begin{proof}
+    Given any $(a,b) \in S$, we clearly have $ab = ab \implies (a,b) \sim (a,b)$. Hence $\sim$ is reflexive. 
+    
+    Suppose $(a,b) \sim (c,d)$. Then, $ad = bc \implies cb = ad  \implies (c,d) \sim (a,b)$ and hence $\sim$ is symmetric.
+    
+    Suppose $(a,b) \sim (c,d)$ and $(c,d) \sim (e,f)$. Then, $ad = bc$ and $cf = de$. Now,
+    \begin{align*}
+        ad = bc &\implies adf = bcf  \\
+        &\implies adf = bde \\
+        &\implies af = be &\text{(since $d \neq 0$ and $R$ is an integral domain)}\\ 
+        &\implies (a,b) \sim (e,f)
+    \end{align*}
+    Hence, $\sim$ is transitive.
+\end{proof}
+
+\begin{defn}[Field of Fractions]
+    The \deff{field of fractions} of an integral domain $R$, denoted as $\fr(R)$, is the collection of equivalence classes of the relation $\sim$ on $S$. If $(a,b) \in S$, we denote the equivalence class of $(a,b)$ with respect to $\sim$ as $\frac{a}{b}$. Thus,
+    \[
+        \fr(R) \vcentcolon= \left\{ \frac{a}{b} \mid (a,b) \in S \right\}
+    \]
+\end{defn}
+
+We are yet to prove that the above construction is a field. First, we define the field operations on this set and show that these are indeed well-defined.
+
+\begin{defn}
+    We define addition and multiplication as follows. Given, $\frac{a}{b}, \frac{c}{d} \in \fr(R)$
+\begin{align*}
+    \frac{a}{b} + \frac{c}{d} &\vcentcolon= \frac{ad + bc}{bd} \\
+    \frac{a}{b} \cdot \frac{c}{d} &\vcentcolon= \frac{ac}{bd}
+\end{align*}
+\end{defn}
+
+\begin{prop}
+    Addition in $\fr(R)$ is well-defined. That is, if $(a,b) \sim (a^{\prime}, b^{\prime})$ and $(c,d) \sim (c^{\prime}, d^{\prime})$, then
+    \[
+        (ad + bc, bd) \sim (a^{\prime}d^{\prime} + b^{\prime}c^{\prime}, b^{\prime}d^{\prime}).
+    \]
+\end{prop}
+
+\begin{prop}
+    Multiplication in $\fr(R)$ is well-defined. That is, if $(a,b) \sim (a^{\prime}, b^{\prime})$ and $(c,d) \sim (c^{\prime}, d^{\prime})$, then
+    \[
+        (ac, bd) \sim (a^{\prime}c^{\prime}, b^{\prime}d^{\prime}).
+    \]
+\end{prop}
+
+\begin{theorem}
+    The set $\fr(R)$ along with addition and multiplication as defined above, forms a field where 
+    \begin{enumerate}
+        \item the additive identity is $\frac{0}{1}$,
+        \item the additive inverse of $\frac{a}{b}$ is $\frac{-a}{b}$,
+        \item the multiplicative identity is $\frac{1}{1}$, and
+        \item for $\frac{a}{b} \neq \frac{0}{1}$, the multiplicative inverse of $\frac{a}{b}$ is $\frac{b}{a}$.
+    \end{enumerate}
+\end{theorem}
+
+We leave the proofs of the above results as an instructive exercise.
+
+The map $\varphi \colon R \to \fr(R)$ defined by
+\[
+    \varphi(a) = \frac{a}{1} \text{ for } a \in R
+\]
+is an injective homomorphism, which we refer to as the \emph{natural inclusion map}. Thus, $R \cong \im\varphi$, which is a subring of $\fr(R)$. Thus, identifying $R$ with $\im\varphi$, we may regard $R$ to be a subring of $\fr(R)$, which is what we had wanted to show all along.
+
+\begin{theorem}[Universal Property] \label{thm:universal-property} Let $R$ be an       integral domain and let $R \xhookrightarrow{\varphi} \fr(R)$ be the natural inclusion map. If $\F$ is a field such that there is an injective homomorphism $R \xhookrightarrow{\psi} \F$, then there exists an injective homomorphism $\fr(R) \xhookrightarrow{\chi} \F$ such that $\psi = \chi \circ \varphi$.
+\end{theorem}
+
+\adjustbox{scale=1.2,center}{%
+\begin{tikzcd}
+                                                          &  & \F                       \\
+                                                          &  &                                  \\
+R \arrow[rr, "\varphi"', hook] \arrow[rruu, "\psi", hook] &  & \fr(R) \arrow[uu, "\chi"', dashed, hook]
+\end{tikzcd}
+}
+
+Intuitively, the universal property states that if $\F$ is any field that contains $R$ as a subring, then the field $\F$ also contains $\fr(R)$. Thus, $\fr(R)$ is the smallest field containing $R$ as a subring.
+
+\begin{proof}
+    We define $\chi \colon \fr(R) \to \F$ as 
+    \[
+        \chi\left( \frac{a}{b} \right) \vcentcolon= \psi(a) \psi(b)^{-1} \text{ for } a,b \in R, b \neq 0.
+    \]
+    Since $\psi$ is injective and $\F$ is a field, the above map is well-defined.\footnotemark\ It is also straightforward to check that $\chi$ is a homomorphism. Now, it remains to show that $\chi$ is injective. We have
+    \begin{align*}
+        \chi\left( \frac{a}{b} \right) = 0 &\implies \psi(a)\psi(b)^{-1} = 0 \\
+        &\implies \psi(a) = 0 &\text{(since $b \neq 0$ and hence $\psi(b)^{-1} \neq 0$)} \\
+        &\implies a = 0 &\text{(since $\psi$ is injective)} \\
+        &\implies \frac{a}{b} = 0.
+    \end{align*}
+    Hence, $\ker\chi$ is trivial and $\chi$ is indeed injective. Now, for any $a \in R$, we have
+    \[
+        \chi\circ\varphi(a) = \chi\left( \frac{a}{1} \right) = \psi(a)\psi(1)^{-1} = \psi(a) \implies \chi\circ\varphi = \psi.\qedhere
+    \]
+\end{proof}
+\footnotetext{One must also check that if $\frac{a}{b} = \frac{a^{\prime}}{b^{\prime}}$, then $\chi\left( \frac{a}{b} \right) = \chi\left( \frac{a^{\prime}}{b^{\prime}} \right)$.}
+
+
+\begin{cor}
+    If $\F$ is any field such that there is an injective homomorphism $R \xhookrightarrow{\psi} \F$ satisfying the universal property, then $\F$ and $\fr(R)$ are isomorphic. Moreover, there exists an isomorphism $\chi \colon \fr(R) \to \F$ such that $\psi = \chi\circ\varphi$.
+\end{cor}
+\begin{proof}
+    Left as an exercise. This indicates that $\fr(R)$ is unique up to isomorphism. 
+\end{proof}
+
+\begin{defn}
+    Let $R$ be an integral domain. The field $\fr(R[x])$ is called the \deff{field of rational functions} with coefficients in $R$ and is denoted as $R(x)$.
+\end{defn}
+
+The field of rational functions $R(x)$ consists of elements of the form $\frac{p(x)}{q(x)}$ where $p(x), q(x) \in R[x]$ and $q(x) \neq 0$.

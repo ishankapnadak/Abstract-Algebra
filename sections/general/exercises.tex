@@ -1,0 +1,75 @@
+\newpage
+\section{Exercises}
+
+\begin{enumerate}
+    \item Let $\nu \colon \mathbb{Q} \to \mathbb{Z} \cup \{\infty\}$ be a function such that 
+    \begin{enumerate}
+        \item $\nu$ is surjective.
+        \item $\nu(r) = \infty \iff r = 0$.
+        \item $\nu(rs) = \nu(r) + \nu(s)$ for all $r,s \in \mathbb{Q}$.
+        \item $\nu(r + s) \geq \min\{\nu(r), \nu(s)\}$ for all $r,s \in \mathbb{Q}$.
+    \end{enumerate}
+    Then, show that $\nu = \nu_p$ for a unique prime $p$.\footnote{Try at your own risk!}
+    \item \label{problem:multiplicativity_bijection} Can we find a bijection between the following two sets:
+    \[
+        \left\{ (a,b) \in \mathbb{Z}^2 \mid 1 \leq a \leq m, 1 \leq b \leq n \text{ and } (a,m) = 1, (b,n) = 1 \right\}
+    \] 
+    \[
+        \left\{ c \in \mathbb{Z} \mid 1 \leq c \leq mn \text{ and } (c,mn) = 1 \right\}
+    \]
+    for positive integers $m,n$ with $(m,n) = 1$. (Hint: Multiplicativity of $\varphi$)
+    \item Let $(R,+,\cdot)$ be a system satisfying all the axioms of a ring, except possibly $a+b = b+a$. Show that $a+b = b+a$ for all $a,b \in R$ so $R$ is indeed a ring. 
+    \item Let $R$ be a ring. Show that if $1 = 0$ in $R$, then $R$ is the trivial or the null ring.
+    \item Show that every finite integral domain is a field.
+    \item Show that the group of units of $M_n(\mathbb{R})$ is $GL_n(\mathbb{R})$.
+    \item Let $R$ be a commutative ring and let $f,g \in R[x]$. Show that $\deg(fg) \leq \deg f + \deg g$ and equality holds if $R$ is an integral domain. Consequently, show that if $R$ is an integral domain then $R[x]$ is an integral domain.
+    \item \begin{enumerate}
+        \item Let $\mathbb{F}$ be a field where $1+1 = 0$. Show that $(x+y)^2 = x^2 + y^2$ for all $x,y \in \mathbb{F}$.
+        \item Suppose further that $\mathbb{F}$ is finite. Show that every element of $\mathbb{F}$ is a square.
+        \item Generalise the above with a general prime $p$.
+    \end{enumerate}
+    \item \label{problem:number-of-squares}Let $\mathbb{F}$ be a finite field where $-1 \neq 1$. Show that the number of squares in $\mathbb{F}$ is $\frac{\abs{\mathbb{F}}+1}{2}$.
+    \item In the same setup as Problem \ref{problem:number-of-squares}, show that every element is a sum of two squares.
+    \item Let $R$ be a commutative ring and let $A \in M_n(R)$. Show that $A$ is invertible if and only if $\det A$ is a unit in $R$.
+    \item Determine all the prime ideals of $\mathbb{Z}[x]$.
+    \item Let $\mathcal{C}[a,b]$ be the ring of continuous real-valued functions on the interval $[a,b]$ (where $a,b \in \mathbb{R}$ and $a<b$), with respect to pointwise addition and multiplication. Show that for every $c \in [a,b]$, the set
+    \[
+        M_c \vcentcolon= \left\{ f \in \mathcal{C}[a,b] \mid f(c) = 0 \right\}
+    \]
+    is a maximal ideal of $\mathcal{C}[a,b]$. Further, show that these are the only maximal ideals of $\mathcal{C}[a,b]$.
+    \item Let $R$ be a commutative ring. Show that if $J$ is an ideal of the ring $M_n(R)$, then $J = M_n(I)$ for some ideal $I$ of $R$. In particular, show that if $\mathbb{F}$ is a field, then the only ideals of $M_n(\mathbb{F})$ are the zero ideal and the unit ideal.
+\end{enumerate}
+
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\begin{enumerate}[resume]
+    \item Show that if $G$ has even order then $G$ has exactly an odd number of elements of order two. In particular, if $G$ has even order, there exists an $x \in G$, $x \neq 1$ such that $x^2 = 1$.
+    \item Let $G$ be a group. For any $a,b \in G$, show that $\abs{ab} = \abs{ba}$. (Hint: elements in the same conjugacy class have the same order)
+    \item Let $\mathcal{G}$ be any collection of groups. Show that isomorphism is an equivalence relation on $\mathcal{G}$.
+    \item Let $G,H$ be two groups and let $\varphi \colon G \to H$ be an isomorphism. Then prove that
+    \begin{enumerate}
+        \item $G$ is abelian if and only if $H$ is abelian.
+        \item for all $x \in G$, $\abs{x} = \abs{\varphi(x)}$.
+    \end{enumerate}
+    \item Let $G$ be a group and $H,K$ be subgroups of $G$. Prove that $H \cup K$ is a subgroup if and only if $H \subseteq K$ or $K \subseteq H$.
+    \item Prove that any two cyclic groups of the same order are isomorphic. More specifically, 
+    \begin{enumerate}
+        \item if $n \in \mathbb{N}^+$ and $H = \langle x \rangle$ and $K = \langle y \rangle$ are both of order $n$, then $H \cong K$. That is, up to isomorphism, there is only one cyclic group of order $n$ for any $n \in \mathbb{N}^+$.
+        \item if $H = \langle x \rangle$ is an infinite cyclic group, then $(\mathbb{Z},+) \cong H$. That is, up to isomorphism, there is only one infinite cyclic group.
+    \end{enumerate}
+    \item Show that the quaternion group $Q_8$ and the dihedral group $D_8$ of order $8$ are \emph{not} isomorphic.
+    \item Show that $D_8$ is isomorphic to a subgroup of $S_4$ but $Q_8$ is not.
+    \item Given any permutation $\sigma \in S_{\Omega}$, show that the order of $\sigma$, i.e, the least positive integer $n$ such that $\sigma^n = 1$, is equal to the least common multiple of the lengths of disjoint cycles present in its cycle decomposition.
+    \item Let $G$ be a group such that $x^2 = 1$ for all $x \in G$. Show that $G$ is abelian.
+    \item Show that all automorphism of $S_3$ are inner automorphisms but the same is not true for $S_4$.
+    \item \label{problem:Aut} Determine the group of automorphisms - $\Aut\mathbb{Z}$, $\Aut S_3$ and $\Aut\mathbb{Z}_n$.
+    \item Show that every subgroup of an abelian group is a normal subgroup. Show that the converse is not true.
+    \item Show that $SL_n(\mathbb{F}) \trianglelefteq GL_n(\mathbb{F})$.
+    \item Show that the center of $GL_n(\mathbb{R})$ is the set of scalar matrices.
+    \item For $n \geq 3$, show that the center of $S_n$ is trivial.
+    \item Show that $C_2 \times C_2$ is isomorphic to the Klein-four group.
+    \item An alternate version of Problem \ref{problem:multiplicativity_bijection}: Find a bijection between $\mathbb{Z}_{mn}^{\times}$ and $\mathbb{Z}_m^{\times} \times \mathbb{Z}_n^{\times}$ where for any $d \in \mathbb{N}^+$, $\mathbb{Z}_d^{\times}$ denotes the multiplicative group of residue classes $\Mod{d}$ of integers coprime to $d$.
+    \item Let $G$ be a group and let $S = \{ g \in G \mid g^2 = 1 \}$. Show that the product of elements in $S$ is equal to the product of elements in $G$.
+    \item Let $G$ be a group and let $K \leq H \leq G$. Show that $[G:K] = [G:H] \cdot [H:K]$.
+    \item Let $F$ be a field. Show that $GL_n(\mathbb{F})/SL_n(\mathbb{F}) \cong \mathbb{F}^{\times}$.
+\end{enumerate}

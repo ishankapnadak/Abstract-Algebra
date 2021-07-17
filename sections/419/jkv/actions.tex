@@ -1,0 +1,308 @@
+\section{Group Actions}
+
+\subsection{Definitions}
+
+\begin{defn}[Group Action]
+    Let $G$ be a group and let $S$ be a set. A \deff{group action of $G$ on $S$} is a map from $G \times S$ to $S$ (denoted as $g\cdot s$ for all $g \in G$, $s \in S$) satisfying
+    \begin{enumerate}
+        \item $g \cdot (h \cdot s) = (gh) \cdot s$ for all $g,h \in G$, $s \in S$.
+        \item $1 \cdot s = s$ for all $s \in S$.
+    \end{enumerate}
+    In this case, we say that $G$ \deff{acts} on $S$ or that $S$ is a \deff{$G$-set}.
+\end{defn}
+
+\begin{defn}[Permutation Representation]
+    Let $G$ be a group and let $S$ be a set. A homomorphism $\varphi \colon G \to S_S$ is called a \deff{permutation representation of $G$ on $S$}.
+\end{defn}
+
+\begin{theorem} \label{thm:action-gives-permutation}
+    Let $G$ be a group and let $S$ be a set. Define $\sigma_g \colon S \to S$ with $\sigma_g(s) = g\cdot s$ for all $s \in S$. Then, the following is true.
+    \begin{enumerate}
+        \item $\sigma_g$ is a bijection, and hence a permutation of $S$.
+        \item The map $\varphi \colon G \to S_S$ defined by $\varphi(g) = \sigma_g$ is a permutation representation of $G$ on $S$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    To prove the first part, we show that $\sigma_{g^{-1}}$ is the inverse of $\sigma_g$. Indeed, we have
+    \[
+        \sigma_{g^{-1}} \circ \sigma_g (s) = g^{-1} \cdot (g \cdot s) = (g^{-1}g) \cdot s = 1\cdot s = s \text{ for all }s\in S
+    \]
+    Similarly, $\sigma_g$ is the inverse of $\sigma_{g^{-1}}$. This shows that $\sigma_g$ is a bijection, and hence a permutation of $S$. 
+    
+    We already know that $1\cdot s = s$ for all $s \in S$. To prove that $\varphi$ as defined above is a homomorphism, we see that
+    \[
+        \sigma_g\circ \sigma_h(s) = g \cdot (h \cdot s) = (gh) \cdot s = \sigma_{gh}(s) \text{ for all }g,h \in G, s \in S
+    \]
+    Hence, $\varphi(g)\varphi(h) = \varphi(gh)$ for all $g,h \in G$. 
+\end{proof}
+
+It turns out that the converse of the above theorem is also true. 
+\begin{prop} \label{prop:permutation-gives-action}
+    Let $G$ be a group and let $S$ be a set. Let $\psi \colon G \to S_S$ be a permutation representation of $G$ on $S$. Then, the map from $G \times S$ to $S$, defined by
+    \[
+        g\cdot s = \psi(g)(s) \text{ for all }g\in G, s \in S
+    \]
+    is a group action of $G$ on $S$.
+\end{prop}
+\begin{proof}
+    Clearly, $\psi(1)$ is the identity permutation and hence $1\cdot s = s$ for all $s \in S$. We have
+    \[
+        g\cdot(h\cdot s) = \psi(g)\left( \psi(h)(s) \right)
+    \]
+    Since $\psi$ is a group homomorphism, we get
+    \[
+        g \cdot(h \cdot s) = \psi(gh)(s) = (gh) \cdot s \qedhere
+    \]
+\end{proof}
+
+\begin{exe}
+    \phantom{hi}
+    \begin{enumerate}
+        \item Consider $S = G$. The map $\psi \colon G \times G \to G$ defined by $(g,h) \mapsto gh$, is a group action. The permutation representation induced by this group action is the map from $G$ to $S_G$ defined by $g \mapsto T_g$, where $T_g$ is the translation map, defined by $T_g(h) = gh$. Moreover, the kernel of this permutation representation is trivial, and hence is an injective group homomorphism from $G$ to $S_G$. Hence, $G$ is isomorphic to a subgroup of $S_G$, which is precisely Cayley's Theorem (\Cref{thm:cayley}).
+        
+        \item Again, consider $S = G$. The map $\psi \colon G \times G \to G$ defined by $(g,h) \mapsto ghg^{-1}$ is also a group action. The permutation induced by this group action is the map from $G$ to $S_G$ defined by $g \mapsto \gamma_g$, where $\gamma_g$ is the conjugation map, defined by $\gamma_g(h) = ghg^{-1}$. The kernel of this permutation is the set 
+        \[
+            \left\{ g \in G \mid ghg^{-1} = h \text{ for all } h \in G \right\}
+        \]
+        which is precisely the center of $G$, $Z(G)$. By the First Isomorphism Theorem (\Cref{thm:iso1}), we get
+        \[
+            G/Z(G) \cong \left\{ \gamma_g \mid g \in G \right\}.
+        \]
+        The group on the right is the group of inner automorphisms of $G$.
+        
+        \item Let $\F$ be a field. The group $GL_n(\F)$ acts on the $n$-dimensional vector space $V \vcentcolon= \F^n$ with the group action naturally defined from $GL_n(\F) \times V \to V$ as 
+        \[
+            (A, u) \mapsto Au \text{ (the matrix product).}
+        \]
+        In the case that the field is $\F_2$, the vector space $V = \F^2$ has precisely $4$ vectors, given by
+        \[
+            V = \left\{ \begin{bmatrix}
+            0 \\ 0
+            \end{bmatrix} \, , \, \underbrace{\begin{bmatrix}
+            1 \\ 0
+            \end{bmatrix}}_{e_1}\, , \, \underbrace{\begin{bmatrix}
+            0 \\ 1
+            \end{bmatrix}}_{e_2}\, , \, \underbrace{\begin{bmatrix}
+            1 \\ 1
+            \end{bmatrix}}_{e_1+e_2} \right\}
+        \]
+        Now, consider $S = \{ e_1, e_2, e_1+e_2\}$ and consider $G = GL_2(\F_)$ with the group action defined as above. This group action gives rise to a permutation representation from $G$ to $S_3$ (since $S$ has three elements) defined by $A \mapsto L_A$, where $L_A$ is the \emph{linear map} induced by $A$, defined by $L_A(u) = Au$. The kernel of this permutation representation is trivial and hence, is an injective group homomorphism. Moreover, since $\abs{GL_2(\F_2)} = \abs{S_3} = 6$, we must have that this homomorphism is also onto, and hence an isomorphism. Thus, $GL_2(\F_2) \cong S_3$.
+    \end{enumerate}
+\end{exe}
+
+\subsection{Orbits and Stabilisers}
+
+\begin{defn}
+    Let $G$ be a group and let $S$ be a set. Let $\cdot \colon G \times S \to S$ be a group action. For a fixed $s \in S$, we define the \deff{orbit} of $s$ under this group action as
+    \[
+        O_s \vcentcolon= \left\{ g \cdot s \mid g \in G \right\}.
+    \]
+\end{defn}
+\begin{defn}
+    Let $G$ be a group and let $S$ be a set. Let $\cdot \colon G \times S \to S$ be a group action. For a fixed $s \in S$, we define the \deff{stabiliser} of $s$ under this group action as
+    \[
+        G_s \vcentcolon= \left\{ g \in G \mid g \cdot s = s \right\}.
+    \]
+\end{defn}
+Note that $O_s \subseteq S$ and $G_s \leq G$. 
+
+\begin{defn}
+    Let $G$ be a group and let $S$ be a set. Let $\cdot \colon G \times S \to S$ be a group action. The group is said to act \deff{transitively} on $S$ (via the action $\cdot$) if $O_s = S$ for all $s \in S$. That is, for every pair $s,t \in S \times S$, there exists $g \in G$ such that $g \cdot s = t$. 
+\end{defn}
+
+\begin{prop} \label{prop:same-orbit-equivalence}
+    Let $G$ be a group and let $S$ be a set. Let $\cdot \colon G \times S \to S$ be a group action. Define a relation $\sim$ on $S$ defined by $s \sim s^{\prime}$ if $s^{\prime} = g \cdot s$ for some $g \in G$. Then, $\sim$ is an equivalence relation. In other words, $s^{\prime} \sim s$ if $s^{\prime} \in O_s$.
+\end{prop}
+\begin{proof}
+    Note that $s \sim s$ since $s = 1 \cdot s$, hence $\sim$ is reflexive. If $s \sim s^{\prime}$, then $s^{\prime} = g \cdot s$ for some $g \in G$. We then have
+    \[
+        g^{-1} \cdot s^{\prime} = g^{-1} \cdot g \cdot s = (g^{-1}g) \cdot s = 1 \cdot s = s \implies s \sim s^{\prime}.
+    \]
+    Hence, $\sim$ is symmetric. If $s \sim s^{\prime}$ and $s^{\prime} \sim s^{\prime\prime}$, we have that $s^{\prime} = g \cdot s$ and $s^{\prime\prime} = h \cdot s^{\prime}$ for some $g,h \in G$. Now, 
+    \[
+        s^{\prime\prime} = h \cdot s^{\prime} = h \cdot (g \cdot s) = (hg) \cdot s \implies s \sim s^{\prime\prime} \text{ since $hg \in G$.}
+    \]
+    Hence, $\sim$ is also transitive, and thus an equivalence relation.
+\end{proof}
+\begin{cor}
+Let $G$ be a group and let $S$ be a set. Let $\cdot \colon G \times S \to S$ be a group action. Then, $S$ can be written as a disjoint union of orbits.
+\end{cor}
+\begin{proof}
+    This follows trivially from \Cref{prop:same-orbit-equivalence} and \Cref{prop:equivalence-partition}.
+\end{proof}
+
+\begin{theorem}[Orbit-Stabiliser Formula] \label{thm:orbit-stabiliser}
+    Let $G$ be a group and let $S$ be a set. Let $\cdot \colon G \times S \to S$ be a group action. Let $G/G_s$ denote the set\footnotemark\ of cosets of the stabiliser of an element $s \in S$. Then, $\varphi \colon G/G_s \to O_s$ defined by
+    \[
+        \varphi(gG_s) \vcentcolon= g \cdot s
+    \]
+    is a bijection. In particular, $\abs{O_s} = [G \colon G_s]$, where $[G \colon G_s] \vcentcolon= \abs{G/G_s}$ is the \emph{index} of $G_s$ in $G$. In the case that $G$ is finite, we have $[G \colon G_s] = \abs{G} / \abs{G_s}$.
+\end{theorem}
+\footnotetext{Note that in general $G_s$ need not be a normal subgroup of $G$. However, we can still talk about its set of cosets.}
+\begin{proof}
+    We first show that this map is well-defined by noting that
+    \[
+        gG_s = hG_s \iff h^{-1}g \in G_s \iff (h^{-1}g) \cdot s = s \iff g\cdot s = h\cdot s.
+    \]
+    Note that this also proves that $\varphi$ is injective. $\varphi$ is also trivially surjective, and hence a bijection. 
+\end{proof}
+
+\begin{prop}
+    Let $G$ be a group and let $S$ be a set. Let $\cdot \colon G \times S \to S$ be a group action. Let $s \in S$ and $g \in G$. Then, $G_{g \cdot s} = g G_s g^{-1}.$
+\end{prop}
+\begin{proof}
+    We have 
+    \[
+        h \in G_{g \cdot s} \iff h \cdot (g \cdot s) = g \cdot s \iff (g^{-1}hg) \cdot s = s \iff g^{-1}hg \in G_s \iff h \in gG_sg^{-1}.
+    \]
+\end{proof}
+
+\begin{cor} \label{cor:|S|-in-terms-of-indices-of-stabilisers}
+    Let $G$ be a group and let $S$ be a set. Let $\cdot \colon G \times S \to S$ be a group action. Then, 
+    \[
+        \abs{S} = \sum_{s_i} \, \left[ G \colon G_{s_i} \right]
+    \]
+    where the sum runs over one element $s_i$ from each orbit of $S$. 
+\end{cor}
+
+\begin{defn}
+    Let $G$ be a group and let $g \in G$. We define the \deff{centraliser} of $g$ as
+    \[
+        Z(g) \vcentcolon= \left\{ h \in G \mid gh = hg \right\}.
+    \]
+    Moreover, the centraliser $Z(g)$ is a subgroup of $G$.
+\end{defn}
+
+\begin{defn}
+    Let $G$ be a group and let $H$ be a subgroup of $G$. We define the \deff{normaliser} of $H$ as
+    \[
+        N(H) \vcentcolon= \left\{ g \in G \mid gH = Hg \right\}.
+    \]
+\end{defn}
+\begin{prop} \label{prop:normaliser-properties}
+    Let $G$ be a group and let $H$ be a subgroup of $G$. Then, $H \trianglelefteq N(H)$ and $N(H)$ is the largest subgroup of $G$ in which $H$ is a normal subgroup. 
+\end{prop}
+
+
+
+\begin{theorem} \label{thm:cardinality-of-conjugacy}
+    Let $G$ be a finite group and let $g \in G$. Let $C(g)$ be the conjugacy class of $g$, and let $Z(g)$ be the centraliser of $g$. Then, 
+    \[
+        \abs{G} = \abs{C(g)} \cdot \abs{Z(g)}
+    \]
+\end{theorem}
+\begin{proof}
+    Consider $G$ acting on $G$ via conjugation. That is, consider the group action $\cdot \colon G \times G \to G$, defined by $(h,g) \mapsto hgh^{-1}$. In this case, $O_g$ is clearly the conjugacy class, $C(g)$, of $g$, and $G_g$ is the centraliser, $Z(g)$, of $g$. Applying the \nameref{thm:orbit-stabiliser} gives us the required result.
+\end{proof}
+
+\begin{cor} \label{cor:|S|-in-terms-of-conjugacy}
+Let $G$ be a finite group. Then, 
+\[
+    \abs{G} = \sum_{g}\, \abs{C(g)}
+\]
+where the sum runs over one element from each conjugacy class of $G$.
+\end{cor}
+\begin{proof}
+    This follows directly by applying \Cref{thm:cardinality-of-conjugacy} to \Cref{cor:|S|-in-terms-of-indices-of-stabilisers}.
+\end{proof}
+
+\begin{cor}[Class Equation] \label{cor:class-equation}
+    Let $G$ be a group and let $Z(G)$ be its center. Then, 
+    \[
+        \abs{G} = \abs{Z(G)} + \sum_{g} \, \left[ G \colon Z(g) \right]
+    \]
+    where the sum runs over one element from each conjugacy class that is not in the center.
+\end{cor}
+\begin{proof}
+    The proof trivially follows from \Cref{cor:|S|-in-terms-of-conjugacy} once we note that each element of the center $Z(G)$ forms a conjugacy class containing only itself.
+\end{proof}
+
+\begin{defn}
+    Let $G$ be a finite group and let $p$ be a prime. $G$ is called a \deff{$p$-group} if $\abs{G} = p^n$ for some $n \in \N^+$.
+\end{defn}
+
+\begin{theorem} \label{thm:p-group-has-non-trivial-center}
+    If $G$ is a $p$-group, then $\abs{Z(G)} \geq p$. In particular, every $p$-group has a non-trivial center. 
+\end{theorem}
+\begin{proof}
+    By the \nameref{cor:class-equation} of $G$, we have
+    \[
+        p^n = \abs{Z(G)} + \sum_{g} \, \left[ G \colon Z(g) \right]
+    \]
+    Note that in the sum to the right, each index is at least $2$ (since the sum varies over only non-trivial conjugacy classes). However, $\left[ G \colon Z(g) \right]$ must divide $\abs{G} = p^n$. It follows that each index is a power of $p$, and hence, $\abs{Z(G)}$ is also a power of $p$. Hence, $\abs{Z(G)} \geq p$. 
+\end{proof}
+In the case that $G$ is abelian, $Z(G)$ is the entire group $G$. However, the above theorem is truly powerful for non-abelian groups as it states that every non-abelian $p$-group has a non-trivial proper normal subgroup, namely, its center. 
+
+\begin{theorem}
+    Let $G$ be a $p$-group and let $\abs{G} = p^n$. Then, there is a sequence of subgroups $H_i$ such that $\abs{H_i} = p^i$ for $i = 1, \ldots, n$. Moreover,
+    \begin{enumerate}
+        \item $1 \trianglelefteq H_1 \trianglelefteq \ldots \trianglelefteq H_n$, and 
+        \item $(H_1 \cong) \, H_1 / 1 , H_2/H_1, \ldots, H_n/H_{n-1}$ are all cyclic groups of order $p$.
+    \end{enumerate}
+    Here, $1$ represents the trivial subgroup of $G$.
+\end{theorem}
+\begin{proof}
+    We apply induction on $n$. If $n = 1$, the theorem is trivially true. Suppose the theorem holds for groups of order $p^{n-1}$ ($n > 1$). Let $x \in Z(G)$ and $x \neq 1$ (such an $x$ exists since the center is non-trivial, by \Cref{thm:p-group-has-non-trivial-center}). Moreover, $\abs{x} = p^r$ where $r < n$ (why?). We also have $\abs{x^{p^{r-1}}} = p$. Define $y \vcentcolon= x^{p^{r-1}}$ and let $H = \langle y \rangle$. We have $H \trianglelefteq G$. Now, consider the quotient group $G/H$, of order $p^{n-1}$. By the induction hypothesis, $G/H$ has a sequence of subgroups as follows.
+    \[
+        1 \, \trianglelefteq \, H_2/H \, \trianglelefteq \, H_3/H \, \trianglelefteq \, \ldots \, \trianglelefteq \, H_n/H = G/H.
+    \]
+    By the \nameref{thm:correspondence}, we may conclude the result.
+\end{proof} 
+
+\begin{defn}
+    A \deff{simple group} is a non-trivial group that has no non-trivial normal subgroups.
+\end{defn}
+\begin{prop}
+    The alternating group $A_5$ is simple.
+\end{prop}
+\begin{proof}
+    We have $\abs{A_5} = 60$. Let the elements
+    \[
+        (1), \, \underbrace{(1 \, 2 \, 3)}_{\sigma}\, , \, \underbrace{(1 \, 2 \, 3 \, 4 \, 5)}_{\tau} \, , \, \underbrace{(1\, 2)(3\, 4)}_{\alpha}
+    \]
+    be representative elements of the conjugacy classes in $A_5$. Clearly, $\abs{C(1)} = 1$. By the \nameref{thm:orbit-stabiliser}, 
+    \[
+        \abs{C(\sigma)} = \frac{60}{\abs{Z(\sigma)}}.
+    \]
+    Now, the elements in the centraliser of $\sigma$ in $A_5$ are the powers\footnotemark\ of $\sigma$, of which there are precisely three - $(1), \sigma,$ and $\sigma^2$. Thus, $\abs{C(\sigma)} = 20$. Similarly, $\abs{C(\tau)} = 12$. Since the number of $5$-cycles in $A_5$ is $24$, there is another $5$-cycle, say $\gamma$, that lies outside of $C(\tau)$ and has its own conjugacy class of $12$ elements. That is, $\abs{C(\gamma)} = 12$. Elementary combinatorics shows that there are $15$ permutations having structure $(1 \, 2)(3 \, 4)$. Moreover, all such elements lie in the same conjugacy class (why?). We then have $\abs{C(\alpha)} = 15$, so that the class equation of $A_5$ becomes
+    \[
+        60 = 1 + 12 + 12 + 15 + 20.
+    \]
+    Now, suppose $A_5$ had a non-trivial normal subgroup, say $H$. Then, $H$ must be a disjoint union of conjugacy classes of $A_5$ and must contain the identity (the center). Moreover, $\abs{H}$ must divide $60$. However, from the class equation, we can verify that no possible combination of conjugacy classes along with the center has order that is a divisor of $60$. Hence, $A_5$ is a simple group. 
+\end{proof}
+\footnotetext{Note that the two cycle $(4 \, 5)$ also permutes with $\sigma$ but it is an odd permutation, hence not an element of $A_5$.}
+
+\begin{rem}
+    The simplicity of $A_5$ is crucial in proving that there is a quintic polynomial that is not solvable by radicals.
+\end{rem}
+
+\begin{lem} \label{lem:every-even-permutation-as-prod-of-3-cycles}
+    Let $n \geq 3$. Any even permutation in $S_n$ can be written as a product of $3$-cycles. 
+\end{lem}
+\begin{proof}
+    We leave the proof as an exercise to the reader. The proof should be fairly trivial after noting the following identities.
+    \[
+        (a \, b)(b \, c) = (a \, b \, c) \text{ and } (a \, b)(c \, d) = (a \, b \, c)(b \, c \, d).
+    \]
+\end{proof}
+
+\begin{theorem}[Galois]
+    $A_n$ is simple for all $n \geq 5$.
+\end{theorem}
+\begin{proof}
+    Let $n \geq 5$. Suppose that there is a non-trivial normal subgroup of $A_n$, that is, there is a normal subgroup $N \trianglelefteq A_n$ such that $N \neq (1)$ and $N \neq A_n$. Recall that a fixed point of a permutation is a point that is not `moved' by the permutation. Among all the permutations in $A_n \setminus (1)$, pick a permutation $\sigma$ that has the maximum number of fixed points. We will show that $\sigma$ must be a $3$-cycle. First, we write $\sigma$ as a product of disjoint cycles. 
+    \[
+        \sigma = (a_1 \, \ldots \, a_k) (b_1 \, \ldots \, b_m) \cdots
+    \]
+    Suppose $k < m$. Then, observe that $\sigma^k$ is a nontrivial permutation in $A_n$ that has strictly more fixed points than $\sigma$, which is a contradiction. Similarly, $k$ cannot be strictly greater than $m$, and hence, by trichotomy, we conclude that $k = m$. Proceeding this way, we see that $\sigma$ has to decompose as a product of cycles of equal length, say $m$. Suppose $m = 2$. Then, $\sigma$ is a product of transpositions. Since $\sigma$ is an even permutation, there must be an even number of transpositions in the decomposition. Moreover, since $\sigma$ is non-trivial, we must have at least one (and hence, at least two) transpositions. Thus, 
+    \[
+        \sigma = (a_1 \, a_2)(a_3 \, a_4) \cdots (a_{2r-1} \, a_{2r})
+    \]
+    with $r \geq 2$. Since $n \geq 5$, there exists a $b \neq a_1, a_2, a_3, a_4$. Let $\tau = (a_3 \, a_4 \, b)$. Define the \emph{commutator} of $\tau$ with $\sigma$ as $\gamma \vcentcolon= \tau\sigma\tau^{-1}\sigma^{-1}$. Since $\sigma \in N$ and $N$ is normal, we conclude that $\gamma \in N$. The fixed points of $\sigma$ are carried over to $\gamma$. That is, $\sigma(j) = j \implies \gamma(j) = j$. Moreover, $a_1$ and $a_2$, which were not fixed points of $\sigma$, have become fixed under $\gamma$. Thus, $\gamma$ has strictly more fixed points than $\sigma$, which is a contradiction. Hence, $m \neq 2$ and $m \geq 3$. 
+    
+    We again consider the decomposition
+    \[
+        (a_1 \, \ldots \, a_m)(b_1 \, \ldots \, b_m) \cdots
+    \]
+    where $m$ is now at least $3$. Suppose $\sigma$ is not a $3$-cycle. Then, choose distinct $r,s \neq a_1, a_2, a_3$ (this is again possible since $n \geq 5$). Now, consider $\tau = (a_3 \, r \, s) \in A_n$ and the commutator $\gamma = \tau\sigma\tau^{-1}\sigma^{-1}$. As before, we have $\gamma \in N$. We may again verify that $\gamma$ preserves the fixed points of $\sigma$, and that $\gamma(a_2) = a_2$. Hence, $\gamma$ has strictly more fixed points than $\sigma$, which is a contradiction. Hence, $\sigma$ must be a $3$-cycle in which case it generates the entire group $A_n$ by \Cref{lem:every-even-permutation-as-prod-of-3-cycles}, and $N = A_n$. Thus, a nontrivial subgroup $N$ cannot exist, and hence $A_n$ is simple for $n \geq 5$. 
+\end{proof}

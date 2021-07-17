@@ -1,0 +1,357 @@
+\section{Separable Extensions}
+
+\subsection{Definitions}
+
+\begin{defn} \label{defn:derivative}
+    Let $\F$ be a field. Define the $\F$-linear map $D_{\F} \colon \F[x] \to \F[x]$ by
+    \[
+        D_{\F} \left( \sum_{i=0}^n \, a_i x^i \right) \vcentcolon= \sum_{i=1}^n \, i a_i x^{i-1}.
+    \]
+    Given any $f(x) \in \F[x]$, we call $D_{\F}(f(x))$ the \deff{(formal) derivative} of $f(x)$, and denote it by $f^{\prime}(x)$.
+\end{defn}
+
+\begin{rem}
+    Note that the above definition requires no notion of limits. In the case that $\F = \R$ or $\C$, it coincides with the usual derivative if we identify a polynomial by the function it represents.
+\end{rem}
+
+We leave the proofs of the following two easy propositions as exercises. 
+
+\begin{prop}
+    Let $f(x),g(x) \in \F[x]$ and let $a \in \F$ be arbitrary. Then, 
+    \begin{enumerate}
+        \item $(f\pm ag)^{\prime}(x) = f^{\prime}(x) \pm ag^{\prime}(x)$,
+        \item $(fg)^{\prime}(x) = f^{\prime}(x)g(x) + f(x)g^{\prime}(x)$.
+    \end{enumerate}
+\end{prop}
+\begin{prop}
+    Let $\F \subseteq \E$ be a field extension. Then, $D_{\E} \restr{\F} = D_{\F}$. Thus, the notation $f^{\prime}(x)$ is unambiguous. 
+\end{prop}
+
+\begin{defn}
+    Let $f(x) \in \F[x]$ be a non-constant monic polynomial and let $\E$ be a splitting field of $f(x)$ over $\F$. In $\E[x]$, factorise $f(x)$ uniquely as
+    \[
+        f(x) = (x-r_1)^{e_1} \cdots (x-r_g)^{e_g},
+    \]
+    where $r_1,\ldots,r_g \in \E$ are distinct and each $e_i \in \N^+$.
+    
+    The numbers $e_1,\ldots,e_g$ are called the \deff{multiplicities} of the roots $r_1,\ldots,r_g$. If $e_i = 1$ for some $i$, then $r_i$ is called a \deff{simple root} and a \deff{repeated root} otherwise.
+    
+    If each root is a simple root, then $f(x)$ is said to be a \deff{separable polynomial}.
+    
+    If $f(x)$ is not monic, we have the same definitions upon division by the leading coefficient.
+\end{defn}
+
+\begin{rem}
+    Note that as stated above, the separability of a polynomial depends on the splitting field chosen. However, in view of \Cref{rem:disc=0-iff-repeated}, we see that separability depends only on $\disc(f(x))$, which we have seen to be independent of the splitting field chosen. (\Cref{prop:disc-independent-of-SF}). The following proposition shows something stronger.
+\end{rem}
+\begin{prop} \label{prop:roots-mults-independent-of-SF}
+    The number of roots and their multiplicities are independent of the splitting field chosen for $f(x)$ over $\F$.
+\end{prop}
+\begin{proof}
+    Let $\E$ and $\K$ be splitting fields of $f(x)$ over $\F$. By \Cref{thm:iso-SF}, there exists an $\F$-isomorphism $\tau \colon \E \to \K$. In turn, we get an isomorphism $\varphi_{\tau} \colon \E[x] \to \K[x]$, defined by
+    \[
+        \sum \, a_i x^i \mapsto \sum \, \tau(a_i) x^i.
+    \]
+    Now, let $\prod_{i=1}^g \, (x-r_i)^{e_i}$ be the unique factorisation of $f(x)$ in $\E[x]$. Then, the above isomorphism shows that
+    \[
+        f(x) = \prod_{i=1}^g \, (x-\tau(r_i))^{e_i}
+    \]
+    is the unique factorisation of $f(x)$ in $\K[x]$, from which the result follows.
+\end{proof}
+\begin{prop} \label{prop:repeated-root-iff-derivative-zero}
+    Let $f(x) \in \F[x]$ be monic and let $r \in \E \supseteq \F$ be a root of $f(x)$. Then, $r$ is a repeated root iff $f^{\prime}(r) = 0$.
+\end{prop}
+\begin{proof}
+    ($\implies$) If $r$ is a repeated root, then write $f(x) = (x-r)^2 g(x)$ for $g(x) \in \E[x]$. Then, taking the derivative gives us
+    \[
+        f^{\prime}(x) = 2(x-r)g(x) + (x-r)^2 g^{\prime}(x).
+    \]
+    Thus, $f^{\prime}(r) = 0$.
+    
+    ($\impliedby$) Suppose $f(x) = (x-r)g(x)$. Then,
+    \[
+        0 = f^{\prime}(r) = (r-r)g^{\prime}(r) + g(r) = g(r).
+    \]
+    Thus, $(x-r) \divides g(x)$ and hence, $(x-r)^2 \divides f(x)$.
+\end{proof}
+
+\begin{theorem}[Derivative Criterion for Separability] \label{thm:derivative-criterion-separability}
+    Let $f(x) \in \F[x]$ be monic.
+    \begin{enumerate}
+        \item If $f^{\prime}(x) = 0$, then every root of $f(x)$ is a repeated root.
+        \item If $f^{\prime}(x) \neq 0$, then $f(x)$ has all roots simple iff $\gcd(f(x), f^{\prime}(x)) = 1$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let $\E$ be a splitting field of $f(x)$ over $\F$.
+    \begin{enumerate}
+        \item Let $r \in \E$ be a root of $f(x)$. Then, $f^{\prime}(r) = 0$ by hypothesis, and hence $r$ is a repeated root by \Cref{prop:repeated-root-iff-derivative-zero}. 
+        \item Assume $f^{\prime}(x) \neq 0$.
+        
+        $(\implies)$ Suppose $f(x)$ has all roots simple. We need to show that $f(x)$ and $f{\prime}(x)$ has no common root. Let $r$ be a root of $f(x)$. Then, $f^{\prime}(r) \neq 0$, by \Cref{prop:repeated-root-iff-derivative-zero}, and we are done.
+        
+        $(\impliedby)$ Suppose $\gcd(f(x), f^{\prime}(x)) = 1$ and $r \in \E$ is an arbitrary root of $f(x)$. Then, $f^{\prime}(r) \neq 0$, and $r$ is a simple root by \Cref{prop:repeated-root-iff-derivative-zero}. \qedhere
+    \end{enumerate}
+\end{proof}
+\begin{prop} \label{prop:irreducible-separable-zero-char}
+    Let $f(x) \in \F[x]$ be irreducible and non-constant.
+    \begin{enumerate}
+        \item $f(x)$ is separable iff $f^{\prime}(x) \neq 0$.
+        \item If $\ch(\F) = 0$, then $f(x)$ is separable.
+    \end{enumerate}
+    In other words, irreducible polynomials over fields of characteristic zero are separable.
+\end{prop}
+\begin{proof}
+    Let $\E$ be a splitting field of $f(x)$ over $\F$.
+    \begin{enumerate}
+        \item $(\implies)$ $f(x)$ has no repeated roots, thus $f^{\prime}(x) \neq 0$ by \nameref{thm:derivative-criterion-separability}.
+        
+        $(\impliedby)$ Suppose $f^{\prime}(x) \neq 0$ and $r \in \E$ is a repeated root of $f(x)$. Then, by \Cref{prop:repeated-root-iff-derivative-zero}, $f^{\prime}(r) = 0$. Thus, $g(x) \vcentcolon= \gcd(f(x), f^{\prime}(x)) \neq 1$. Irreducibility of $f(x)$ forces $f(x) = g(x)$, which implies $f(x) \divides f^{\prime}(x)$, a contradiction since $\deg f^{\prime}(x) < \deg f(x)$. 
+        
+        \item In fields of characteristic zero, only the constant polynomials have derivative zero (since $i \cdot a_i \neq 0$ if $a_i \neq 0$). Since $f(x)$ is non-constant, $f^{\prime}(x) \neq 0$, and thus the previous part applies. \qedhere
+    \end{enumerate}
+\end{proof}
+\begin{defn}
+    Let $\F$ be a field of prime characteristic $p$. Define
+    \[
+        \F^p \vcentcolon= \left\{ \alpha^p \in \F \mid \alpha \in \F \right\}
+    \]
+    to be the set of all $p^{\text{th}}$ powers of elements of $\F$.
+\end{defn}
+\begin{prop}
+    $\F^p$ is a subfield of $\F$. 
+\end{prop}
+\begin{proof}
+    Only closure under addition is not obvious. For this, recall that $(x+y)^p = x^p + y^p$. (\Cref{prop:char-basics}).
+\end{proof}
+
+\begin{prop} \label{prop:p-power-irreducible-or-root}
+    Let $\F$ be a field with $\ch(\F) = p > 0$. Then, $f(x)\vcentcolon= x^p -a \in \F[x]$ is either irreducible in $\F[x]$, or $a \in \F^p$. In other words, either $f(x)$ is irreducible or it has a root.
+\end{prop}
+\begin{proof}
+    Suppose $f(x)$ is not irreducible. Write $f(x) = g(x)h(x)$ with $1 \leq \deg g(x) =\vcentcolon m < p$. Let $b \in \E$ be a root of $f(x)$ in a splitting field $\E$ of $f(x)$ over $\F$. Then, $b^p = a$. Thus, $f(x)$ factorises in $\E[x]$ as 
+    \[
+        f(x) = x^p - b^p = (x-b)^p.
+    \]
+    Since $\E[x]$ is a unique factorisation domain (\Cref{cor:F[x]-is-UFD-and-PID}), we see that $g(x) = (x-b)^m$ (we may assume that $g(x)$ is monic). Note that the coefficient of $x^{m-1}$ is $mb$. By assumption, $mb \in \F$. Since $1 \leq m < p$, we see that $b \in \F$. Thus, $a = b^p \in \F^p$.
+\end{proof}
+
+\begin{prop} \label{prop:poly-p-power-not-sep}
+    Let $f(x) \in \F[x]$ be an irreducible polynomial and let $p \vcentcolon= \ch(\F) > 0$. If $f(x)$ is not separable, then there exists $g(x) \in \F[x]$ such that $f(x) = g(x^p)$.
+\end{prop}
+\begin{proof}
+    Since $f(x)$ is irreducible and not separable, we must have $f^{\prime}(x) = 0$. Write
+    \[
+        f(x) = a_0 + a_1x + \cdots + a_n x^n
+    \]
+    and note that
+    \[
+        f^{\prime}(x) = a_1 + 2a_2 x + \cdots + na_nx^{n-1} = 0.
+    \]
+    Thus, $ka_k = 0$ for $k=1,\ldots,n$. When $p \notdivides k$, we clearly have $a_k = 0$, since we may cancel the $k$. Thus, $f(x)$ is of the form
+    \[
+        f(x) = a_0 + a_p x^p + \cdots + a_{mp} x^mp.
+    \]
+    for some $m \in \N^+$. Thus, $g(x) = a_0 + a_p x + \cdots + a_{mp} x^m$ works.
+\end{proof}
+
+\begin{defn}
+    Let $\K/\F$ be a field extension. An algebraic element $\alpha \in \K$ over $\F$ is called a \deff{separable element over $\F$} if $\irr(\alpha, \F)$ is separable over $\F$.
+    
+    We say that $\K/\F$ is a \deff{separable extension} if every $\alpha \in \K$ is separable. 
+    
+    We say that $\F$ is a \deff{perfect field} if every algebraic extension of $\F$ is separable. Equivalently, every irreducible polynomial in $\F[x]$ is separable.
+\end{defn}
+
+\begin{cor}\label{cor:zero-char-perfect}
+    Every field of characteristic zero is perfect.
+\end{cor}
+\begin{proof}
+    \Cref{prop:irreducible-separable-zero-char}.
+\end{proof}
+
+\begin{prop} \label{prop:perfect-iff-F=F^p}
+    Let $\F$ be a field with characteristic $p > 0$. Then, $\F$ is perfect iff $\F = \F^p$.
+\end{prop}
+\begin{proof}
+    $(\implies)$ Suppose $\F$ is perfect and suppose $\F \neq \F^p$. Pick $\alpha \in \F \setminus \F^p$. Consider the polynomial $f(x) = x^p - \alpha \in \F[x]$. By \Cref{prop:p-power-irreducible-or-root}, $f(x)$ is irreducible. However, $f^{\prime}(x) = px^{p-1} = 0$ (since $\F$ has characteristic $p$). Thus, by \Cref{prop:irreducible-separable-zero-char}, $f(x)$ is not separable, which is a contradiction since $\F$ was assumed to be perfect.
+    
+    $(\impliedby)$ Suppose $\F = \F^p$ and $f(x) \in \F[x]$ is irreducible and not separable. By \Cref{prop:poly-p-power-not-sep}, we may write 
+    \[
+        f(x) = \sum_{i=0}^m \, a_i x^{ip}.
+    \]
+    Let $b_i \in \F$ be such that $a_i = b_i^p$. (Such a $b_i$ exists since $\F = \F^p$). Now, we have
+    \begin{align*}
+        f(x) &= \sum_{i=0}^m \, a_i x^{ip} = \sum_{i=0}^m \, b_i^p x^{ip} = \left( \underbrace{\sum_{i=0}^m \, b_i x^i}_{\in \, \F[x]} \right)^p, &\text{(By \Cref{cor:p-power-of-sum})}
+    \end{align*}
+    which contradicts the irreducibility of $f(x)$. Thus, $\F$ is perfect. 
+\end{proof}
+
+\begin{cor}
+    Every finite field is perfect.
+\end{cor}
+\begin{proof}
+    Let $\F$ be a finite field of characteristic $p > 0$ (a finite cannot have characteristic zero since $\Z$ is infinite). We show that $\F = \F^p$. 
+    
+    Recall that the prime subfield of $\F$ is the field $\F_p$ with $p$ elements. Since $\F$ is a vector space over $\F_p$, we have $\abs{\F} = p^n$ for some $n \in \N^+$, where $n = \left[ \F \colon \F_p \right]$ (Note that $\left[ \F \colon \F_p \right] < \infty$ since $\F$ is finite). By \nameref{thm:lagrange}, $\alpha^{p^n -1} = 1$ for all $\alpha \in \F^{\times}$ (consider the multiplicative group $\F^{\times}$ of order $p^n - 1$). Thus, $\alpha^{p^n} = \alpha$ for all $\alpha \in \F$ (including $0$). 
+    
+    Thus, given any arbitrary $\alpha \in \F$, choosing $\beta = \alpha^{p^{n-1}}$ gives us $\alpha = \beta^p \in \F^p$. The result follows from \Cref{prop:perfect-iff-F=F^p}.
+\end{proof}
+
+\subsection{Extensions of Embeddings}
+
+\begin{prop} \label{multiplicity-is-power-of-p}
+    Let $f(x) \in \F[x]$ be an irreducible monic polynomial. Then, all roots of $f(x)$ have equal multiplicity (in any splitting field). If $\ch(\F) = 0$, then all roots are simple. If $\ch(\F) =\vcentcolon p > 0$, then all roots have multiplicity $p^n$ for some $n \in \N$.
+\end{prop}
+\begin{proof}
+    Let $\overline{\F} \supseteq \F$ be an algebraic closure of $\F$. Let $\alpha, \beta \in \F$ be roots of $f$. We have an $\F$-isomorphism $\sigma \colon \F(\alpha) \to \F(\beta)$ determined by $\alpha \mapsto \beta$. Thus, $\sigma$ can be extended to an automorphism $\tau$ of $\F$. Suppose $f(x) = (x-\alpha)^mh(x)$ where $m$ is the multiplicity of $\alpha$ and $h(x) \in \overline{\F}[x]$. Since $\tau$ fixes $\F$, it also fixes $f(x) \in \F[x]$. Thus, applying $\tau$, we get
+    \[
+        f(x) = f^{\tau}(x) = (x-\beta)^m h^{\tau}(x).
+    \]
+    Thus, the multiplicity of $\beta$ is at least $m$. By symmetry, we have equality. 
+    
+    If $\ch(\F) = 0$, then $f(x)$ is separable by \Cref{prop:irreducible-separable-zero-char}. Thus, all roots are simple.
+    
+    Now, suppose $\ch(\F) = \vcentcolon p > 0$. Let $n \in \N$ be the largest such that there exists a polynomial $g(x) \in \F[x]$ such that $f(x) = g(x^{p^n})$. Note that if no such positive $n$ exists, we can take $g = f$ and $n = 0$. Then, $g$ is irreducible since $f$ is so. Moreover, $g$ must be separable. If not, by \Cref{prop:poly-p-power-not-sep}, we must have $g(x) = h(x^p)$ for some $h(x) \in \F[x]$. But then, $f(x) = h(x^{p^{n+1}})$, contradicting the maximality of $n$. Thus, $g(x)$ factors as $(x-r_1)\cdots(x-r_g)$ in $\overline{\F}$ where each factor is distinct. Since $\overline{\F}$ is algebraically closed, we can find $s_1, \ldots, s_g$, necessarily distinct, such that $s_i^{p^n} = r_i$ for all $i$. We then have
+    \[
+        f(x) = g(x^{p^n}) = (x-s_1)^{p^n} \cdots (x-s_g)^{p^n},
+    \]
+    as desired.
+\end{proof}
+
+\begin{theorem} \label{thm:cardinality-of-extension}
+    Let $\sigma \colon \F \to \bbL$ be an embedding of fields where $\bbL$ is an algebraic closure of $\sigma(\F)$. Similarly, let $\tau \colon \F \to \bbL^{\prime}$ be an embedding of fields where $\bbL^{\prime}$ is an algebraic closure of $\tau(\F)$. Let $\E$ be an algebraic extension of $\F$.
+    
+    Let $S_{\sigma}$ (resp. $S_{\tau}$) denote the set of extensions of $\sigma$ (resp. $\tau$) to embeddings of $\E$ into $\bbL$ (resp. $\bbL^{\prime}$). Let $\lambda \colon \bbL \to \bbL^{\prime}$ be an isomorphism extending $\tau \circ \sigma^{-1} \colon \sigma(\F) \to \tau(\F)$.
+    
+    The map $\psi \colon S_{\sigma} \to S_{\tau}$ given by $\psi(\widetilde{\sigma}) = \lambda \circ \widetilde{\sigma}$ is a bijection.
+    
+    \begin{center}
+        \begin{tikzcd}
+\mathbb{L}^{\prime} \arrow[d, no head]      &                                                                                             & \mathbb{L} \arrow[ll, "\lambda"'] \arrow[d, no head] \\
+\widetilde{\tau}(\mathbb{E}) \arrow[d, no head] & \mathbb{E} \arrow[l, "{\widetilde{\tau} \, \in \, S_{\tau}}"'] \arrow[r, "{\widetilde{\sigma} \, \in \, S_{\sigma}}"] & \widetilde{\sigma}(\mathbb{E}) \arrow[d, no head]        \\
+\tau(\mathbb{F})                            & \mathbb{F} \arrow[l, "\tau"'] \arrow[r, "\sigma"]                                           & \sigma(\mathbb{F})   \end{tikzcd}
+    \end{center}                               
+\end{theorem}
+\begin{proof}
+    If $\widetilde{\sigma} \in S_{\sigma}$, then for any $x \in \F$, we have
+    \[
+        (\lambda \circ \widetilde{\sigma})(x) = \lambda(\sigma(x)) = (\tau \circ \sigma^{-1})(\sigma(x)) = \tau(x).
+    \]
+    Thus, $\psi$ actually maps into $S_{\tau}$. Since $\lambda$ is an isomorphism, $\psi$ is easily seen to be a bijection. Explicitly, the inverse of $\psi$ is the map $\widetilde{\tau} \mapsto \lambda^{-1} \circ \tau$.
+\end{proof}
+
+\begin{rem}
+    The above proposition says that the ``number'' (cardinality) of extensions does not depend on $\bbL$ or on the embedding $\sigma$. Since $\E$ is an arbitrary algebraic extension of $\F$, the set $S_{\sigma}$ need not be finite. 
+    
+    Thus, we may assume $\bbL \supseteq \F$ to be an algebraic closure of $\F$ and $\sigma$ to be the inclusion map.
+\end{rem}
+
+\begin{defn}
+    If $\E/\F$ is an algebraic extension, then the cardinality of $S_{\sigma}$ (as in \Cref{thm:cardinality-of-extension}) is called the \deff{separable degree} of $\E/\F$ and is denoted as $[ \E\colon\F]_s$.
+\end{defn}
+
+\begin{prop} \label{prop:separable-leq-actual}
+    Let $\alpha \in \E \supseteq \F$ be algebraic over $\F$ and $n \vcentcolon= \deg \left( \irr(\alpha, \F) \right)$. Then, $[\F(\alpha) \colon \F]_s \leq n = [\F(\alpha) \colon \F]$ with equality iff $\alpha$ is separable over $\F$.
+\end{prop}
+\begin{proof}
+    By \Cref{prop:embedding-extension}, $[\F(\alpha) \colon \F]_s$ is exactly the number of roots of $p(x) \vcentcolon= \irr(\alpha, \F)$ in $\overline{\F}$. This is at most $n = \deg p(x)$. Moreover, equality occurs implies that all roots are distinct, and thus $\alpha$ is separable over $\F$.
+\end{proof}
+
+\begin{theorem}[Tower Law for separable degree] \label{thm:tower-separable}
+    Let $\F \subseteq \E \subseteq \K$ be a tower of finite algebraic extensions. Then, $[\E\colon\F]_s \leq [\E\colon\F]$, and
+    \[
+        \left[ \K  \colon \F \right]_s = \left[ \K  \colon \E \right]_s \cdot \left[ \E  \colon \F \right]_s.
+    \]
+\end{theorem}
+\begin{proof}
+    We first show that the separable degree is multiplicative. Let $n \vcentcolon= [\K \colon \E]_s$ and $m \vcentcolon= [\E \colon \F]_s$, and let $\sigma \colon \F \to \bbL$ be an embedding into an algebraically closed field $\bbL$.
+    
+    Let $\sigma_1, \ldots, \sigma_m \colon \E \to \bbL$ be extensions of $\sigma$. Then, each $\sigma_i$ has extensions $\sigma_i^{(1)},\ldots,\sigma_i^{(n)} \colon \K \to \bbL$. Note that the set $\left\{ \sigma_i^{(j)} \colon 1 \leq i \leq m, 1 \leq j \leq n \right\}$ has cardinality $mn$ since all extensions obtained are distinct. Clearly, any embedding $\tau \colon \K \to \bbL$ extending $\sigma$ is obtained this way. ($\tau \restr{\E} = \sigma_i$ for some $i$, and thus, $\tau = \sigma_i^{(j)}$ for some $j$). Thus, $[\K \colon \F]_s = mn$ as desired.
+    
+    Now, since $\E/\F$ is finite, we can construct $\alpha_1, \ldots, \alpha_g$ such that $\E = \F(\alpha_1, \ldots, \alpha_g)$. We have the chain
+    \[
+        \F \subseteq \F(\alpha_1) \subseteq \F(\alpha_1, \alpha_2) \subseteq \cdots \subseteq \F(\alpha_1, \ldots, \alpha_g).
+    \]
+    By \Cref{prop:separable-leq-actual}, we have
+    \[
+        \left[ \F(\alpha_1, \ldots, \alpha_{i+1} \colon \F(\alpha_1, \ldots, \alpha_i) \right]_s \leq \left[ \F(\alpha_1, \ldots, \alpha_{i+1} \colon \F(\alpha_1, \ldots, \alpha_i) \right]
+    \]
+    for all $i = 0,\ldots,g-1$. Since both degrees are multiplicative, we are done. 
+\end{proof}
+
+\begin{cor} \label{cor:equality-at-each-stage}
+    Let $\F \subseteq \E \subseteq \K$ be a tower of finite algebraic extensions. Then, $[\K\colon\F] = [\K\colon\F]_s$ iff the equality holds at each stage.
+\end{cor}
+
+\begin{theorem} \label{thm:separable-iff-degrees-equal}
+    Let $\E/\F$ be a finite extension. Then, $\E/\F$ is separable iff $[\E\colon\F] = [\E\colon\F]_s$.
+\end{theorem}
+\begin{proof}
+    Write $\E = \F(\alpha_1, \ldots, \alpha_n)$ for $\alpha_i \in \E$. (Since $\E/\F$ is finite, it is also algebraic by \Cref{prop:finite-is-algebraic}). Now, put
+    \[
+        \F_0 \vcentcolon= \F \text{  and  } \F_i \vcentcolon= \F(\alpha_1,\ldots,\alpha_i),
+    \]
+    for $i=1,\ldots,n$.
+    
+    ($\implies$) Assume $\E/\F$ is separable. Then, since each $\alpha_i$ is separable over $\F$, it follows that $\alpha_i$ is separable over $\F_i$ for $i=1,\ldots,n$. (Note that $\irr(\alpha_i,\F_i) \divides \irr(\alpha_i, \F)$). Thus, we see that
+    \[
+        [\F_i \colon \F_{i-1}]_s = [\F_i \colon \F_{i-1}]
+    \]
+    for all $i = 1,\ldots,n$. Multiplying gives us $[\E\colon\F]_s = [\E\colon\F]$.
+    
+    ($\impliedby$) Let $\alpha \in \E$ be arbitrary. Consider the tower 
+    \[
+        \F \subseteq \F(\alpha) \subseteq \E.
+    \]
+    Since $[\E\colon\F]_s = [\E\colon\F]$, we must also have $[\F(\alpha) \colon \F]_s = [\F(\alpha) \colon \F]$, by \Cref{cor:equality-at-each-stage}. Thus, $\alpha$ is separable over $\F$ by \Cref{prop:separable-leq-actual}.
+\end{proof}
+
+\begin{cor} \label{cor:separable-element-generates-separable-extension}
+    Let $\alpha \in \E \supseteq \F$ be separable over $\F$. Then, $\F(\alpha)/\F$ is separable.
+\end{cor}
+\begin{proof}
+    By \Cref{prop:separable-leq-actual}, $[\F(\alpha)\colon\F]_s = [\F(\alpha)\colon\F]$. The result follows by \Cref{thm:separable-iff-degrees-equal}.
+\end{proof}
+
+\begin{prop}
+    Let $\F \subseteq \E \subseteq \K$ be a tower of fields. Then, $\K/\F$ is separable iff $\K/\E$ and $\E/\F$ are.
+\end{prop}
+\begin{proof}
+    For both parts, note that if $\alpha \in \K$ is algebraic over $\F$, then it is also algebraic over $\E$. Moreover, $\irr(\alpha, \E) \divides \irr(\alpha, \F)$. (The divisibility is in $\E[x]$). 
+    
+    ($\implies$) Let $\alpha \in \K$ be arbitrary. Then, $\alpha$ is algebraic over $\F$ and thus, over $\E$. Since $\irr(\alpha, \F)$ has no repeated roots, neither does its factor $\irr(\alpha, \E)$. 
+    Thus, $\K/\E$ is separable. Now, let $\beta \in \E$ be arbitrary. Then, $\beta \in \K$ and thus, $\irr(\alpha, \F)$ is separable. Thus, $\E/\F$ is separable. 
+    
+    ($\impliedby$) Let $\alpha \in \K$ be arbitrary. Note that $\alpha$ is algebraic over $\E$ since it is separable over $\E$. Let $\irr(\alpha, \E) = a_1 + \cdots + a_nx^{n-1} + x^n \in \E[x]$. Put
+    \[
+        \F_0 = \F \text{  and  } \F_i = \F(a_1,\ldots, a_i),
+    \]
+    for $i=1,\ldots,n$. By ($\implies$), we see that $a_i$ is separable over $\F_{i-1}$ and hence,
+    \[
+        \left[ \F_i \colon \F_{i-1} \right]_s = \left[ \F_i \colon \F_{i-1} \right]
+    \]
+    for all $i=1,\ldots,n$. Finally, put $\F_{n+1} = \F_n(\alpha)$. Then, the above equality also holds for $i=n+1$, since $\alpha$ is separable over $\F_n$. (Note that by construction, $\irr(\alpha, \F_n) = \irr(\alpha, \E)$, and the latter is separable by assumption). Upon multiplying, we get $\left[ \F_{n+1} \colon \F \right]_s = \left[ \F_{n+1} \colon \F\right]$, and thus $\F_{n+1}/\F$ is separable. Since $\alpha \in \F_{n+1}$, $\alpha$ is separable over $\F$, and thus $\K/\F$ is separable.
+\end{proof}
+
+\begin{cor}
+    Let $f(x) \in \F[x]$ be a separable polynomial and let $\E \supseteq \F$ be a splitting field of $f(x)$ over $\F$. Then, $\E/\F$ is separable. 
+\end{cor}
+\begin{proof}
+    Write $\E = \F(r_1,\ldots,r_n)$ where $f(x) = a(x-r_1)\cdots(x-r_n)$, and apply the previous proposition and corollary repeatedly.
+\end{proof}
+
+\begin{prop}
+    Let $\E/\F$ be a finite extension. Then, $[\E\colon\F]_s$ divides $[\E\colon\F]$. If $\ch(\F) =\vcentcolon p > 0$, then the quotient $\ddfrac{[\E\colon\F]}{[\E\colon\F]_s}$ is a power of $p$.
+\end{prop}
+\begin{proof}
+    If $\ch(\F) = 0$, then $\F$ is a perfect field by \Cref{cor:zero-char-perfect}. Since $\E/\F$ is a finite extension, it is also algebraic by \Cref{prop:finite-is-algebraic}. Thus. $\E/\F$ is separable and the two degrees are equal. Suppose now that $\ch(\F) =\vcentcolon p > 0$.
+    
+    First suppose that $\E = \F(\alpha)$ for some $\alpha \in \E$. Let $p(x) \vcentcolon= \irr(\alpha, \E)$ and let $d \vcentcolon= \deg p(x)$. By \Cref{multiplicity-is-power-of-p}, $p(x)$ factors in $\overline{\F}[x]$ as
+    \[
+        p(x) = (x-\alpha)^{p^n} (x-\alpha_2)^{p^n} \cdots (x-\alpha_g)^{p^n}
+    \]
+    for some $n \in \N$, where $\alpha_2,\ldots,\alpha_g \in \overline{\F} \setminus \{\alpha\}$ are distinct. Note that $gp^n = d$. By \Cref{prop:embedding-extension}, $[\F(\alpha) \colon \F]_s = g$. Thus, the statement is true. 
+    
+    For a general finite extension $\E/\F$, write $\E = \F(\beta_1, \ldots, \beta_k)$ and use the fact that degrees are multiplicative. 
+\end{proof}

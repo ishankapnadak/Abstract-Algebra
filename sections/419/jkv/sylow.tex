@@ -1,0 +1,99 @@
+\section{Sylow Theorems}
+
+\begin{theorem}[Cauchy's Theorem] \label{thm:cauchy}
+    Let $G$ be a finite group and let $p$ be a prime. If $p$ divides the order of $G$, then $G$ has a subgroup of order $p$. 
+\end{theorem}
+\begin{proof}
+    Consider the set
+    \[
+        S = \left\{ (x_1, \ldots , x_p) \in G^p \mid x_1 \cdots x_p = 1 \right\}.
+    \]
+    \[
+        \left( \sigma, (x_1, \ldots, x_p) \right) \longmapsto \left( x_{\sigma(1)}, \ldots, x_{\sigma(p)} \right)
+    \]
+    for all $\sigma \in H$ and  $(x_1, \ldots, x_p) \in S$. Notice that the orbit of the $(1, \ldots, 1)$ is itself. Since $S$ can be written as a disjoint union of orbits, it follows that there is at least another orbit that has only one element (this follows from divisibility considerations, since $p$ divides $\abs{S}$). Thus, there exists a $p$-tuple $(x_1, \ldots, x_p) \neq (1, \ldots, 1)$ such that $O((x_1, \ldots, x_p)) = \left\{ (x_1, \ldots, x_p) \right\}$. Since the orbit of this tuple contains only itself, and since permutations in $H$ cyclically permute the elements of the tuple, it follows that each element of the tuple. That is, such an element of the form $(x, \ldots, x)$ for some $x \in G$ with $x \neq 1$. Since $(x, \ldots, x) \in S$, it follows that $x^p = 1$. It then follows that $\abs{x} = p$, and the cyclic subgroup $\langle x \rangle$ is a subgroup of $G$ of order $p$. 
+\end{proof}
+
+\begin{prop} \label{prop:p^n-has-normal-subgroups-p^i}
+    Let $G$ be a finite group of order $p^n$ where $p$ is a prime and $n \in \N^+$. Then, there are normal subgroups
+    \[
+        \left\{ 1 \right\} = G_0 < G_1 < \ldots < G_n = G
+    \]
+    such that $\abs{G_i} = p^i$ and $G_i \trianglelefteq G$ for $i = 0, \ldots, n$.
+\end{prop}
+
+\begin{proof}
+    We prove this by induction on $n$. In the case that $n=1$, we trivially have $G_0 = \{1\}$ and $G_1 = G$. Now, assume that $n \geq 2$ and that the result holds for $n-1$. By \Cref{thm:p-group-has-non-trivial-center}, $G$ has a non-trivial center, and $p$ divides $\abs{Z(G)}$. By \nameref{thm:cauchy}, $Z(G)$ has an element of order $p$, say $z$. We define $G_1 = \langle z \rangle$. Clearly, $\abs{G_1} = p$. Moreover, since $G_1 \leq Z(G)$ and $Z(G) \trianglelefteq G$, we conclude that $G_1 \trianglelefteq G$. Now, define $H = G/G_1$. We have $\abs{H} = p^n/p = p^{n-1}$. By the induction hypothesis, $H$ has normal subgroups
+    \[
+        \left\{ 1 \right\} = H_0 < H_1 < \ldots < H_{n-1} = H
+    \]
+    such that $\abs{H_i} = p^i$ and $H_i \trianglelefteq H$ for $i = 0, \ldots, n-1$. By the \nameref{thm:correspondence}, there is a normal subgroup $G_{i+1}$ of $G$ such that $G_{i+1}/G_1 = H_i$ for $i =0, \ldots, n-1$. Moreover, $\abs{G_{i+1}} = \abs{G_1} \cdot \abs{H_i} = p^{i+1}$ for $i=0, \ldots, n-1$. We also have that $G_i \leq G_{i+1}$ by the \nameref{thm:correspondence}. This concludes the proof.
+\end{proof}
+
+\begin{defn}
+    Let $G$ be a group and let $H \leq G$ be a subgroup. If $\abs{H} = p^i$ for a prime $p$ and some positive integer $i$, then $H$ is called a \deff{$p$-subgroup} of $G$.
+\end{defn}
+
+\begin{defn}
+    Let $G$ be a finite group and $\abs{G} = p^n m$ where $p$ is a prime, $n$ is a positive integer, and $\gcd(p,m) = 1$. A subgroup of $G$ having order $p^n$ is called a \deff{Sylow $p$-subgroup} of $G$. The set of all Sylow $p$-subgroups of $G$ is denoted as $\Syl_p(G)$. The number of Sylow $p$-subgroups of $G$ is denoted as $n_p \vcentcolon= \abs{\Syl_p(G)}$.
+\end{defn}
+
+\begin{theorem}[Sylow Theorems] \label{thm:sylow}
+Let $G$ be a finite group and $\abs{G} = p^n m$ where $p$ is a prime, $n$ is a positive integer, and $\gcd(p,m) = 1$. Then, the following are true.
+\begin{enumerate}
+    \item $G$ has subgroups of order $p^i$ for $i = 1, \ldots, n$. In particular, $G$ has a Sylow $p$-subgroup, that is, $n_p \geq 1$.
+    \item Any $p$-subgroup of $G$ is contained in a Sylow $p$-subgroup of $G$.
+    \item Any two Sylow $p$-subgroups of $G$ are conjugates of each other. 
+    \item $n_p \equiv 1 \Mod{p}$ and $n_p \divides m$. 
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \phantom{hi}
+    \begin{enumerate}
+        \item When $\abs{G} = 1$, the statement is trivially true. Now, assume that the statement is true for all finite groups of order less than $\abs{G}$. The class equation of $G$ is
+        \[
+            \abs{G} = \abs{Z(G)} + \sum_{g} \left[ G \colon Z(g) \right]
+        \]
+        where the sum runs over one representative from each conjugacy class that is not the center. Suppose that $p \notdivides \abs{Z(G)}$. Since $p$ divides $\abs{G}$, there exists a $g$ in the second sum such that $p \notdivides \abs{G}/\abs{Z(g)}$. Since $p^n$ divides the order of $G$, it follows that $p^n$ divides $\abs{Z(g)}$. Note that $Z(g)$ is not the whole group since $g$ is not a central element. Hence, $\abs{Z(g)} < \abs{G}$. From the induction hypothesis, it follows that $Z(g)$ has subgroups of order $p^i$ for $i = 1, \ldots, n$ and in particular, a Sylow $p$-subgroup. Since $Z(g) \leq G$, this result extends to $G$ as well. Now, if $p$ divides $Z(G)$, then by \nameref{thm:cauchy}, there exists an element $z \in Z(G)$ of order $p$. Let $H = \langle z \rangle$. Then, $H \trianglelefteq G$. We leave the rest of the proof as an exercise to the reader. The proof follows along similar lines as \Cref{prop:p^n-has-normal-subgroups-p^i}, by considering the quotient group $G/H$ (which has order strictly less than $\abs{G}$), proving the result there and pulling it back to $G$ by the \nameref{thm:correspondence}.
+        
+        \item Let $H^{\prime} \leq G$ and $\abs{H^{\prime}} = p^i$ for some $0 \leq i \leq n$. We must show that $H^{\prime}$ is contained in a Sylow $p$-subgroup of $G$. Suppose $H$ is a Sylow $p$-subgroup of $G$. Consider the set
+        \[
+            S = G/H = \left\{ gH \mid g \in G \right\}.
+        \]
+        We have $\abs{S} = \abs{G}/\abs{H} = m$. Let $H^{\prime}$ act on $S$ by translation, with action defined from $H \times S$ to $S$ as $(h, gH) \mapsto hgH$. We leave it to the reader to verify that this is indeed a group action. Now, $S$ is a disjoint union of $H^{\prime}$-orbits and thus 
+        \[
+            \abs{S} = \sum_{h} \, \abs{O_h}
+        \]
+        where the sum runs over one representative from each orbit. Note that each orbit must have cardinality of the form $p^k$ for $k=0, \ldots,i$, since $\abs{O}_h$ must divide $\abs{H}^{\prime}$ which is $p^i$. However, $\abs{S} = m$ and $p \notdivides m$. We hence conclude that there is at least one orbit that has only one element, that is, an orbit consisting of a single left coset, say $gH$. We thus have
+        \begin{align*}
+            &hgH = gH &\text{ for all } h \in H^{\prime} \\
+            \implies &g^{-1}hg \in H &\text{ for all } h \in H^{\prime} \\
+            \implies &g^{-1}H^{\prime}g \subseteq H \\
+            \implies &H^{\prime} \subseteq gHg^{-1}
+        \end{align*}
+        Since $\abs{gHg^{-1}} = p^n$, $gHg^{-1}$ is also a Sylow $p$-subgroup of $G$. Hence, $H^{\prime}$ is contained in a Sylow $p$-subgroup of $G$.
+        
+        \item In the above, if $\abs{H}^{\prime} = p^n$, then we clearly have $H^{\prime} = gHg^{-1}$. Hence, any two Sylow $p$-subgroups are conjugates of each other.
+        
+        \item As defined earlier, $\Syl_p(G)$ denotes the set of all Sylow $p$-subgroups of $G$. $G$ acts on $\Syl_p(G)$ by conjugation, with action from $G \times \Syl_p(G)$ to $\Syl_p(G)$ defined as $(g,H) \mapsto gHg^{-1}$. Since every Sylow $p$-subgroup is a conjugate of a Sylow $p$-subgroup, there is only one orbit with respect to this group action, and hence, the group $G$ acts transitively on $\Syl_p(G)$. If $P$ is a Sylow $p$-subgroup, then $\Syl_p(G) = \left\{ gPg^{-1} \mid g \in G \right\}$. By the \nameref{thm:orbit-stabiliser}, 
+        \[
+            \abs{\Syl_p(G)} = \left[ G \colon G_P \right] = \frac{\abs{G}}{\abs{G_P}}.
+        \]
+        Now, 
+        \[
+            G_P = \left\{ g \in G \mid gPg^{-1} = P \right\} = N(P).
+        \]
+        Since $N(P)$ contains $P$, $\abs{N(P)} \geq p^n$. Now, the orbit-stabiliser formula immediately tells us that $\abs{\Syl_p(G)} = n_p \divides m$. Now, it remains to show that $n_p \equiv 1 \Mod{p}$.
+        
+        Now, we consider the Sylow $p$-subgroup, $P$, act on $\Syl_p(G)$ with the same action as defined as above. Now, $P \in \Syl_p(G)$ and $O_P = \left\{ P \right\}$. Suppose $Q \in \Syl_p(G)$, $Q \neq P$ with $O_Q = \left\{ Q \right\}$. Now, 
+        \[
+            O_Q = \left\{ gQg^{-1} \mid g \in P \right\} = \left\{ O_Q \right\} \iff gQg^{-1} = Q \text{ for all } g \in P
+        \]
+        Thus, $P \subseteq N(Q)$, and thus $P \leq N(Q)$. Moreover, $Q \trianglelefteq N(Q)$ by \Cref{prop:normaliser-properties}. By \Cref{prop:HK}, $PQ \leq N(Q)$. Since $Q \trianglelefteq N(Q)$, we also have $Q \trianglelefteq PQ$. By the \nameref{thm:iso3},
+        \[
+            \frac{PQ}{Q} \cong \frac{P}{P \cap Q} \implies \abs{\frac{PQ}{Q}} = \abs{\frac{P}{P\cap Q}} = p^i \text{ for some } i.
+        \]
+        Thus, $\abs{PQ} = p^{i+n}$, which implies that $i = 0$ and $\abs{PQ} = p^n$. Since $P \leq PQ$ and $Q \trianglelefteq PQ$, and $\abs{P} = \abs{Q} = \abs{PQ}$, it follows that $P = Q = PQ$. The main conclusion is that when $P$ acts on $\Syl_p(G)$, there is only one singleton orbit. All other orbits have cardinality $p^i$ for some $i \geq 1$. Since $\Syl_p(G)$ is a disjoint union of these orbits, we may write out the cardinality of $\Syl_p(G)$ (which is $n_p$) as the sum of cardinalities of all disjoint orbits. Now, `modding' out by $p$ gives us $n_p \equiv 1 \Mod{p}.$ \qedhere
+    \end{enumerate}
+\end{proof}

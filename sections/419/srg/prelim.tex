@@ -1,0 +1,433 @@
+\section{Preliminaries}
+
+\subsection{Notation}
+
+\begin{enumerate}
+    \item $\N = \{ 0, 1, 2, \ldots \}$ is the set of non-negative integers
+    \item $\N^+ = \{ 1, 2, 3, \ldots \}$ is the set of positive integers
+    \item $\Z = \{ 0, \pm 1, \pm 2, \ldots \}$ is the set of integers
+    \item $\Q = \left\{ \frac{m}{n} \mid m,n \in \Z, n \neq 0 \right\}$ is the set of rationals
+    \item $\R$ is the set of reals
+    \item $\C$ is the set of complex numbers
+    \item $\Q^{\times}$, $\Z^{\ast}$, $\R^{\times}$, $\C^{\times}$ will denote the set of non-zero rationals, integers, reals and complex numbers respectively.
+\end{enumerate}
+
+\subsection{Relations and Partitions}
+
+\begin{defn}
+    A \deff{relation} on $A$ is a subset $R$ of $A \times A$. If $(a,b) \in R$, we say that $a$ is \deff{related to} $b$ by $R$ and write $a \, R \, b$ or $a \sim  b$.
+\end{defn}
+
+For example, `equality' (=) is a relation on any set $A$. `Less than' ($<$) is a relation on $\R$ or any of its subsets. Fix a positive integer $n$. Then, `congruence modulo $n$' ($\equiv)$ is a relation on $\Z$, defined by 
+\[
+    a \equiv b \Mod{n} \iff n \divides a-b.
+\]
+
+\begin{defn}
+    A relation $\sim$ on $A$ is said to be an \deff{equivalence relation} if it is
+    \begin{enumerate}
+        \item \deff{reflexive}, i.e, $a \sim a$ for all $a \in A$,
+        \item \deff{symmetric}, i.e, $a \sim b$ implies $b \sim a$ for all $a,b \in A$, and
+        \item \deff{transitive}, i.e, $a \sim b$ and $b \sim c$ implies $a \sim c$ for all $a,b,c \in A$.
+    \end{enumerate}
+\end{defn}
+
+It is easy to show that $<$ is transitive but not reflexive or symmetric. $=$ is an equivalence relation on any set whereas $\equiv \Mod{n}$ is an equivalence relation on $\Z$.
+
+\begin{exe} \label{exe:equivalence-Z-Q}
+\phantom{hi}
+\begin{enumerate}
+    \item Show that the relation $\sim$ on $\N \times \N = \left\{ (m,n) \mid m,n \in \N \right\}$ defined by
+    \[
+        (m,n) \sim (m^{\prime}, n^{\prime}) \iff m + n^{\prime} = m^{\prime} + n
+    \]
+    is an equivalence relation.
+    
+    \item Show that the relation $\sim$ on $\Z \times \Z^{\ast} = \left\{ (m,n) \mid m,n \in \Z, n \neq 0 \right\}$ defined by
+    \[
+        (m,n) \sim (m^{\prime}, n^{\prime}) \iff m \cdot n^{\prime} = m^{\prime} \cdot n
+    \]
+    is an equivalence relation.
+\end{enumerate}
+\end{exe}
+
+
+\begin{rem}[Well-Ordering Property] \label{rem:wop}
+     Every non-empty subset of $\N$ has a least element. That is, if $A \subseteq \N$ and $A \neq \emptyset$ then $\exists \, m \in \N$ such that $m \leq a$ for all $a \in A$. WOP is also true for any subset of $\Z$ which is bounded below. WOP also implies the principle of induction.
+\end{rem}
+
+\begin{defn}
+    If $\sim$ is an equivalence relation on $A$, then for any $a \in A$, the set
+    \[
+        [a]_{\sim} \vcentcolon= \{ b \in A \mid b \sim a \}
+    \]
+    is called the \deff{equivalence class} of $a$ with respect to $\sim$. Elements of the equivalence class of $a$ are said to be \deff{equivalent} to $a$. If $C$ is an equivalence class, then any element of $C$ is called a \deff{representative} of class $C$. We will denote the equivalence class of $a$ as $[a]$ when the relation $\sim$ is clear from context.
+\end{defn}
+
+
+
+\begin{ex}
+    Fix some $n \in \N_+$ and consider the equivalence relation $\equiv \Mod{n}$. We have a total of $n$ equivalence classes, defined by
+\begin{align*}
+    [0] &= \left\{ kn \mid k \in \Z \right\} \\
+    [1] &= \left\{ kn + 1 \mid k \in \Z \right\} \\
+    \vdots \, &= \quad \vdots \\
+    [n-1] &= \left\{ kn + n-1 \mid k \in \Z \right\}
+\end{align*}
+
+These are called the \emph{residue classes$\Mod{n}$}. We sometimes also denote the residue classes as $\overline{0}, \overline{1}, \ldots, \overline{n-1}$. We denote the set of residue classes of $n$ as $\Z_n$, defined as
+\[
+    \Z_n \vcentcolon= \left\{ \overline{0}, \overline{1}, \ldots, \overline{n-1} \right\}.
+\]
+For $\overline{a}, \overline{b} \in \Z_n$, we further define addition and multiplication as follows
+\[
+    \overline{a} + \overline{b} = \overline{a + b} \text{ and } \overline{a} \cdot \overline{b} = \overline{a \cdot b}.
+\]
+One may verify that these operations are indeed well-defined.
+\end{ex}
+\begin{exe}
+The following exercise builds on \Cref{exe:equivalence-Z-Q}.
+\begin{enumerate}
+    \item Show that the equivalence classes of the relation $\sim$ on $\N \times \N = \left\{ (m,n) \mid m,n \in \N \right\}$ defined by
+    \[
+        (m,n) \sim (m^{\prime}, n^{\prime}) \iff m + n^{\prime} = m^{\prime} + n
+    \]
+    are in one-to-one correspondence with the set of integers. (We may define the set $\Z$ formally, using $\N$, as equivalence classes of this relation).
+    
+    \item Show that the equivalence classes of the relation $\sim$ on $\Z \times \Z^{\ast} = \left\{ (m,n) \mid m,n \in \Z, n \neq 0 \right\}$ defined by
+    \[
+        (m,n) \sim (m^{\prime}, n^{\prime}) \iff m \cdot n^{\prime} = m^{\prime} \cdot n
+    \]
+    are in one-to-one correspondence with the set of rationals. (We may define the set $\Q$ formally, using $\Z$, as equivalence classes of this relation).
+\end{enumerate}
+\end{exe}
+
+\begin{defn} 
+    A \deff{partition} of $A$ is a collection $\left\{ A_i \mid i \in I \right\}$ of non-empty subsets of $A$ ($I$ is some indexing set) such that
+    \begin{enumerate}
+        \item $A = \bigcup_{i \in I} A_i$.
+        \item $A_i \cap A_j = \emptyset$ for all $i,j \in I$ with $i \neq j$.
+    \end{enumerate}
+\end{defn}
+
+The ideas of an equivalence relation and partitions are closely related, as we show now.
+
+\begin{prop} \label{prop:equivalence-partition}
+    Let $A$ be a non-empty set.
+    \begin{enumerate}
+        \item If $\sim$ defines an equivalence relation on $A$ then the set of equivalence classes of $\sim$ form a partition of $A$.
+        \item If $\left\{ A_i \mid i \in I \right\}$ is a partition of $A$ then there exists an equivalence relation $\sim$ on $A$ whose equivalence classes are precisely the sets $A_i, i \in I$.
+    \end{enumerate}
+\end{prop}
+
+\subsection{Number Theory}
+
+\begin{defn}
+    Given $a,b \in \Z$, we say that $b$ \deff{divides} $a$ and write $b \divides a$ if $a = bc$ for some $c \in \Z$. In this case, $a$ is said to be a \deff{multiple} of $b$, or $a$ is said to be \deff{divisible} by $b$.
+\end{defn}
+
+\begin{enumerate}
+    \item Divisibility is a relation on $\Z$, which is reflexive and transitive but not symmetric. In fact, $a \divides b$ and $b \divides a \iff b = \pm a$. This follows since $b \divides a \implies \abs{b} \leq \abs{a}$ (assuming $a \neq 0$).
+    \item If $b \divides a_1$ and $b \divides a_2$ then $b \divides (a_1 + a_2)$ and $b \divides ka_1$ for all $k \in \Z$. Thus, $b \divides (k_1a_1 + k_2a_2)$ for all $k_1,k_2 \in \Z$.
+\end{enumerate}
+
+\begin{prop}[Division Algorithm] \label{prop:div_algo}
+    Given $a,b \in \Z$ with $b \neq 0$, there exist unique $q,r \in \Z$ such that $a = bq + r \text{ and } 0 \leq r < \abs{b}$.
+\end{prop}
+
+\begin{proof}
+    We first prove existence. Let $a,b \in \Z$ with $b \neq 0$. Without loss of generality, we may assume $b > 0$ (if $b < 0$, we do the following considering $-b$ and replace $q$ by $-q$). Consider
+    \[
+        S \vcentcolon= \{ a - bx \mid x \in \Z \text{ such that } a - bx \geq 0 \}.
+    \]
+    Then, $S$ is a non-empty subset of $\N$ (we may take $x = -\abs{a}$). Hence, by the \nameref{rem:wop}, there exists a minimal element in $S$. Call this $r$. Since $r \in S$, $r = a - bq$ for some $q \in \Z$ and $r \geq 0$. We now only have to show that $r < b$. Suppose $r \geq b$, then $r - b = a - b(q+1) \geq 0$ and thus $r-b \in S$. This contradicts the minimality of $r$. This proves the existence of $q,r$ satisfying the given properties.
+    
+    \medskip
+    
+    Suppose there are $q,r,q^{\prime}, r^{\prime} \in \Z$ satisfying the given conditions. We have $r - r^{\prime} = b(q{\prime} - q)$. If $r \neq r^{\prime}$, we obtain $\abs{b} < \abs{r - r^{\prime}}$ which is a contradiction since $0 \leq r, r^{\prime} < b$. Thus, we get $r = r^{\prime}$. Since $b \neq 0$, we also get $q = q^{\prime}$. Hence, $q$ and $r$ are unique.
+\end{proof}
+
+\begin{cor} \label{cor:additive_subgroup_nZ}
+    Suppose $H$ is a subset of $\Z$ that is non-empty and closed under inverses and addition. Then, $H = n\Z$ for a unique $n \in \N$ where
+    \[
+        n\Z \vcentcolon= \left\{ nm \mid m \in \Z \right\}
+    \]
+    $H$ is called a \emph{subgroup} of the additive group $\Z$, as we shall see later.
+\end{cor}
+\begin{proof}
+    Let $H$ be a subset of $\Z$ satisfying the given conditions. If $H = \{0\}$ then $H = n\Z$ with $n=0$. If $H \neq \{0\}$, then $H \cap \N^+$ is non-empty. Suppose $n$ is the least element in $H \cap \N^+$ (such an $n$ exists by the \nameref{rem:wop}). Then, $n\Z \subseteq H$ since $H$ is closed under addition. Further, if $m \in H$ then, by the \nameref{prop:div_algo}, there exist $q,r \in \Z$ such that $m = nq + r$ with $0 \leq r < n$. But $r = m - nq \in H$ since $m \in H$ and $n \in H$. If $r > 0$ then $r \in H \cap \N^+$ and the minimality of $n$ is contradicted. Hence, $r = 0$ and $m = nq$. Thus, $H \subseteq n\Z$, giving us $H = n\Z$.
+\end{proof}
+
+\begin{defn}
+    Given $a,b \in \Z$, not both zero, a \deff{greatest common divisor} or \deff{$\gcd$} of $a$ and $b$ is a positive integer $d$ such that
+    \begin{enumerate}
+        \item $d$ is a common divisor of $a$ and $b$, i.e, $d \divides a$ and $d \divides b$, and
+        \item if $e$ is a common divisor of $a$ and $b$, i.e, $e \divides a$ and $e \divides b$, then $e \divides d$.
+    \end{enumerate}
+    In the case $a = b =0$, we define the $\gcd$ of $a$ and $b$ to be $0$. We usually denote the $\gcd$ of $a$ and $b$ as $\gcd(a,b)$.
+\end{defn}
+We leave it as an exercise to the reader to come up with a similar definition for the least common multiple ($\lcm$). We denote the $\lcm$ of $a$ and $b$ as $\lcm(a,b)$.
+
+\begin{prop}[Bézout's Lemma] \label{prop:bezout}
+    Given any $a,b \in \Z$, the $\gcd$ of $a$ and $b$ exists and is unique. Moreover, it can be expressed as a combination $ma + nb$ for some $m,n \in \Z$.
+\end{prop}
+    
+\begin{proof}
+    For $a=b=0$, the proof is trivial. We hence assume that at least one of $a$ and $b$ is non-zero. Consider 
+    \[
+        H = \{ ma + nb \mid m,n \in \Z \}.
+    \]
+    $H$ is a non-empty subset of $\Z$ that is closed under inverses and addition. Hence, by \Cref{cor:additive_subgroup_nZ}, there exists a unique $d \in\N^+$ such that $H = d\Z$. We leave it as an exercise to show that $d$ is indeed the $\gcd$. 
+\end{proof}
+
+\begin{prop} \label{prop:a|c}
+    \item Let $a,b,c \in \Z$. If $a \divides bc$ and $\gcd(a,b) = 1$ ($a$ and $b$ are coprime), then $a \divides c$.
+\end{prop}
+\begin{proof}
+    \nameref{prop:bezout} tells us that $ma + nb = 1$ for some $m,n \in \Z$. Multiplying throughout by $c$, we get 
+    \[
+        mac + nbc = c.
+    \]
+    Since $a \divides ac$ and $a \divides bc$, we must have $a \divides c$.
+\end{proof}
+\begin{defn}[Prime Number]
+    An integer $p$ is said to be a \deff{prime number} if it is greater than $1$ and the only positive integers that divide $p$ are $1$ and $p$.
+\end{defn}
+\begin{cor}[Euclid's Lemma] \label{cor:euclid_lemma}
+    If $p$ is a prime number, and $p \divides bc$ for some $b,c \in \Z$, then $p\divides b$ or $p\divides c$.
+\end{cor}
+\begin{proof}
+    Suppose $p$ is prime and $p \divides bc$ for some $\Z$. If $p \divides b$, we are done. If $p \notdivides b$, then $\gcd(p,b) = 1$. By \Cref{prop:a|c}, $p \divides c$.
+\end{proof}
+
+\begin{prop} \label{prop:infinite_primes}
+    There are infinitely many primes.
+\end{prop}
+\begin{proof}[Euclid's Proof]
+    If there were only finitely many primes $p_1, \ldots, p_k$, then consider $n = p_1 \cdots p_k + 1$. If $p$ is a prime that divides $n$ then $p \neq p_i$ for all $i \in \{1, \ldots, k\}$ (since $n \equiv 1\Mod{p_i}$ for all $i$), which is a contradiction since $p_1, \ldots, p_k$ are assumed to be the only primes.
+\end{proof}
+
+\begin{prop} \label{prop:mult-inverse-mod-p}
+    If $b \in \Z$ and $p$ is a prime number such that $p \notdivides b$, then there exists $b^{\prime} \in \Z$ such that $bb^{\prime} \equiv 1 \Mod{p}$. Moreover, $b^{\prime}$ can be chosen such that $1 \leq b^{\prime} < p$ and $b^{\prime}$ is unique.
+\end{prop}
+\begin{proof}
+    Since $\gcd(b,p) = 1$, we have $pu + bv = 1$ for some $u,v \in \Z$ (\nameref{prop:bezout}). Thus, $b^{\prime} = v$ satisfies $bb^{\prime} \equiv 1 \Mod{p}$. The uniqueness of $b^{\prime}$ satisfying $bb^{\prime} \equiv 1 \Mod{p}$ and $1 \leq b^{\prime} < p$ follows by replacing any $v \in \Z$ satisfying $bv \equiv 1 \Mod{p}$ by the unique element $b^{\prime}$ in the residue class of $v \Mod{p}$ such that $0 \leq b^{\prime} < p$. Moreover, $b^{\prime} = 0 \implies 0 \equiv 1 \Mod{p}$ which is a contradiction. Hence, $1 \leq b^{\prime} < p$.
+\end{proof}
+
+\begin{theorem}[Fundamental Theorem of Arithmetic] \label{thm:FTAr}
+    Every positive integer $n$ can be written as a product of primes. That is,
+    \[
+        n = p_1 \cdots p_k
+    \]
+    for some primes $p_1, \ldots, p_k$ (not necessarily distinct). Moreover, this factorisation is unique up to rearrangement of terms. That is, if
+    \[
+        n = q_1 \cdots q_l
+    \]
+    where $q_1, \ldots, q_l$ are primes then $k=l$ and $q_i = p_{\sigma(i)}$ for all $i \in \{1, \ldots, k\}$ for some permutation $\sigma$ of $\{1, \ldots, k\}$.
+\end{theorem}
+\begin{proof}
+    We first prove the existence by induction. If $n=1$, the hypothesis holds with $k = 0$ since the empty product is $1$, by convention. Suppose $n > 1$ and the hypothesis holds for all positive integers strictly less than $n$. If $n$ is prime, the hypothesis clearly holds with $k=1$. If $n$ is not prime, then $n = n_1 n_2$ for some $n_1, n_2 \in \N^+$ with $n_1 < n$ and $n_2 < n$. By the induction hypothesis, both $n_1$ and $n_2$ are finite products of primes and hence, so is $n$. Thus, existence is proved by induction.
+    
+    Next, we prove uniqueness. Suppose $n \in \N^+$ is written as
+    \[
+        n = p_1 \cdots p_k
+    \]
+    and also
+    \[
+        n = q_1 \cdots q_l
+    \]
+    where $p_1, \ldots, p_k, q_1, \ldots, q_l$ are primes. We can induct on $k$. If $k = 0$, then $n = 1$ and hence $l = 0$. Hence, $k = l$ and $p_i$'s are a permutation of $q_i$'s (vacuously). Suppose that $k > 1$ and the result holds for $k-1$. Then,
+    \[
+        p_1 \divides n = q_1 \cdots q_l.
+    \]
+    Hence, by an obvious extension of \nameref{cor:euclid_lemma}, $p_1 \divides q_j$ for some $j$ since $q_j$ is a prime and $p_1 > 1$, we must have $p_1 = q_j$. Thus,
+    \[
+        p_2 \cdots p_k = q_1 \cdots q_{j-1} \cdot q_{j+1} \cdots q_l.
+    \]
+    By induction hypothesis, $k-1 = l-1$, giving us $k=l$, and $p_2, \ldots, p_k$ are a permutation of $q_1, \ldots, q_{j-1}, q_{j+1}, \ldots q_l$. Since we showed $p_1 = q_j$, it follows that $p_1, \ldots, p_k$ is a permutation of $q_1, \ldots, q_l$. Thus, uniqueness is also proved by induction.
+\end{proof}
+Following is another version of the above theorem.
+\begin{theorem}[Fundamental Theorem of Arithmetic - Version 2]  \label{thm:FTAr2}
+    Every non-zero integer $n$ can be written as
+    \[
+        n = \epsilon \cdot p_1^{e_1} \cdots p_h^{e_h}
+    \]
+    where $\epsilon \in \{1,-1\}$, $p_1, \ldots, p_h$ are distinct primes and $e_1, \ldots, e_h$ are positive integers and $h \geq 0$. Moreover, $p_i$ and $e_i$ are uniquely determined by $n$.
+\end{theorem}
+This allows us to associate with every prime an `exponent' or `valuation' on the set of non-zero integers. Let $p$ be a prime. We define $\nu_p \colon \Z^{\ast} \to \N$ as follows
+\[
+    \nu_p(n) = \begin{cases}
+        e_i & \text{ if } p = p_i \text{ for some $1 \leq i \leq h$ in the prime decomposition of $n$,}\\
+        0 & \text{otherwise.}
+    \end{cases}
+\]
+With this notation, we can write
+\[
+    n = \epsilon \cdot \prod_{p} p^{\nu_p(n)}
+\]
+where the product is over all primes. This product is well defined since $\nu_p(n) = 0$ for all but finitely many primes.
+
+\begin{prop} \label{prop:gcd-lcm-prime-factorisation}
+    If $m,n \in \Z^{\ast}$, then 
+    \[
+        \gcd(m,n) = \prod_{p} p^{\min\{\nu_p(m), \nu_p(n)\}}
+    \]
+    \[
+        \lcm(m,n) = \prod_{p} p^{\max\{\nu_p(m), \nu_p(n)\}}
+    \]
+\end{prop}
+\begin{cor} \label{cor:prod-gcd-times-lcm}
+    If $m,n \in \Z^{\ast}$ then $\, \abs{m \cdot n} = \gcd(m,n) \cdot \lcm(m,n)$.
+\end{cor}
+We can extend the function $\nu_p$ to non-zero rationals $(\Q^{\times})$ by defining
+\[
+    \nu_p\left( \frac{m}{n} \right) \vcentcolon= \nu_p(m) - \nu_p(n) \text{ for } m,n \in \Z^{\ast}
+\]
+We leave it as an exercise to show that the above is indeed well-defined. This allows us to write every non-zero rational number as a product of primes. Suppose $r \in \Q^{\times}$, then we have
+\[
+    r = \epsilon \cdot \prod_{p} p^{\nu_p(r)}
+\]
+where $\epsilon \in \{1,-1\}$ and the product is over all primes. This product is well-defined since $\nu_p(r) = 0$ for all but finitely many primes.
+
+\underline{Note:} By convention, we often define $\nu_p(0) = \infty$. With this, the following is true. 
+\begin{prop}  \label{prop:p-val-properties}
+    Let $\nu_p \colon \Q \to \Z \cup \{\infty\}$ as defined above for some prime $p$. Then,
+    \begin{enumerate}
+        \item $\nu_p$ is surjective,
+        \item $\nu_p(r) = \infty \iff r = 0$,
+        \item $\nu_p(rs) = \nu_p(r) + \nu_p(s)$ for all $r,s \in \Q$, and
+        \item $\nu_p(r + s) \geq \min\{\nu_p(r), \nu_p(s)\}$ for all $r,s \in \Q$.
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    Left as an exercise.
+\end{proof}
+
+\begin{rem}
+    The function $\nu_p \colon \Q \to \Z \cup \{\infty\}$ is called the \emph{$p$-adic valuation of $\Q$}. One can use it to define a norm and a metric on $\Q$, as follows:
+\[
+    \abs{x}_p \vcentcolon= 2^{-\nu_p(x)} \text{ for all } x \in \Q.
+\]
+with the convention $2^{-\infty} \vcentcolon= 0$. One can see that
+\begin{enumerate}
+    \item $\abs{x}_p \geq 0$ and $\abs{x}_p = 0 \iff x =0$.
+    \item $\abs{xy}_p = \abs{x}_p \abs{y}_p$.
+    \item $\abs{x+y}_p \leq \max\left\{ \abs{x}_p, \abs{y}_p \right\} \leq \abs{x}_p + \abs{y}_p$.
+\end{enumerate}
+Thus, $\abs{\cdot}_p \colon \Q \to \R$ defines a norm on $\Q$. Further, $d_p \colon \Q \times \Q \to \R$ defined by
+\[
+    d_p(x,y) \vcentcolon= \abs{x-y}_p \text{ for } x,y \in \Q
+\]
+defines a metric on $\Q$. Once can consider the completion of $\Q$ with respect to $d_p$ and this gives rise to a set denoted by $\Q_p$ called the field of $p$-adic numbers.\footnotemark\ We will not spend much time on $p$-adic numbers in this document.
+\end{rem}
+\footnotetext{Within the $p$-adic numbers, we also have the $p$-adic integers, denoted by $\Z_p$. Note this is \textbf{not} the set of residue classes modulo $p$. Since we will not deal with $p$-adic integers in this document, we continue to use the notation $\Z_n$ for the set of residue classes modulo $n$. Another common notation for the same is $\Z/n\Z$.} 
+
+\begin{defn}
+    Given $n \in \N^+$, we define $\varphi(n)$ to be the number of integers $a \in \N^+$ with $1 \leq a \leq n$ and $\gcd(a,n) = 1$. $\varphi$ is called \deff{Euler's totient function}.
+\end{defn}
+
+We can obtain an explicit formula for $\varphi(n)$ using a very basic counting principle - called the inclusion-exclusion principle.
+\begin{theorem}[Principle of Inclusion and Exclusion] \label{thm:inc-exc}
+    If $A_1, \ldots, A_r$ are finite sets, then
+    \[
+        \abs{A_1 \cup \cdots \cup A_r} = \sum_i \abs{A_i} - \sum_{i<j} \abs{A_i \cap A_j} + \sum_{i < j < k} \abs{A_i \cap A_j \cap A_k} - \cdots + (-1)^{r-1} \abs{A_1 \cap \cdots \cap A_r}.
+    \]
+\end{theorem}
+\begin{proof}
+    The proof is trivial using induction on $r$.
+\end{proof}
+For $n \in \N^+$, suppose $p_1, \ldots, p_r$ be the distinct primes that divide $n$. We have
+\begin{align*}
+    n - \varphi(n) &= \abs{\left\{ a \in \N^+ \mid 1 \leq a \leq n \text{ and } \gcd(a,n) \neq 1 \right\}} \\
+    &= \abs{\bigcup_{i=1}^r A_{p_i}}
+\end{align*}
+where for any $m \in \N^+$ with $m \divides n$, $A_m \vcentcolon= \left\{ a \in \N^+ \mid 1 \leq a \leq n \text{ and } m \divides a \right\}$. Observe that $\abs{A_m} = n/m$. By the \nameref{thm:inc-exc},
+\begin{align*}
+    n- \varphi(n) &= \sum_i \, \abs{A_{p_i}} - \sum_{i<j} \, \abs{A_{p_i} \cap A_{p_j}} + \sum_{i < j < k} \abs{A_{p_i} \cap A_{p_j} \cap A_{p_k}} - \cdots + (-1)^{r-1} \abs{A_{p_1} \cap \cdots \cap A_{p_r}} \\
+    &= \sum_i \, \abs{A_{p_i}} - \sum_{i<j} \, \abs{A_{p_ip_j}} + \sum_{i < j < k} \abs{A_{p_ip_jp_k}} - \cdots + (-1)^{r-1} \abs{A_{p_1 \cdots p_r}} \\
+    &= \sum_{i} \, \frac{n}{p_i} - \sum_{i < j} \, \frac{n}{p_ip_j} + \sum_{i < j < k} \, \frac{n}{p_ip_jp_k} - \cdots + (-1)^{r-1} \frac{n}{p_1\cdots p_r}
+\end{align*}
+\begin{align*}
+    \therefore \, \varphi(n) &= n - \sum_{i} \, \frac{n}{p_i} + \sum_{i < j} \, \frac{n}{p_ip_j} - \sum_{i < j < k} \, \frac{n}{p_ip_jp_k} + \cdots + (-1)^{r} \frac{n}{p_1\cdots p_r} \\
+    &= n \left( 1 - \sum_{i} \, \frac{1}{p_i} + \sum_{i < j} \, \frac{1}{p_ip_j} - \sum_{i < j < k} \, \frac{1}{p_ip_jp_k} + \cdots + (-1)^{r} \frac{1}{p_1\cdots p_r} \right)
+\end{align*}
+We can express the above term as a product of $r$ factors. This gives us the famous \emph{Euler's Product Formula}:
+\[
+    \boxed{\varphi(n) = n \cdot \prod_{p \divides n} \left( 1 - \frac{1}{p} \right)}
+\]
+\begin{cor}[Multiplicativity of $\varphi$] \label{cor:phi-multiplicity}
+    For $m,n \in \N^+$, $\varphi(mn) = \varphi(m)\cdot \varphi(n)$ iff $\gcd(m,n) = 1$.
+\end{cor}
+If $n = p_1^{e_1} \cdots p_h^{e_h}$ where $p_1, \ldots, p_k$ are distinct primes and $e_1, \ldots, e_h \in \N^+$, one may reduce the product formula to the following
+\[
+    \varphi(n) = \prod_{i=1}^h p_i^{e_i - 1} \cdot (p_i - 1)
+\]
+In particular, this allows us to deduce that $\varphi(n)$ is even for all $n > 2$.
+\begin{exe}
+    For $n,d \in \N^+$, show that
+    \[
+        \sum_{d \divides n} \varphi(d) = n.
+    \]
+\end{exe}
+\begin{defn}
+    Let $n \in \N^+$. A set $\{a_1, \ldots, a_k\}$ of integers is called a \deff{reduced system of residues$\Mod{n}$} if the following hold:
+    \begin{enumerate}
+        \item $\gcd(a_i, n) = 1$ for all $i \in \{1, \ldots, k\}$,
+        \item $a_i \not\equiv a_j \Mod{n}$ for all $i,j \in \{1, \ldots, k\}, i \neq j$, and
+        \item $a \in \Z, \gcd(a,n) = 1 \implies a \equiv a_i \Mod{n}$ for some $i \in \{1, \ldots, k\}$.
+    \end{enumerate}
+\end{defn}
+For example, $\{1, 3, 5, 7\}$ is a reduced system of residues$\Mod{8}$.
+\begin{prop} \label{prop:rsr-mod}
+    Let $n \in \N^+$. Then, 
+    \begin{enumerate}
+        \item $\{ a \in \Z \mid 1 \leq a \leq n \text{ and } \gcd(a,n) =1 \}$ is a reduced system of residues$\Mod{n}$.
+        \item Any reduced system of residues$\Mod{n}$ has cardinality $\varphi(n)$.
+        \item If $\{a_1, \ldots, a_k\}$ is a reduced system of residues$\Mod{n}$ and $a \in \Z$ such that $\gcd(a,n) = 1$, then $\{aa_1, \ldots, aa_k\}$ is also a reduced system of residues$\Mod{n}$.
+    \end{enumerate}
+\end{prop}
+\begin{theorem}[Euler's Theorem] \label{thm:euler}
+    Let $n \in \N^+$ and $a \in \Z$. If $\gcd(a,n) = 1$, then $a^{\varphi(n)} \equiv 1 \Mod{n}$.
+\end{theorem}
+\begin{proof}
+    Let $\{a_1, \ldots, a_k\}$ be a reduced system of residues$\Mod{n}$. Then, we proved that $k = \varphi(n)$ and $\{aa_1, \ldots, aa_k\}$ is also a reduced system of residues$\Mod{n}$. With a little bit of effort, we can show that
+    \[
+        \prod_{i=1}^k aa_i \equiv \prod_{i=1}^k a_i \Mod{n} \implies a^{\varphi(n)} \cdot \prod_{i=1}^k a_i \equiv \prod_{i=1}^{k} a_i \Mod{n}
+    \]
+    \[
+        \therefore \, a^{\varphi(n)} \equiv 1 \Mod{n} \qedhere
+    \]
+\end{proof}
+\begin{cor}[Fermat's Little Theorem] \label{thm:fermat-little}
+    If $p$ is a prime and $a \in \Z$, then $a^p \equiv a \Mod{p}$.
+\end{cor}
+
+\begin{theorem}[Wilson's Theorem] \label{thm:wilson}
+    Let $n \in \N^+$ with $n > 1$. $n$ is prime iff $(n-1)! \equiv -1 \Mod{n}$.
+\end{theorem}
+\begin{proof}
+    If $p = 2$ or $3$, the result clearly holds. Suppose $p$ is a prime greater than $3$. For any $a \in \Z$, there is a unique $a^{\prime} \in \Z$ with $1 \leq a^{\prime} \leq p-1$ and $aa^{\prime} \equiv 1 \Mod{p}$ (\Cref{prop:mult-inverse-mod-p}). We see that
+    \[
+        a = a^{\prime} \iff a^2 \equiv 1 \Mod{p} \iff p \divides (a-1)(a+1) \iff a = 0 \text{ or } a = p-1
+    \]
+    Hence the $p-3$ numbers $2,\ldots,p-2$ can be paired as $(a,a^{\prime})$ where $2 \leq a,a^{\prime} \leq p-2$, $aa^{\prime} \equiv 1 \Mod{p}$. Moreover, $a \neq a^{\prime}$ in any of these pairs. This tells us that $2\cdot3\ldots\cdot(p-2) \equiv 1 \Mod{p}$. This gives us
+    \[
+        (p-1)! \equiv (p-1) \Mod{p} \implies (p-1)! \equiv -1 \Mod{p}
+    \]
+    We leave the converse as an exercise.
+\end{proof}
+
+\begin{theorem}[Chinese Remainder Theorem] \label{thm:crt}
+    If $n_1, \ldots, n_k$ are pairwise coprime positive integers, that is, $n_1, \ldots, n_k \in \N^+$ and $\gcd(n_i, n_j) = 1$ for all $i,j \in \{1, \ldots, k\}$, $i \neq j$, and if $c_1, \ldots, c_k$ are any integers, then the congruences
+    \[
+        x \equiv c_i \Mod{n_i} \text{ for } i \in \{1, \ldots, k\}
+    \]
+    have a solution, which is unique$\Mod{n_1\cdots n_k}$.
+\end{theorem}
+\begin{proof}
+    Let $n$ be the product $n_1 \cdots n_k$ and let $m_i = n/n_i$ for $i \in \{1, \ldots, k\}$. Since $n_i$'s are pairwise coprime, we get $\gcd(m_i, n_i) = 1$ for all $i \in \{1, \ldots, k\}$ Then, the congruence
+    \[
+        m_i x \equiv c_i \Mod{n_i}
+    \]  
+    has a solution, say $x_i$, for each $i$. Consider $x = m_1x_1 + \cdots + m_kx_k$. For any $i \in \{1, \ldots, k\}$, we see that $n_i \divides m_j$ for all $j \neq i$. Hence, $x$ as chosen above satisfies all the congruences. This proves existence. We leave the proof of uniqueness$\Mod{n}$ as an exercise.
+\end{proof}

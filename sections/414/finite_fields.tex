@@ -1,0 +1,155 @@
+\section{Finite Fields}
+
+\subsection{Existence and Uniqueness}
+
+We let $p$ denote an arbitrary prime number.
+
+\begin{theorem}[Uniqueness of finite fields] \label{thm:finite-field-uniqueness}
+    Let $\K$ and $\bbL$ be two finite fields with the same cardinality. Then, $\K$ and $\bbL$ are isomorphic.
+\end{theorem}
+\begin{proof}
+    Let $q \vcentcolon= \abs{\K}$ and $p \vcentcolon= \ch(\K)$. Then, $q = p^n$ for some $n \in \N^+$. Note that $\K^{\times}$ is a (multiplicative) group of order $q-1$. By \nameref{thm:lagrange}, we have that $a^{q-1} = 1$ for all $a \in \K^{\times}$. We thus get that $a^q - a = 0$ for \emph{all} $a \in \K$ (including $0$). Hence, $\K$ is a splitting field of $x^q - x$ over $\F_p$, and so is $\bbL$. By the \nameref{thm:iso-SF}, $\K$ and $\bbL$ are isomorphic.
+\end{proof}
+
+\begin{defn}
+    We shall denote \emph{the} finite field with $p^n$ elements as $\F_{p^n}$.
+\end{defn}
+
+\begin{rem}
+    Note that we have not yet shown that the finite field $\F_{p^n}$ exists for all prime $p$, and all $n \in \N^+$. We have only shown that if such a field exists, then it is unique up to isomorphism.
+\end{rem}
+
+\begin{theorem}[Existence of finite fields] \label{thm:finite-field-existence}
+    Fix a prime $p$ and an algebraic closure $\overline{\F}_p$. For every $n \in \N^+$, there exists a unique subfield of $\overline{\F}_p$ of size $p^n$, denoted by $\F_{p^n}$. Furthermore, 
+    \[
+        \overline{\F}_p = \bigcup_{n \, \in \, \N^+}  \F_{p^n}.
+    \]  
+\end{theorem}
+\begin{proof}
+    Fix $n \in \N^+$ and let $q \vcentcolon= p^n$. $\overline{\F}_p$ contains a unique splitting field of $x^q - x =\vcentcolon f(x)$ over $\F_p$. We show that this splitting field has $q$ elements. Consider
+    \[
+        \K = \left\{ \alpha \in \overline{\F}_p \mid f(\alpha) = 0 \right\}.
+    \]
+    Then, $\abs{\K} = q$, since $f(x)$ is separable by the \nameref{thm:derivative-criterion-separability}. Thus, $\K$ is the desired splitting field. Conversely, any field with $q$ elements would be the set of roots of $x^q - x$, hence we have uniqueness. 
+    
+    We now show that $\overline{\F}_p = \bigcup_{k\geq 1}\, \F_{p^k}$. Let $\alpha \in \overline{\F}_p$ and let $d \vcentcolon= \deg_{\F_p} (\alpha)$. Then, $[\F_p(\alpha) \colon \F_p] = d$ and hence, $\alpha \in \F(\alpha) = \F_{p^d}$.
+\end{proof}
+
+\begin{prop}
+    The polynomial $f(x) \vcentcolon= x^4 + 1$ is irreducible in $\Z[x]$ but it is reducible in $\F_p$ for every prime $p$.
+\end{prop}
+\begin{proof}
+    For irreducibility in $\Z[x]$, note that
+    \[
+        f(x+1) = x^4 + 4x^3 + 6x^2 + 4x + 2
+    \]  
+    is irreducible by applying the \nameref{prop:ES-criterion} at the prime $2$.
+    
+    Now, let $p$ be a prime. If $p = 2$, then $x^4 + 1 = (x+1)^4$. Let $p > 2$ be an odd prime. Then, $p^2 \equiv 1 \Mod{8}$. We then have
+    \[
+        x^4 +1 \divides x^8 - 1 \divides x^{p^2-1} - 1 \divides x^{p^2} - x.
+    \]
+    Now, suppose $x^4 + 1$ is irreducible and let $\alpha \in \overline{\F}_p$ be a root. Then, $[\F_p(\alpha) \colon \F_p] = \deg(x^4 + 1) = 4$. But, $\alpha$ is clearly contained in the splitting field of $x^{p^2} - x$ over $\F_p$, which is $\F_{p^2} \subseteq \overline{\F}_p$ and so, is contained in a degree $2$ extension, a contradiction.
+\end{proof}
+
+\subsection{Gauss' Necklace Formula}
+
+We recall (without proof) the Möbius inversion formula.
+
+\begin{defn}
+    The \deff{Möbius function} $\mu \colon \N^+ \to \N^+$ is defined as
+    \[
+        \mu(n) \vcentcolon= \begin{cases}
+            1 & n = 1, \\
+            (-1)^r & \text{$n$ is a product of $r$ distinct primes, and} \\
+            0 & p^2 \divides n \text{ for some prime $p$.}
+        \end{cases}
+    \]
+\end{defn}
+\begin{theorem}[Möbius inversion formula] \label{thm:möbius}
+    Let $f,g \colon \N^+ \to \N^+$ be functions satisfying 
+    \[
+        f(n) = \sum_{d \divides n} g(d).
+    \]
+    Then, they also satisfy
+    \[
+        g(n) = \sum_{d \divides n} f\left( \frac{n}{d} \right) \mu(d).
+    \]
+\end{theorem}
+
+For the remainder, $p$ denotes an odd prime and $q$ denotes a positive integral power of $p$.
+
+\begin{lem} \label{lem:finite-field-polynomial-division}
+    If $m \divides n$, then $x^{q^m} - x \divides x^{q^n} - x$ in $\F_q[x]$.
+\end{lem}
+\begin{proof}
+    Fix an algebraic closure $\overline{\F}_q$. Since $f(x) \vcentcolon= x^{q^m} - x$ is separable, by the \nameref{thm:derivative-criterion-separability}, it suffices to show that every root of $f(x)$ is also a root of $x^{q^n} - x =\vcentcolon= g(x)$. Let $\alpha$ be a root of $f(x)$. We have
+    \[
+        \alpha^{q^m} = \alpha.
+    \]
+    Raising both sides to the power $q^m$, we obtain
+    \[
+        \alpha^{q^{2m}} = \alpha^{q^m} = \alpha.
+    \]
+    Continuing repeatedly, we see that
+    \[
+        \alpha^{km} = \alpha
+    \]
+    for all $k \in \N^+$, and for $k = n/m$ in particular. This gives us $g(\alpha) = 0$, as desired.
+\end{proof}
+
+\begin{lem} \label{lem:factorisation-of-x^q^n-x}
+    Let $f(x) \in \F_q[x]$ be a monic irreducible polynomial. Then, $f(x) \divides x^{q^n} - x$ iff $\deg f \divides n$.
+\end{lem}
+\begin{proof}
+    ($\implies$) Suppose $f(x) \divides x^{q^n} - x$. Then, $\F_{q^n}$ contains all roots of $f(x)$. Let $\alpha \in \F_{q^n}$ be a root of $f(x)$. Considering the tower $\F_q \subseteq \F_q(\alpha) \subseteq \F_{q^n}$, shows that $\deg f(x) = [\F_q(\alpha) \colon \F_q]$ divides $[\F_{q^n} \colon \F_q] = n$.
+    
+    ($\impliedby$) Let $d \vcentcolon= \deg f(x)$ and suppose $d \divides n$. Fix an algebraic closure $\overline{\F}_q$ of $\F_q$. Let $\alpha \in \overline{\F}_q$ be a root of $f(x)$. Then, $[\F(\alpha) \colon \F] = d$ and thus, by \Cref{thm:finite-field-existence}, we have that
+    \[
+        \F(\alpha) = \F_{q^d} = \left\{ \beta^{q^d} - \beta = 0 \mid \beta \in \overline{\F}_q \right\}.
+    \]
+    Thus, every root of $f(x)$ satisfies $x^{q^d} - x$. Since this divides $x^{q^n} - x$ by \Cref{lem:finite-field-polynomial-division}, we are done.
+\end{proof}
+
+\begin{rem}
+    \Cref{lem:factorisation-of-x^q^n-x} essentially shows that the monic factorisation of $x^{q^n} - x$ in $\F_q[x]$ consists of every (monic) irreducible polynomial of degree $d$ where $d$ runs over all the divisors of $n$. Moreover, no factor can be repeated since $x^{q^n} - x$ is separable.
+\end{rem}
+
+\begin{theorem}[Gauss' Necklace Formula] \label{thm:gauss-necklace}
+    The number of irreducible polynomials of degree $n$ over $\F_q$ is given by
+    \[
+        N_q(n) \vcentcolon= \frac{1}{n} \sum_{d \divides n} \mu(d) q^{n/d}.
+    \]
+\end{theorem}
+\begin{proof}
+    By \Cref{lem:factorisation-of-x^q^n-x}, we note that
+    \[
+        x^{q^n} - x = \prod_{d \divides n} f_1^{(d)}(x) \cdots f_{N_q(d)}^{(d)}(x),
+    \]
+    where $f_1^{(d)}(x), \ldots ,f_{N_q(d)}^{(d)}(x)$ are all the monic irreducible polynomials of degree $d$. Equating the degree on both sides gives us
+    \[
+        q^n = \sum_{d \divides n} d N_q(d).
+    \]
+    Defining $f(n) \vcentcolon = q^n$ and $g(n) \vcentcolon= nN_q(n)$ allows us to use the \nameref{thm:möbius} to obtain the result.
+\end{proof}
+
+\subsection{Primitive Element Theorem}
+
+\begin{defn}
+    Let $\E/\F$ be a field extension. An element $\alpha \in \E$ is called a \deff{primitive element for $\E$ over $\F$} if $\E = \F(\alpha)$.
+    
+    We say that \deff{$\E$ is primitive over $\F$} if there exists a primitive element for $\E$ over $\F$.
+\end{defn}
+
+\begin{theorem}[Primitive Element Theorem] \label{thm:primitive}
+    Let $\K/\F$ be a finite extension.
+    \begin{enumerate}
+        \item There is a primitive element for $\K/\F$ iff the number of intermediate subfields $\E$ such that $\F \subseteq \E\subseteq \K$ is finite.
+        
+        \item If $\K/\F$ is separable, then $\K/\F$ is primitive.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Omitted due to time constraints. 
+\end{proof}
